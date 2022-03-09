@@ -20,18 +20,18 @@ function UserMessageCountTable({ data }: InputData) {
     <Table borderless className="text-light">
       <thead>
         <tr>
-          <th>User</th>
-          <th>#</th>
-          <th>%</th>
-          <th>Daily</th>
-          <th>Monthly</th>
-          <th>Yearly</th>
+          <th scope="col">User</th>
+          <th scope="col">#</th>
+          <th scope="col">%</th>
+          <th scope="col">Daily</th>
+          <th scope="col">Monthly</th>
+          <th scope="col">Yearly</th>
         </tr>
       </thead>
       <tbody>
         {data.users.map((name) => (
           <tr key={name}>
-            <td className="user-name-table">{name}</td>
+            <th scope="row" className="user-name-table">{name}</th>
             <td>{data.messagesPerUser[name].length}</td>
             <td>
               {Math.round(
@@ -59,7 +59,7 @@ function UserMessageCountTable({ data }: InputData) {
       </tbody>
       <tfoot>
         <tr className="fw-bold">
-          <td>Total</td>
+          <th scope="row">Total</th>
           <td>{data.totalMessages}</td>
           <td>100%</td>
           <td>{parseFloat(`${data.totalMessages / totalDays}`).toFixed(1)}</td>

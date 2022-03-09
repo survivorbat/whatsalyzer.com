@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
 
-function UserWordCountTable({ data }: InputData) {
+function UserEmojiCountTable({ data }: InputData) {
   return (
     <Table borderless className="text-light">
       <thead>
@@ -17,20 +17,20 @@ function UserWordCountTable({ data }: InputData) {
         {data.users.map((name) => (
           <tr key={name}>
             <td className="user-name-table">{name}</td>
-            <td>{data.wordsPerUser[name].length}</td>
+            <td>{data.emojisPerUser[name].length}</td>
             <td>
               {Math.round(
-                (data.wordsPerUser[name].length / data.totalWords) * 100
+                (data.emojisPerUser[name].length / data.totalEmojis) * 100
               )}
               %
             </td>
             <td>
               {parseFloat(
                 `${
-                  data.wordsPerUser[name].length /
+                  data.emojisPerUser[name].length /
                   data.messagesPerUser[name].length
                 }`
-              ).toFixed(1)}
+              ).toFixed(2)}
             </td>
           </tr>
         ))}
@@ -38,10 +38,10 @@ function UserWordCountTable({ data }: InputData) {
       <tfoot>
         <tr className="fw-bold">
           <td>Total</td>
-          <td>{data.totalWords}</td>
+          <td>{data.totalEmojis}</td>
           <td>100%</td>
           <td>
-            {parseFloat(`${data.totalWords / data.totalMessages}`).toFixed(1)}
+            {parseFloat(`${data.totalEmojis / data.totalMessages}`).toFixed(1)}
           </td>
         </tr>
       </tfoot>
@@ -49,4 +49,4 @@ function UserWordCountTable({ data }: InputData) {
   );
 }
 
-export default UserWordCountTable;
+export default UserEmojiCountTable;

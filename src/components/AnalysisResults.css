@@ -35,3 +35,7 @@
 .table {
   font-size: 110%;
 }
+
+.user-name-table {
+  white-space: nowrap;
+}

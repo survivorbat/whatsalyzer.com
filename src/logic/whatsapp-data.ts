@@ -36,15 +36,26 @@ const getWords = (message: string): string[] => {
     .map((w) => w.toLowerCase());
 };
 
+/**
+ * Get the words in a message
+ * @param message The message to dissect
+ */
+const getEmojis = (message: string): string[] => {
+  return [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
+};
+
 class WhatsappData {
   readonly totalMessages: number;
   readonly totalMessageLength: number;
   readonly totalWords: number;
+  readonly totalEmojis: number;
   readonly users: string[];
 
   readonly messagesPerUser: Record<string, Message[]>;
   readonly wordsPerUser: Record<string, string[]>;
+  readonly emojisPerUser: Record<string, string[]>;
   readonly wordUsagePerUser: Record<string, Record<string, number>>;
+  readonly emojiUsagePerUser: Record<string, Record<string, number>>;
 
   readonly messagesPerMonthPerUser: Record<string, Record<string, number>>;
   readonly messagesPerHourPerUser: Record<string, Record<string, number>>;
@@ -122,8 +133,39 @@ class WhatsappData {
       {} as Record<string, Record<string, number>>
     );
 
+    this.emojisPerUser = sortedByDate.reduce((prev, cur) => {
+      if (!prev[cur.author]) {
+        prev[cur.author] = [];
+      }
+
+      prev[cur.author].push(...getEmojis(cur.message));
+
+      return prev;
+    }, {} as Record<string, string[]>);
+
+    this.emojiUsagePerUser = Object.keys(this.emojisPerUser).reduce(
+      (res, user) => {
+        res[user] = this.emojisPerUser[user].reduce((result, word) => {
+          if (!result[word]) {
+            result[word] = 0;
+          }
+
+          result[word]++;
+          return result;
+        }, {} as Record<string, number>);
+
+        return res;
+      },
+      {} as Record<string, Record<string, number>>
+    );
+
     this.totalWords = Object.keys(this.wordsPerUser).reduce(
       (res, user) => res + this.wordsPerUser[user].length,
+      0
+    );
+
+    this.totalEmojis = Object.keys(this.emojisPerUser).reduce(
+      (res, user) => res + this.emojisPerUser[user].length,
       0
     );
 

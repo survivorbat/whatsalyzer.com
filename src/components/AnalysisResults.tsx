@@ -10,6 +10,9 @@ import { InputData } from './charts/input-interface';
 import UserWordCountDoughnut from './charts/UserWordCountDoughnut';
 import UserWordCountTable from './charts/UserWordCountTable';
 import UserWordUsageTable from './charts/UserWordUsageTable';
+import UserEmojiCountTable from './charts/UserEmojiCountTable';
+import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
+import UserEmojiCountDoughnut from './charts/UserEmojiCountDoughnut';
 
 function AnalysisResults({ data }: InputData) {
   if (data.totalMessages === 0) {
@@ -103,18 +106,18 @@ function AnalysisResults({ data }: InputData) {
           <h3>Total Emoji's</h3>
           <Row>
             <Col>
-              <UserWordCountDoughnut data={data} />
+              <UserEmojiCountDoughnut data={data} />
             </Col>
           </Row>
           <Row>
             <Col>
-              <UserWordCountTable data={data} />
+              <UserEmojiCountTable data={data} />
             </Col>
           </Row>
         </Col>
         <Col className="chart-container" md={12} lg={6}>
-          <h3>Popular words</h3>
-          <UserWordUsageTable data={data} />
+          <h3>Popular emojis</h3>
+          <UserEmojiUsageTable data={data} />
         </Col>
       </Row>
     </>
