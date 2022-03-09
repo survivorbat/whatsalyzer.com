@@ -46,6 +46,20 @@ function AnalysisResults({ data }: InputData) {
           <div className="display-1 fw-bold">{data.totalWords}</div>
         </Col>
       </Row>
+      <Row>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Total Emoji's</h3>
+          <div className="display-1 fw-bold">{data.totalEmojis}</div>
+        </Col>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Total Characters</h3>
+          <div className="display-1 fw-bold">{data.totalMessageLength}</div>
+        </Col>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Total System Messages</h3>
+          <div className="display-1 fw-bold">{data.systemMessages.length}</div>
+        </Col>
+      </Row>
       <Row className="chart-title">
         <Col>
           <h3 className="section-title">User Activity</h3>

@@ -31,8 +31,8 @@ const getMonthsBetween = (a: Date, b: Date): moment.Moment[] => {
  */
 const getWords = (message: string): string[] => {
   return message
-    .split(/\W+/)
-    .filter((w) => /[a-zA-Z]/.test(w))
+    .split(/\b\W+\b/)
+    .filter((w) => /[a-zA-Z']/.test(w))
     .map((w) => w.toLowerCase());
 };
 
