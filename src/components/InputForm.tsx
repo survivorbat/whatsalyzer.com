@@ -11,7 +11,9 @@ import {
 } from 'react-bootstrap';
 import { FormEvent, useState } from 'react';
 
-function InputForm({ handleData }: { handleData: Function }) {
+import './InputForm.css';
+
+const InputForm = ({ handleData }: { handleData: Function }) => {
   const [whatsappFile, setWhatsappFile] = useState({} as File);
 
   const handleChange = (files: FileList) => {
@@ -30,30 +32,32 @@ function InputForm({ handleData }: { handleData: Function }) {
   };
 
   return (
-    <Row>
-      <Col>
-        <Form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
+      <Row>
+        <Col lg={6} md={12} className="input-column">
           <FormGroup>
-            <FormLabel htmlFor="inputFile">Whatsapp file</FormLabel>
+            <FormLabel htmlFor="input-file">Whatsapp file</FormLabel>
             <FormControl
-              id="inputFile"
+              id="input-file"
               type="file"
-              aria-describedby="inputFileHelp"
+              aria-describedby="input-file-help"
               placeholder="The file to upload"
-              className="bg-dark text-light"
+              className="text-light"
               onChange={(e: any) => handleChange(e.target!.files)}
             />
-            <FormText id="inputFileHelp" muted>
-              The file to analyze and generate a report from
+            <FormText id="input-file-help" muted>
+              The file to analyze
             </FormText>
           </FormGroup>
-          <Button type="submit" className="btn-dark" value="Submit">
-            Submit
+        </Col>
+        <Col lg={6} md={12} className="input-column">
+          <Button type="submit" id="submit-button" value="Submit">
+            Analyze this conversation
           </Button>
-        </Form>
-      </Col>
-    </Row>
+        </Col>
+      </Row>
+    </Form>
   );
-}
+};
 
 export default InputForm;

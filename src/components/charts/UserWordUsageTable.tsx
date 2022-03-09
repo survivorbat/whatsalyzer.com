@@ -16,10 +16,6 @@ const getTopWords = (
 };
 
 function UserWordUsageTable({ data }: InputData) {
-  const sortedKeys = Object.keys(data.userWordUsage).sort(
-    (a, b) => data.userWords[b].length - data.userWords[a].length
-  );
-
   return (
     <Table borderless className="text-light">
       <thead>
@@ -29,11 +25,11 @@ function UserWordUsageTable({ data }: InputData) {
         </tr>
       </thead>
       <tbody>
-        {sortedKeys.map((name) => (
+        {data.users.map((name) => (
           <tr key={name}>
             <td className="user-name-table">{name}</td>
             <td>
-              {getTopWords(data.userWordUsage[name], 5).map((word) => (
+              {getTopWords(data.wordUsagePerUser[name], 5).map((word) => (
                 <span className="rounded-pill participant-pill" key="word">
                   {word.name} <small>({word.amount})</small>
                 </span>

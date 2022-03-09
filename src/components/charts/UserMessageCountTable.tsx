@@ -16,10 +16,6 @@ function UserMessageCountTable({ data }: InputData) {
   const totalMonths = duration.asMonths();
   const totalYears = duration.asYears();
 
-  const sortedKeys = Object.keys(data.userMessages).sort(
-    (a, b) => data.userMessages[b].length - data.userMessages[a].length
-  );
-
   return (
     <Table borderless className="text-light">
       <thead>
@@ -33,29 +29,29 @@ function UserMessageCountTable({ data }: InputData) {
         </tr>
       </thead>
       <tbody>
-        {sortedKeys.map((name) => (
+        {data.users.map((name) => (
           <tr key={name}>
             <td className="user-name-table">{name}</td>
-            <td>{data.userMessages[name].length}</td>
+            <td>{data.messagesPerUser[name].length}</td>
             <td>
               {Math.round(
-                (data.userMessages[name].length / data.totalMessages) * 100
+                (data.messagesPerUser[name].length / data.totalMessages) * 100
               )}
               %
             </td>
             <td>
               {parseFloat(
-                `${data.userMessages[name].length / totalDays}`
+                `${data.messagesPerUser[name].length / totalDays}`
               ).toFixed(1)}
             </td>
             <td>
               {parseFloat(
-                `${data.userMessages[name].length / totalMonths}`
+                `${data.messagesPerUser[name].length / totalMonths}`
               ).toFixed(1)}
             </td>
             <td>
               {parseFloat(
-                `${data.userMessages[name].length / totalYears}`
+                `${data.messagesPerUser[name].length / totalYears}`
               ).toFixed(1)}
             </td>
           </tr>

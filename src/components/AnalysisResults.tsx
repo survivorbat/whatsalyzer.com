@@ -18,33 +18,38 @@ function AnalysisResults({ data }: InputData) {
 
   return (
     <>
+      <Row className="chart-title">
+        <Col>
+          <h2 className="section-title">Conversation Stats</h2>
+        </Col>
+      </Row>
       <Row>
-        <Col className="header-container">
-          <h2>Users</h2>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Users</h3>
           <div className="d-inline-flex flex-wrap justify-content-center">
-            {data.participants.map((name) => (
+            {data.users.map((name) => (
               <div key={name} className="participant-pill rounded-pill">
                 {name}
               </div>
             ))}
           </div>
         </Col>
-        <Col className="header-container">
-          <h2>Total Messages</h2>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Total Messages</h3>
           <div className="display-1 fw-bold">{data.totalMessages}</div>
         </Col>
-        <Col className="header-container">
-          <h2>Total words</h2>
+        <Col className="header-container" md={12} lg={4}>
+          <h3>Total words</h3>
           <div className="display-1 fw-bold">{data.totalWords}</div>
         </Col>
       </Row>
       <Row className="chart-title">
         <Col>
-          <h2>User Activity</h2>
+          <h3 className="section-title">User Activity</h3>
         </Col>
       </Row>
       <Row>
-        <Col className="chart-container" xs={6}>
+        <Col className="chart-container" md={12} lg={6}>
           <h3>Message Distribution</h3>
           <Row>
             <Col>
@@ -52,7 +57,7 @@ function AnalysisResults({ data }: InputData) {
             </Col>
           </Row>
         </Col>
-        <Col className="chart-container" xs={6}>
+        <Col className="chart-container" md={12} lg={6}>
           <h3>Total Messages</h3>
           <UserMessageCountTable data={data} />
         </Col>
@@ -71,11 +76,11 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row className="chart-title">
         <Col>
-          <h2>Message Contents</h2>
+          <h2 className="section-title">Message Contents</h2>
         </Col>
       </Row>
       <Row className="justify-content-around">
-        <Col className="chart-container" xs={6}>
+        <Col className="chart-container" md={12} lg={6}>
           <h3>Total Words</h3>
           <Row>
             <Col>
@@ -88,7 +93,26 @@ function AnalysisResults({ data }: InputData) {
             </Col>
           </Row>
         </Col>
-        <Col className="chart-container" xs={6}>
+        <Col className="chart-container" md={12} lg={6}>
+          <h3>Popular words</h3>
+          <UserWordUsageTable data={data} />
+        </Col>
+      </Row>
+      <Row className="justify-content-around">
+        <Col className="chart-container" md={12} lg={6}>
+          <h3>Total Emoji's</h3>
+          <Row>
+            <Col>
+              <UserWordCountDoughnut data={data} />
+            </Col>
+          </Row>
+          <Row>
+            <Col>
+              <UserWordCountTable data={data} />
+            </Col>
+          </Row>
+        </Col>
+        <Col className="chart-container" md={12} lg={6}>
           <h3>Popular words</h3>
           <UserWordUsageTable data={data} />
         </Col>

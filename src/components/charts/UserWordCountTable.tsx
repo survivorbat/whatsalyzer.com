@@ -3,10 +3,6 @@ import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
 
 function UserWordCountTable({ data }: InputData) {
-  const sortedKeys = Object.keys(data.userWords).sort(
-    (a, b) => data.userWords[b].length - data.userWords[a].length
-  );
-
   return (
     <Table borderless className="text-light">
       <thead>
@@ -18,20 +14,21 @@ function UserWordCountTable({ data }: InputData) {
         </tr>
       </thead>
       <tbody>
-        {sortedKeys.map((name) => (
+        {data.users.map((name) => (
           <tr key={name}>
             <td className="user-name-table">{name}</td>
-            <td>{data.userWords[name].length}</td>
+            <td>{data.wordsPerUser[name].length}</td>
             <td>
               {Math.round(
-                (data.userWords[name].length / data.totalWords) * 100
+                (data.wordsPerUser[name].length / data.totalWords) * 100
               )}
               %
             </td>
             <td>
               {parseFloat(
                 `${
-                  data.userWords[name].length / data.userMessages[name].length
+                  data.wordsPerUser[name].length /
+                  data.messagesPerUser[name].length
                 }`
               ).toFixed(1)}
             </td>

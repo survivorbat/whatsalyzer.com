@@ -26,7 +26,7 @@ function App() {
   };
 
   return (
-    <Container className="text-light">
+    <Container className="text-light main-container">
       <Header />
       <InputForm handleData={handleNewData} />
       <AnalysisResults data={whatsappData} />

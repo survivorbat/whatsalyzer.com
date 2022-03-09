@@ -21,6 +21,17 @@
   color: azure;
 }
 
-.user-name-table {
-  font-size: 80%;
+.main-title-container {
+  padding: 50px;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 270%;
+  margin-bottom: 20px;
+  margin-top: 50px;
+}
+
+.table {
+  font-size: 110%;
 }
