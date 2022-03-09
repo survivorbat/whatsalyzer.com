@@ -13,7 +13,7 @@ const getTopWords = (
   return new Array(amount)
     .fill(0)
     .map((_, i) => ({ name: sorted[i], amount: inputData[sorted[i]] }))
-    .filter(i => i.name);
+    .filter((i) => i.name);
 };
 
 function UserWordUsageTable({ data }: InputData) {
@@ -28,7 +28,9 @@ function UserWordUsageTable({ data }: InputData) {
       <tbody>
         {data.users.map((name) => (
           <tr key={name}>
-            <th scope="row" className="user-name-table">{name}</th>
+            <th scope="row" className="user-name-table">
+              {name}
+            </th>
             <td>
               {getTopWords(data.wordUsagePerUser[name], 5).map((word) => (
                 <span className="rounded-pill participant-pill" key={word.name}>

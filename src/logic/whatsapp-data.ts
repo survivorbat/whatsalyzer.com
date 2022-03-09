@@ -11,11 +11,11 @@ const hours = [
  * @param a The starting date
  * @param b The ending date
  */
-const getMonthsBetween = (a: Date, b: Date): moment.Moment[] => {
+export const getMonthsBetween = (a: Date, b: Date): moment.Moment[] => {
   const firstDate = moment(a);
   const lastDate = moment(b);
 
-  const dates = [moment(firstDate)];
+  const dates = [];
 
   while (lastDate.unix() >= firstDate.unix()) {
     dates.push(moment(firstDate));
@@ -29,18 +29,18 @@ const getMonthsBetween = (a: Date, b: Date): moment.Moment[] => {
  * Get the words in a message
  * @param message The message to dissect
  */
-const getWords = (message: string): string[] => {
+export const getWords = (message: string): string[] => {
   return message
-    .split(/\b\W+\b/)
-    .filter((w) => /[a-zA-Z']/.test(w))
-    .map((w) => w.toLowerCase());
+    .split(/\b[^\w']+\b/)
+    .map((w) => w.toLowerCase().replace(/[^a-zA-Z']/g, ''))
+    .filter((w) => w !== '');
 };
 
 /**
  * Get the words in a message
  * @param message The message to dissect
  */
-const getEmojis = (message: string): string[] => {
+export const getEmojis = (message: string): string[] => {
   return [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
 };
 

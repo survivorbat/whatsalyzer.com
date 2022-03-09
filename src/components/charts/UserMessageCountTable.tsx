@@ -31,7 +31,9 @@ function UserMessageCountTable({ data }: InputData) {
       <tbody>
         {data.users.map((name) => (
           <tr key={name}>
-            <th scope="row" className="user-name-table">{name}</th>
+            <th scope="row" className="user-name-table">
+              {name}
+            </th>
             <td>{data.messagesPerUser[name].length}</td>
             <td>
               {Math.round(
