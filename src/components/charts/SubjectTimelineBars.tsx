@@ -20,12 +20,14 @@ const SubjectTimelineBars = ({data}: InputData) => {
 
   const options = {
     indexAxis: 'y',
+    aspectRatio: 1.5,
     scales: {
       x: {
         grid: defaultGridXConfig,
         ticks: {
           callback: (label: number, index: number, ticks: Tick[]) => moment.unix(label).format('MMM YYYY'),
           color: defaultLabelColor,
+          autoSkip: false,
         },
         beginAtZero: false,
       },

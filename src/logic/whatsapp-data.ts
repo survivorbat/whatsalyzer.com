@@ -64,24 +64,46 @@ export interface UserTimeline {
   leaveDate: moment.Moment
 }
 
-// export const getUserTimelines = (systemMessages: Message[]): Record<string, UserTimeline[]> => {
-//   return systemMessages.reduce((prev, cur) => {
-//     const addMatch = cur.message.match(/^(.*) added (.+)/);
-//     const removeMatch = cur.message.match(/^(.*) removed (.+)/);
-//
-//     if (addMatch) {
-//       const userName = addMatch[1];
-//
-//       if (!prev[userName]) {
-//         prev[userName] = []
-//       }
-//
-//       prev[userName].push({joinDate: moment(cur.date)});
-//     }
-//
-//     return prev;
-//   }, {} as Record<string, UserTimeline[]>)
-// }
+export const getUserTimelines = (systemMessages: Message[], users: string[], firstDate: Date): Record<string, UserTimeline[]> => {
+  const result = systemMessages.reduce((prev, cur) => {
+    const addMatch = cur.message.match(/^.* added (.+)/);
+    const removeMatch = cur.message.match(/^.* removed (.+)/);
+
+    if (addMatch) {
+      const userName = addMatch[1];
+
+      if (!prev[userName]) {
+        prev[userName] = []
+      }
+
+      prev[userName].push({joinDate: moment(cur.date), leaveDate: moment()});
+    }
+
+    if (removeMatch) {
+      const userName = removeMatch[1];
+
+      if (!prev[userName]) {
+        prev[userName] = []
+      }
+
+      if (prev[userName].length > 0) {
+        prev[userName][prev[userName].length-1].leaveDate = moment(cur.date);
+      } else {
+        prev[userName].push({joinDate: moment(firstDate), leaveDate: moment(cur.date)});
+      }
+    }
+
+    return prev;
+  }, {} as Record<string, UserTimeline[]>)
+
+  users.forEach((user) => {
+    if (!result[user]) {
+      result[user] = [{joinDate: moment(firstDate), leaveDate: moment()}];
+    }
+  });
+
+  return result;
+}
 
 /**
  * Get the words in a message
@@ -109,7 +131,7 @@ class WhatsappData {
   readonly totalEmojis: number;
 
   readonly users: string[];
-  readonly userTimelines: UserTimeline[];
+  readonly userTimelines: Record<string, UserTimeline[]>;
   readonly conversationNames: ConversationName[];
 
   readonly messagesPerUser: Record<string, Message[]>;
@@ -272,7 +294,7 @@ class WhatsappData {
     }, {} as Record<string, Record<string, number>>);
 
     this.conversationNames = getConversationSubjects(this.systemMessages);
-    this.userTimelines = [];
+    this.userTimelines = getUserTimelines(this.systemMessages, this.users, (this.firstMessage || {}).date);
   }
 }
 

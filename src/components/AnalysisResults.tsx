@@ -32,13 +32,13 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3>Group Subject</h3>
+          <h3>Group Subject Timeline</h3>
           <SubjectTimelineBars data={data} />
         </Col>
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3>Users</h3>
+          <h3>Users Timeline</h3>
           <UserTimelineBars data={data} />
         </Col>
       </Row>

@@ -1,8 +1,8 @@
 import WhatsappData, {
   ConversationName, getConversationSubjects,
   getEmojis,
-  getMonthsBetween,
-  getWords,
+  getMonthsBetween, getUserTimelines,
+  getWords, UserTimeline,
 } from './whatsapp-data';
 import { Message } from 'whatsapp-chat-parser/types/types';
 import moment from 'moment';
@@ -175,6 +175,154 @@ describe('getEmojis', () => {
   });
 });
 
+describe('getUserTimelines', () => {
+  const tests = [
+    {
+      firstDate: new Date(2015, 5, 1),
+      input: <Message[]>[
+        {
+          "date": new Date(2019, 1, 1),
+          "message": "John Smith added Tom"
+        },
+        {
+          "date": new Date(2019, 2, 1),
+          "message": "John Smith added Jack"
+        },
+      ],
+      users: ['Jack', 'Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2019, 1, 1)),
+            leaveDate: expect.any(moment),
+          },
+        ],
+        Jack: [
+          {
+            joinDate: moment(new Date(2019, 2, 1)),
+            leaveDate: expect.any(moment),
+          },
+        ],
+      },
+    },
+    {
+      firstDate: new Date(2015, 1, 1),
+      input: <Message[]>[
+        {
+          "date": new Date(2021, 1, 1),
+          "message": "John Smith added Tom"
+        },
+        {
+          "date": new Date(2021, 2, 1),
+          "message": "John Smith removed Tom"
+        },
+      ],
+      users: ['Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2021, 1, 1)),
+            leaveDate: moment(new Date(2021, 2, 1)),
+          },
+        ],
+      },
+    },
+    {
+      firstDate: new Date(2015, 1, 1),
+      input: <Message[]>[
+        {
+          "date": new Date(2021, 2, 1),
+          "message": "John Smith removed Tom"
+        },
+      ],
+      users: ['Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2015, 1, 1)),
+            leaveDate: moment(new Date(2021, 2, 1)),
+          },
+        ],
+      },
+    },
+    {
+      firstDate: new Date(2015, 1, 1),
+      input: <Message[]>[
+        {
+          "date": new Date(2021, 2, 1),
+          "message": "John Smith added Tom"
+        },
+      ],
+      users: ['Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2021, 2, 1)),
+            leaveDate: expect.any(moment),
+          },
+        ],
+      },
+    },
+    {
+      firstDate: new Date(2015, 5, 1),
+      input: <Message[]>[
+        {
+          "date": new Date(2019, 1, 1),
+          "message": "John Smith added Tom"
+        },
+        {
+          "date": new Date(2019, 2, 1),
+          "message": "John Smith removed Tom"
+        },
+        {
+          "date": new Date(2020, 1, 1),
+          "message": "John Smith added Tom"
+        },
+        {
+          "date": new Date(2020, 2, 1),
+          "message": "John Smith removed Tom"
+        },
+      ],
+      users: ['Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2019, 1, 1)),
+            leaveDate: moment(new Date(2019, 2, 1)),
+          },
+          {
+            joinDate: moment(new Date(2020, 1, 1)),
+            leaveDate: moment(new Date(2020, 2, 1)),
+          },
+        ],
+      },
+    },
+    {
+      firstDate: new Date(2015, 1, 1),
+      input: <Message[]>[],
+      users: ['Tom'],
+      expected: <Record<string, UserTimeline[]>>{
+        Tom: [
+          {
+            joinDate: moment(new Date(2015, 1, 1)),
+            leaveDate: expect.any(moment),
+          },
+        ],
+      },
+    },
+  ];
+
+  tests.forEach(({firstDate, input, users, expected}) => {
+    it(`returns the expected mapping on '${input.length}' messages`, () => {
+      // Act
+      const result = getUserTimelines(input, users, firstDate);
+
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  })
+});
+
 describe('getConversationSubjects', () => {
   const tests = [
     {
@@ -307,7 +455,7 @@ describe('WhatsappData', () => {
             23: {},
           },
           conversationNames: [],
-          userTimelines: [],
+          userTimelines: {},
           // This property is ignored and added in the assert
           messages: [],
         },
@@ -456,7 +604,7 @@ describe('WhatsappData', () => {
             },
           },
           conversationNames: [],
-          userTimelines: [],
+          userTimelines: {},
           messagesPerMonthPerUser: {
             'Apr 2021': {
               'Among Us Player': 0,
