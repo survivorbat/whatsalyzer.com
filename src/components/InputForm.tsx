@@ -43,16 +43,17 @@ const InputForm = ({ handleData }: { handleData: Function }) => {
               aria-describedby="input-file-help"
               placeholder="The file to upload"
               className="text-light"
+              required={true}
               onChange={(e: any) => handleChange(e.target!.files)}
             />
             <FormText id="input-file-help" muted>
-              The file to analyze
+              The file to analyze, export the Whatsapp chat you want to analyze and put file here.
             </FormText>
           </FormGroup>
         </Col>
         <Col lg={6} md={12} className="input-column">
           <Button type="submit" id="submit-button" value="Submit">
-            Analyze this conversation
+            Analyze this conversation!
           </Button>
         </Col>
       </Row>

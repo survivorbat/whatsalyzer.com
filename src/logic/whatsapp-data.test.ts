@@ -1,9 +1,11 @@
 import WhatsappData, {
+  ConversationName, getConversationSubjects,
   getEmojis,
   getMonthsBetween,
   getWords,
 } from './whatsapp-data';
 import { Message } from 'whatsapp-chat-parser/types/types';
+import moment from 'moment';
 
 describe('getMonthsBetween', () => {
   const tests = [
@@ -173,6 +175,89 @@ describe('getEmojis', () => {
   });
 });
 
+describe('getConversationSubjects', () => {
+  const tests = [
+    {
+      input: <Message[]>[
+        {
+          "date": new Date(2019, 1, 1),
+          "message": "John Smith created group \"Civil Conversation\""
+        },
+      ],
+      expected: <ConversationName[]>[
+        {
+          name: 'Civil Conversation',
+          startDate: moment(new Date(2019, 1, 1)),
+          user: 'John Smith',
+          endDate: expect.any(moment),
+        },
+      ],
+    },
+    {
+      input: <Message[]>[
+        {
+          "date": new Date(2019, 2, 2),
+          "message": "Smith John changed the subject from \"Civil Conversation\" to \"Aggressive Conversation\""
+        },
+      ],
+      expected: <ConversationName[]>[
+        {
+          name: 'Aggressive Conversation',
+          startDate: moment(new Date(2019, 2, 2)),
+          endDate: expect.any(moment),
+          user: 'Smith John',
+        },
+      ],
+    },
+    {
+      input: <Message[]>[
+        {
+          "date": new Date(2020, 1, 1),
+          "message": "My boy created group \"Salad People 🥗\""
+        },
+        {
+          "date": new Date(2020, 2, 1),
+          "message": "You changed the subject from \"Salad People 🥗\" to \"Brezus People\""
+        },
+        {
+          "date": new Date(2021, 3, 2),
+          "message": "My boy changed the subject from \"Brezus People\" to \"🥖Brezus' People🥖\""
+        },
+      ],
+      expected: <ConversationName[]>[
+        {
+          name: 'Salad People 🥗',
+          startDate: moment(new Date(2020, 1, 1)),
+          endDate: moment(new Date(2020, 2, 1)),
+          user: 'My boy',
+        },
+        {
+          name: 'Brezus People',
+          startDate: moment(new Date(2020, 2, 1)),
+          endDate: moment(new Date(2021, 3, 2)),
+          user: 'You',
+        },
+        {
+          name: '🥖Brezus\' People🥖',
+          startDate: moment(new Date(2021, 3, 2)),
+          endDate: expect.any(moment),
+          user: 'My boy',
+        },
+      ],
+    },
+  ];
+
+  tests.forEach(({input, expected}) => {
+    it(`it returns expected list from '${input.length}' system messages`, () => {
+      // Act
+      const result = getConversationSubjects(input);
+
+      // Assert
+      expect(result).toEqual(expected);
+    })
+  })
+})
+
 // TODO: Make this more comprehensible
 
 describe('WhatsappData', () => {
@@ -180,7 +265,7 @@ describe('WhatsappData', () => {
     const tests = [
       {
         input: [],
-        expected: {
+        expected: <WhatsappData>{
           totalMessages: 0,
           totalMessageLength: 0,
           totalWords: 0,
@@ -190,8 +275,8 @@ describe('WhatsappData', () => {
           systemMessages: [],
           emojiUsagePerUser: {},
           emojisPerUser: {},
-          lastMessage: null,
-          firstMessage: null,
+          lastMessage: undefined,
+          firstMessage: undefined,
           wordUsagePerUser: {},
           wordsPerUser: {},
           messagesPerMonthPerUser: {},
@@ -221,6 +306,10 @@ describe('WhatsappData', () => {
             22: {},
             23: {},
           },
+          conversationNames: [],
+          userTimelines: [],
+          // This property is ignored and added in the assert
+          messages: [],
         },
       },
       {
@@ -256,7 +345,7 @@ describe('WhatsappData', () => {
             date: new Date(2022, 2, 10, 7, 10, 5),
           },
         ],
-        expected: {
+        expected: <WhatsappData>{
           totalMessages: 4,
           totalMessageLength: 98,
           totalWords: 19,
@@ -366,6 +455,8 @@ describe('WhatsappData', () => {
               you: 1,
             },
           },
+          conversationNames: [],
+          userTimelines: [],
           messagesPerMonthPerUser: {
             'Apr 2021': {
               'Among Us Player': 0,
@@ -518,6 +609,8 @@ describe('WhatsappData', () => {
               'Madame Trudeau': 0,
             },
           },
+          // This property is ignored and added in the assert
+          messages: [],
         },
       },
     ];

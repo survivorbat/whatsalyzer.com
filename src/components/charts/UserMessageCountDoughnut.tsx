@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import { defaultChartColors } from '../../constants/colors';
 import { InputData } from './input-interface';
-import { defaultLabelColor, defaultPluginConfig } from '../../constants/charts';
+import { defaultPluginConfig } from '../../constants/charts';
 
 function UserMessageCountDoughnut({ data }: InputData) {
   const chartData = {

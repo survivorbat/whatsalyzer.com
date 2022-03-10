@@ -1,5 +1,6 @@
 import { Message } from 'whatsapp-chat-parser/types/types';
 import moment from 'moment';
+import { Simulate } from 'react-dom/test-utils';
 
 const hours = [
   0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
@@ -25,6 +26,63 @@ export const getMonthsBetween = (a: Date, b: Date): moment.Moment[] => {
   return dates;
 };
 
+export interface ConversationName {
+  name: string
+  user: string
+  startDate: moment.Moment
+  endDate: moment.Moment
+}
+
+export const getConversationSubjects = (systemMessages: Message[]): ConversationName[] => {
+  return systemMessages.reduce((prev, cur) => {
+    const createMatch = cur.message.match(/^(.*) created group "(.+)"/);
+    const renameMatch = cur.message.match(/^(.*) changed the subject from "(.+)" to "(.+)"/);
+
+    // If we find the create message, we add it as the first item in the list with an unspecified end date
+    if (createMatch) {
+      prev.push({name: createMatch[2], user: createMatch[1], startDate: moment(cur.date), endDate: moment()});
+    }
+
+    // If we find a rename message, we...
+    if (renameMatch) {
+      // First check if a message came before it, because if it does, that message now gets an
+      // end date
+      if (prev.length > 0) {
+        prev[prev.length - 1].endDate = moment(cur.date);
+      }
+
+      // Then we add the new item with an unspecified end date
+      prev.push({name: renameMatch[3], user: renameMatch[1], startDate: moment(cur.date), endDate: moment()});
+    }
+
+    return prev;
+  }, [] as ConversationName[])
+}
+
+export interface UserTimeline {
+  joinDate: moment.Moment
+  leaveDate: moment.Moment
+}
+
+// export const getUserTimelines = (systemMessages: Message[]): Record<string, UserTimeline[]> => {
+//   return systemMessages.reduce((prev, cur) => {
+//     const addMatch = cur.message.match(/^(.*) added (.+)/);
+//     const removeMatch = cur.message.match(/^(.*) removed (.+)/);
+//
+//     if (addMatch) {
+//       const userName = addMatch[1];
+//
+//       if (!prev[userName]) {
+//         prev[userName] = []
+//       }
+//
+//       prev[userName].push({joinDate: moment(cur.date)});
+//     }
+//
+//     return prev;
+//   }, {} as Record<string, UserTimeline[]>)
+// }
+
 /**
  * Get the words in a message
  * @param message The message to dissect
@@ -49,7 +107,10 @@ class WhatsappData {
   readonly totalMessageLength: number;
   readonly totalWords: number;
   readonly totalEmojis: number;
+
   readonly users: string[];
+  readonly userTimelines: UserTimeline[];
+  readonly conversationNames: ConversationName[];
 
   readonly messagesPerUser: Record<string, Message[]>;
   readonly wordsPerUser: Record<string, string[]>;
@@ -81,8 +142,8 @@ class WhatsappData {
     );
 
     // Set first and last
-    this.firstMessage = sortedByDate[0] || null;
-    this.lastMessage = sortedByDate[sortedByDate.length - 1] || null;
+    this.firstMessage = sortedByDate[0] || undefined;
+    this.lastMessage = sortedByDate[sortedByDate.length - 1] || undefined;
 
     // Set totals
     this.totalMessages = filtered.length;
@@ -209,6 +270,9 @@ class WhatsappData {
 
       return prev;
     }, {} as Record<string, Record<string, number>>);
+
+    this.conversationNames = getConversationSubjects(this.systemMessages);
+    this.userTimelines = [];
   }
 }
 

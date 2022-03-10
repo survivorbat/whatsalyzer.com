@@ -13,10 +13,36 @@ import UserWordUsageTable from './charts/UserWordUsageTable';
 import UserEmojiCountTable from './charts/UserEmojiCountTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import UserEmojiCountDoughnut from './charts/UserEmojiCountDoughnut';
+import UserTimelineBars from './charts/UserTimelineBars';
+import SubjectTimelineBars from './charts/SubjectTimelineBars';
 
 function AnalysisResults({ data }: InputData) {
   if (data.totalMessages === 0) {
     return <></>;
+  }
+
+  let conversationTimeline;
+
+  if (data.conversationNames.length > 0) {
+    conversationTimeline = <>
+      <Row className="chart-title">
+        <Col>
+          <h3 className="section-title">Group Timelines</h3>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="chart-container">
+          <h3>Group Subject</h3>
+          <SubjectTimelineBars data={data} />
+        </Col>
+      </Row>
+      <Row>
+        <Col className="chart-container">
+          <h3>Users</h3>
+          <UserTimelineBars data={data} />
+        </Col>
+      </Row>
+    </>
   }
 
   return (
@@ -42,13 +68,13 @@ function AnalysisResults({ data }: InputData) {
           <div className="display-1 fw-bold">{data.totalMessages}</div>
         </Col>
         <Col className="header-container" md={12} lg={4}>
-          <h3>Total words</h3>
+          <h3>Total Words</h3>
           <div className="display-1 fw-bold">{data.totalWords}</div>
         </Col>
       </Row>
       <Row>
         <Col className="header-container" md={12} lg={4}>
-          <h3>Total Emoji's</h3>
+          <h3>Total Emojis</h3>
           <div className="display-1 fw-bold">{data.totalEmojis}</div>
         </Col>
         <Col className="header-container" md={12} lg={4}>
@@ -96,7 +122,7 @@ function AnalysisResults({ data }: InputData) {
           <h2 className="section-title">Message Contents</h2>
         </Col>
       </Row>
-      <Row className="justify-content-around">
+      <Row>
         <Col className="chart-container" md={12} lg={6}>
           <h3>Total Words</h3>
           <Row>
@@ -111,13 +137,13 @@ function AnalysisResults({ data }: InputData) {
           </Row>
         </Col>
         <Col className="chart-container" md={12} lg={6}>
-          <h3>Popular words</h3>
+          <h3>Popular Words</h3>
           <UserWordUsageTable data={data} />
         </Col>
       </Row>
-      <Row className="justify-content-around">
+      <Row>
         <Col className="chart-container" md={12} lg={6}>
-          <h3>Total Emoji's</h3>
+          <h3>Total Emojis</h3>
           <Row>
             <Col>
               <UserEmojiCountDoughnut data={data} />
@@ -130,10 +156,11 @@ function AnalysisResults({ data }: InputData) {
           </Row>
         </Col>
         <Col className="chart-container" md={12} lg={6}>
-          <h3>Popular emojis</h3>
+          <h3>Popular Emojis</h3>
           <UserEmojiUsageTable data={data} />
         </Col>
       </Row>
+      {conversationTimeline}
     </>
   );
 }
