@@ -38,14 +38,16 @@ function UserHourlyActivityGraph({ data }: InputData) {
       y: {
         grid: defaultGridYConfig,
         ticks: {
-          callback: (label: string, index: number, ticks: Tick[]) => `${label}%`,
+          callback: (label: string, index: number, ticks: Tick[]) =>
+            `${label}%`,
           color: defaultLabelColor,
         },
       },
       x: {
         grid: defaultGridXConfig,
         ticks: {
-          callback: (label: string, index: number, ticks: Tick[]) => `${label}:00`,
+          callback: (label: string, index: number, ticks: Tick[]) =>
+            `${label}:00`,
           color: defaultLabelColor,
         },
       },

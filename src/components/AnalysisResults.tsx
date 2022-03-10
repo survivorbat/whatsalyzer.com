@@ -24,25 +24,27 @@ function AnalysisResults({ data }: InputData) {
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {
-    conversationTimeline = <>
-      <Row className="chart-title">
-        <Col>
-          <h3 className="section-title">Group Timelines</h3>
-        </Col>
-      </Row>
-      <Row>
-        <Col className="chart-container">
-          <h3>Group Subject Timeline</h3>
-          <SubjectTimelineBars data={data} />
-        </Col>
-      </Row>
-      <Row>
-        <Col className="chart-container">
-          <h3>Users Timeline</h3>
-          <UserTimelineBars data={data} />
-        </Col>
-      </Row>
-    </>
+    conversationTimeline = (
+      <>
+        <Row className="chart-title">
+          <Col>
+            <h3 className="section-title">Group Timelines</h3>
+          </Col>
+        </Row>
+        <Row>
+          <Col className="chart-container">
+            <h3>Group Subject Timeline</h3>
+            <SubjectTimelineBars data={data} />
+          </Col>
+        </Row>
+        <Row>
+          <Col className="chart-container">
+            <h3>Users Timeline</h3>
+            <UserTimelineBars data={data} />
+          </Col>
+        </Row>
+      </>
+    );
   }
 
   return (
@@ -84,6 +86,24 @@ function AnalysisResults({ data }: InputData) {
         <Col className="header-container" md={12} lg={4}>
           <h3>Total System Messages</h3>
           <div className="display-1 fw-bold">{data.systemMessages.length}</div>
+        </Col>
+      </Row>
+      <Row>
+        <Col className="header-container" md={12} lg={6}>
+          <h3>First Message</h3>
+          <div className="fw-bold">{data.firstMessage.message}</div>
+          <div className="text-muted">
+            {data.firstMessage.author},{' '}
+            {data.firstMessage.date.format('DD-MM-YYYY')}
+          </div>
+        </Col>
+        <Col className="header-container" md={12} lg={6}>
+          <h3>Last Message</h3>
+          <div className="fw-bold">{data.lastMessage.message}</div>
+          <div className="text-muted">
+            {data.lastMessage.author},{' '}
+            {data.lastMessage.date.format('DD-MM-YYYY')}
+          </div>
         </Col>
       </Row>
       <Row className="chart-title">

@@ -4,14 +4,9 @@ import { InputData } from './input-interface';
 import moment from 'moment';
 
 function UserMessageCountTable({ data }: InputData) {
-  if (!data.firstMessage || !data.lastMessage) {
-    return <></>;
-  }
-
-  const firstDate = moment(data.firstMessage.date);
-  const lastDate = moment(data.lastMessage.date);
-
-  const duration = moment.duration(lastDate.diff(firstDate));
+  const duration = moment.duration(
+    data.lastMessage.date.diff(data.firstMessage.date)
+  );
   const totalDays = duration.asDays();
   const totalMonths = duration.asMonths();
   const totalYears = duration.asYears();
