@@ -30,7 +30,11 @@ function UserMessageCountTable({ data }: InputData) {
       <tbody>
         {data.users.map((name, index) => (
           <tr key={name}>
-            <th scope="row" style={{color: defaultColors[index % defaultColors.length]}} className="user-name-table">
+            <th
+              scope="row"
+              style={{ color: defaultColors[index % defaultColors.length] }}
+              className="user-name-table"
+            >
               {name}
             </th>
             <td>{data.messagesPerUser[name].length}</td>

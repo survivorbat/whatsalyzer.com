@@ -10,7 +10,9 @@ function UserEmojiCountDoughnut({ data }: InputData) {
     datasets: [
       {
         id: 0,
-        data: data.users.map((name) => Math.round(data.emojisPerUser[name].length / data.totalEmojis * 100)),
+        data: data.users.map((name) =>
+          Math.round((data.emojisPerUser[name].length / data.totalEmojis) * 100)
+        ),
         backgroundColor: defaultColors,
         borderColor: '#000000',
       },
@@ -18,11 +20,12 @@ function UserEmojiCountDoughnut({ data }: InputData) {
   };
 
   const options = {
-    plugins:  {
+    plugins: {
       legend: defaultPluginConfig.legend,
       tooltip: {
         callbacks: {
-          label: (data: any) => `${data.label}: ${data.dataset.data[data.dataIndex]}%`
+          label: (data: any) =>
+            `${data.label}: ${data.dataset.data[data.dataIndex]}%`,
         },
       },
     },

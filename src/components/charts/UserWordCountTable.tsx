@@ -17,7 +17,13 @@ function UserWordCountTable({ data }: InputData) {
       <tbody>
         {data.users.map((name, index) => (
           <tr key={name}>
-            <th scope="row" className="user-name-table" style={{color: defaultColors[index % defaultColors.length]}}>{name}</th>
+            <th
+              scope="row"
+              className="user-name-table"
+              style={{ color: defaultColors[index % defaultColors.length] }}
+            >
+              {name}
+            </th>
             <td>{data.wordsPerUser[name].length}</td>
             <td>
               {Math.round(

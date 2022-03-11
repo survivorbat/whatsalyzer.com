@@ -10,7 +10,9 @@ import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 
 function App() {
-  const [whatsappData, setWhatsappData] = useState((): WhatsappData | null => null);
+  const [whatsappData, setWhatsappData] = useState(
+    (): WhatsappData | null => null
+  );
 
   const handleNewData = (data: string) => {
     const result = parseStringSync(data);
@@ -23,7 +25,7 @@ function App() {
 
   let analysisResult;
   if (whatsappData) {
-    analysisResult = <AnalysisResults data={whatsappData!} />
+    analysisResult = <AnalysisResults data={whatsappData!} />;
   }
 
   return (

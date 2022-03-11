@@ -132,13 +132,11 @@ class WhatsappData {
       throw new Error('No messages to analyze');
     }
 
-    const whatsappMessages = messages.map((m) =>
-      ({
-        message: m.message,
-        author: m.author,
-        date: moment(m.date),
-      })
-    );
+    const whatsappMessages = messages.map((m) => ({
+      message: m.message,
+      author: m.author,
+      date: moment(m.date),
+    }));
 
     this.systemMessages = whatsappMessages.filter((m) => m.author === 'System');
 
@@ -238,7 +236,9 @@ class WhatsappData {
       res[hour] = this.users!.reduce(
         (result, user) => ({
           ...result,
-          [user]: filtered.filter((message) => message.date.hour() === hour && message.author === user).length
+          [user]: filtered.filter(
+            (message) => message.date.hour() === hour && message.author === user
+          ).length,
         }),
         {}
       );
@@ -249,7 +249,7 @@ class WhatsappData {
     // Set messages per month, just use an empty array if there are no messages
     const dates = getMonthsBetween(
       this.firstMessage.date,
-      this.lastMessage.date,
+      this.lastMessage.date
     );
 
     this.messagesPerMonthPerUser = dates.reduce((res, date) => {
@@ -257,13 +257,13 @@ class WhatsappData {
 
       res[dateFormat] = this.users.reduce(
         (list, user) => ({
-          ...list, [user]: filtered
-            .filter(
-              (message) =>
-                message.date.month() === date.month() &&
-                message.date.year() === date.year() &&
-                message.author === user
-            ).length
+          ...list,
+          [user]: filtered.filter(
+            (message) =>
+              message.date.month() === date.month() &&
+              message.date.year() === date.year() &&
+              message.author === user
+          ).length,
         }),
         {}
       );

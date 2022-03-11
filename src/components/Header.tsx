@@ -8,11 +8,14 @@ import FigureCaption from 'react-bootstrap/FigureCaption';
 import FigureImage from 'react-bootstrap/FigureImage';
 
 function Header() {
-  const [menuOpen, setMenuOpen] = useState({qa: false, howto: false} as Record<string, boolean>);
+  const [menuOpen, setMenuOpen] = useState({
+    qa: false,
+    howto: false,
+  } as Record<string, boolean>);
 
   const toggleMenu = (menu: string) => {
-    setMenuOpen({...menuOpen, [menu]: !menuOpen[menu]})
-  }
+    setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
+  };
 
   return (
     <div className="header-container">
@@ -25,10 +28,14 @@ function Header() {
       </Row>
       <Row className="menu-container">
         <Col lg={6} md={12}>
-          <button className="menu-button" onClick={() => toggleMenu('howto')}>Getting Started</button>
+          <button className="menu-button" onClick={() => toggleMenu('howto')}>
+            Getting Started
+          </button>
         </Col>
         <Col lg={6} md={12}>
-          <button className="menu-button" onClick={() => toggleMenu('qa')}>Q&A</button>
+          <button className="menu-button" onClick={() => toggleMenu('qa')}>
+            Q&A
+          </button>
         </Col>
       </Row>
       <Row className="info-container">
@@ -42,26 +49,34 @@ function Header() {
                 <li>Select 'More'</li>
                 <li>Click on 'Export chat'</li>
                 <li>Click 'Without media'</li>
-                <li>Send the export to yourself by email or through Whatsapp</li>
+                <li>
+                  Send the export to yourself by email or through Whatsapp
+                </li>
               </ol>
-              <p>
-                Then select the file below to analyze the conversation.
-              </p>
+              <p>Then select the file below to analyze the conversation.</p>
               <Row>
                 <Col className="howto-image-container" xs={12} md={6}>
                   <Figure>
-                    <FigureImage className="howto-image" src={howto1} alt="Select 'More'"/>
+                    <FigureImage
+                      className="howto-image"
+                      src={howto1}
+                      alt="Select 'More'"
+                    />
                     <FigureCaption>Select 'More'</FigureCaption>
                   </Figure>
                 </Col>
                 <Col className="howto-image-container" xs={12} md={6}>
                   <Figure>
-                    <FigureImage className="howto-image" src={howto2} alt="Click on 'Export chat'"/>
+                    <FigureImage
+                      className="howto-image"
+                      src={howto2}
+                      alt="Click on 'Export chat'"
+                    />
                     <FigureCaption>Click on 'Export chat'</FigureCaption>
                   </Figure>
                 </Col>
               </Row>
-              <hr/>
+              <hr />
             </div>
           </Collapse>
           <Collapse in={menuOpen.qa}>
@@ -69,22 +84,31 @@ function Header() {
               <h2>Questions and Answers</h2>
               <p>Q: Does Whatsalyzer save my data?</p>
               <p>
-                A: No, Whatsalyzer is a fully client-side application. This means that your browser performs
-                all the calculations and no data is ever uploaded to a server.
+                A: No, Whatsalyzer is a fully client-side application. This
+                means that your browser performs all the calculations and no
+                data is ever uploaded to a server.
               </p>
               <p>Q: Can I analyze group chats?</p>
               <p>
-                A: Yes! Those stats are even more interesting than 'normal' chats.
+                A: Yes! Those stats are even more interesting than 'normal'
+                chats.
               </p>
               <p>Q: Is Whatsalyzer open-source?</p>
               <p>
-                A: Yes! You can view the code right here: <a href="https://github.com/survivorbat/whatsalyzer" target="_blank">github.com/survivorbat/whatsalyzer</a>
+                A: Yes! You can view the code right here:{' '}
+                <a
+                  href="https://github.com/survivorbat/whatsalyzer"
+                  target="_blank"
+                >
+                  github.com/survivorbat/whatsalyzer
+                </a>
               </p>
               <p>Q: Will new features be added?</p>
               <p>
-                A: Yes! The TODO list can be found in the README of the source code, check the link above.
+                A: Yes! The TODO list can be found in the README of the source
+                code, check the link above.
               </p>
-              <hr/>
+              <hr />
             </div>
           </Collapse>
         </Col>
