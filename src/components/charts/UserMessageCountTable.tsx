@@ -6,7 +6,7 @@ import { defaultColors } from '../../constants/colors';
 
 function UserMessageCountTable({ data }: InputData) {
   const duration = moment.duration(
-    data.firstMessage.date.diff(data.lastMessage.date)
+    data.lastMessage.date.diff(data.firstMessage.date)
   );
 
   const totalDays = duration.asDays();

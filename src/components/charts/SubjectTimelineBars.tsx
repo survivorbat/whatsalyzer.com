@@ -55,8 +55,8 @@ const SubjectTimelineBars = ({ data }: InputData) => {
       tooltip: {
         callbacks: {
           label: (context: any) => {
-            const begin = context.dataset.data[0][0];
-            const end = context.dataset.data[0][1];
+            const begin = context.dataset.data[context.dataIndex][0];
+            const end = context.dataset.data[context.dataIndex][1];
 
             return (
               moment.unix(begin).format('MMM YYYY') +
