@@ -15,6 +15,7 @@ import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import UserEmojiCountDoughnut from './charts/UserEmojiCountDoughnut';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
 import { defaultColors } from '../constants/colors';
+import DiagramHint from './DiagramHint';
 
 function AnalysisResults({ data }: InputData) {
   let conversationTimeline;
@@ -119,6 +120,7 @@ function AnalysisResults({ data }: InputData) {
           </h3>
           <Row>
             <Col>
+              <DiagramHint/>
               <UserMessageCountDoughnut data={data} />
             </Col>
           </Row>
@@ -133,6 +135,7 @@ function AnalysisResults({ data }: InputData) {
           <h3 title="The amount of messages per user per month">
             Monthly Activity
           </h3>
+          <DiagramHint/>
           <UserActivityGraph data={data} />
         </Col>
       </Row>
@@ -141,6 +144,7 @@ function AnalysisResults({ data }: InputData) {
           <h3 title="The activity of a user on a particular hour, relative to their total activity">
             Relative Hourly Activity
           </h3>
+          <DiagramHint/>
           <UserHourlyActivityGraph data={data} />
         </Col>
       </Row>
@@ -159,6 +163,7 @@ function AnalysisResults({ data }: InputData) {
           <h3>Total Words</h3>
           <Row>
             <Col>
+              <DiagramHint/>
               <UserWordCountDoughnut data={data} />
             </Col>
           </Row>
@@ -182,6 +187,7 @@ function AnalysisResults({ data }: InputData) {
           </h3>
           <Row>
             <Col>
+              <DiagramHint/>
               <UserEmojiCountDoughnut data={data} />
             </Col>
           </Row>
