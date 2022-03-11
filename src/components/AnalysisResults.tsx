@@ -15,12 +15,9 @@ import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import UserEmojiCountDoughnut from './charts/UserEmojiCountDoughnut';
 import UserTimelineBars from './charts/UserTimelineBars';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
+import { defaultColors } from '../constants/colors';
 
 function AnalysisResults({ data }: InputData) {
-  if (data.totalMessages === 0) {
-    return <></>;
-  }
-
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {
@@ -58,8 +55,8 @@ function AnalysisResults({ data }: InputData) {
         <Col className="header-container" md={12} lg={4}>
           <h3>Users</h3>
           <div className="d-inline-flex flex-wrap justify-content-center">
-            {data.users.map((name) => (
-              <div key={name} className="participant-pill rounded-pill">
+            {data.users.map((name, index) => (
+              <div key={name} style={{color: defaultColors[index % defaultColors.length]}} className="fw-bold participant-pill rounded-pill">
                 {name}
               </div>
             ))}

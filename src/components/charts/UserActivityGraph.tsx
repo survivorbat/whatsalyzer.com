@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import { defaultChartColors } from '../../constants/colors';
+import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import {
   defaultGridXConfig,
@@ -18,8 +18,8 @@ function UserMessageCountPie({ data }: InputData) {
       data: Object.keys(data.messagesPerMonthPerUser).map(
         (date) => data.messagesPerMonthPerUser[date][name] || 0
       ),
-      borderColor: defaultChartColors[index % defaultChartColors.length],
-      backgroundColor: defaultChartColors[index % defaultChartColors.length],
+      borderColor: defaultColors[index % defaultColors.length],
+      backgroundColor: defaultColors[index % defaultColors.length],
       tension: 0.3,
     })),
   };

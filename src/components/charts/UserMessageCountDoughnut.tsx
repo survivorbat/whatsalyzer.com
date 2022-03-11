@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import { defaultChartColors } from '../../constants/colors';
+import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import { defaultPluginConfig } from '../../constants/charts';
 
@@ -11,7 +11,7 @@ function UserMessageCountDoughnut({ data }: InputData) {
       {
         id: 0,
         data: data.users.map((name) => data.messagesPerUser[name].length),
-        backgroundColor: defaultChartColors,
+        backgroundColor: defaultColors,
         borderColor: '#000000',
       },
     ],

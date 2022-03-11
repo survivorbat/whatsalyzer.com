@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InputData } from './input-interface';
-import { defaultChartColors } from '../../constants/colors';
+import { defaultColors } from '../../constants/colors';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
@@ -32,8 +32,8 @@ const UserTimelineBars = ({ data }: InputData) => {
 
         return null;
       }),
-      borderColor: defaultChartColors,
-      backgroundColor: defaultChartColors,
+      borderColor: defaultColors,
+      backgroundColor: defaultColors,
       minBarLength: 5,
     })),
   };

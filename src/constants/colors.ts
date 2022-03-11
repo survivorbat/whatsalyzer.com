@@ -1,4 +1,4 @@
-export const defaultChartColors = [
+export const defaultColors = [
   '#e6194b',
   '#3cb44b',
   '#ffe119',

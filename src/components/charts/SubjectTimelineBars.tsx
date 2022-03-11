@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { InputData } from './input-interface';
-import { defaultChartColors } from '../../constants/colors';
+import { defaultColors } from '../../constants/colors';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -20,8 +20,8 @@ const SubjectTimelineBars = ({ data }: InputData) => {
           convo.startDate.unix(),
           convo.endDate.unix(),
         ]),
-        borderColor: defaultChartColors,
-        backgroundColor: defaultChartColors,
+        borderColor: defaultColors,
+        backgroundColor: defaultColors,
         minBarLength: 5,
       },
     ],
