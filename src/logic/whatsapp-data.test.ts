@@ -3,9 +3,7 @@ import WhatsappData, {
   getConversationSubjects,
   getEmojis,
   getMonthsBetween,
-  getUserTimelines,
   getWords,
-  UserTimeline,
   WhatsappMessage,
 } from './whatsapp-data';
 import { Message } from 'whatsapp-chat-parser/types/types';
@@ -177,154 +175,6 @@ describe('getEmojis', () => {
   });
 });
 
-describe('getUserTimelines', () => {
-  const tests = [
-    {
-      firstDate: moment(new Date(2015, 5, 1)),
-      input: <WhatsappMessage[]>[
-        {
-          date: moment(new Date(2019, 1, 1)),
-          message: 'John Smith added Tom',
-        },
-        {
-          date: moment(new Date(2019, 2, 1)),
-          message: 'John Smith added Jack',
-        },
-      ],
-      users: ['Jack', 'Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2019, 1, 1)),
-            leaveDate: expect.any(moment),
-          },
-        ],
-        Jack: [
-          {
-            joinDate: moment(new Date(2019, 2, 1)),
-            leaveDate: expect.any(moment),
-          },
-        ],
-      },
-    },
-    {
-      firstDate: moment(new Date(2015, 1, 1)),
-      input: <WhatsappMessage[]>[
-        {
-          date: moment(new Date(2021, 1, 1)),
-          message: 'John Smith added Tom',
-        },
-        {
-          date: moment(new Date(2021, 2, 1)),
-          message: 'John Smith removed Tom',
-        },
-      ],
-      users: ['Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2021, 1, 1)),
-            leaveDate: moment(new Date(2021, 2, 1)),
-          },
-        ],
-      },
-    },
-    {
-      firstDate: moment(new Date(2015, 1, 1)),
-      input: <WhatsappMessage[]>[
-        {
-          date: moment(new Date(2021, 2, 1)),
-          message: 'John Smith removed Tom',
-        },
-      ],
-      users: ['Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2015, 1, 1)),
-            leaveDate: moment(new Date(2021, 2, 1)),
-          },
-        ],
-      },
-    },
-    {
-      firstDate: moment(new Date(2015, 1, 1)),
-      input: <WhatsappMessage[]>[
-        {
-          date: moment(new Date(2021, 2, 1)),
-          message: 'John Smith added Tom',
-        },
-      ],
-      users: ['Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2021, 2, 1)),
-            leaveDate: expect.any(moment),
-          },
-        ],
-      },
-    },
-    {
-      firstDate: moment(new Date(2015, 5, 1)),
-      input: <WhatsappMessage[]>[
-        {
-          date: moment(new Date(2019, 1, 1)),
-          message: 'John Smith added Tom',
-        },
-        {
-          date: moment(new Date(2019, 2, 1)),
-          message: 'John Smith removed Tom',
-        },
-        {
-          date: moment(new Date(2020, 1, 1)),
-          message: 'John Smith added Tom',
-        },
-        {
-          date: moment(new Date(2020, 2, 1)),
-          message: 'John Smith removed Tom',
-        },
-      ],
-      users: ['Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2019, 1, 1)),
-            leaveDate: moment(new Date(2019, 2, 1)),
-          },
-          {
-            joinDate: moment(new Date(2020, 1, 1)),
-            leaveDate: moment(new Date(2020, 2, 1)),
-          },
-        ],
-      },
-    },
-    {
-      firstDate: moment(new Date(2015, 1, 1)),
-      input: <WhatsappMessage[]>[],
-      users: ['Tom'],
-      expected: <Record<string, UserTimeline[]>>{
-        Tom: [
-          {
-            joinDate: moment(new Date(2015, 1, 1)),
-            leaveDate: expect.any(moment),
-          },
-        ],
-      },
-    },
-  ];
-
-  tests.forEach(({ firstDate, input, users, expected }) => {
-    it(`returns the expected mapping on '${input.length}' messages`, () => {
-      // Act
-      const result = getUserTimelines(input, users, firstDate);
-
-      // Assert
-      expect(result).toEqual(expected);
-    });
-  });
-});
-
 describe('getConversationSubjects', () => {
   const tests = [
     {
@@ -424,32 +274,32 @@ describe('WhatsappData', () => {
           {
             message: 'User joined your channel',
             author: 'System',
-            date: new Date(2021, 2, 10, 5, 0, 5),
+            date: new Date(2021, 2, 10, 5),
           },
           {
             message: 'Welcome to the chat!',
             author: 'Madame Trudeau',
-            date: new Date(2021, 2, 10, 5, 10, 5),
+            date: new Date(2021, 2, 10, 5),
           },
           {
             message: 'Thanks! Happy to be here 😊',
             author: 'Among Us Player',
-            date: new Date(2021, 2, 10, 5, 12, 5),
+            date: new Date(2021, 2, 12, 5),
           },
           {
             message: '<Media omitted>',
             author: 'Among Us Player',
-            date: new Date(2022, 3, 10, 6, 12, 5),
+            date: new Date(2022, 3, 10, 6),
           },
           {
             message: 'Sorry for being late to the meeting',
             author: 'Among Us Player',
-            date: new Date(2022, 1, 10, 6, 12, 5),
+            date: new Date(2022, 1, 10, 6),
           },
           {
             message: 'I forgive you 💩',
             author: 'Madame Trudeau',
-            date: new Date(2022, 2, 10, 7, 10, 5),
+            date: new Date(2022, 2, 10, 7),
           },
         ],
         expected: <WhatsappData>{
@@ -462,41 +312,41 @@ describe('WhatsappData', () => {
             {
               message: 'User joined your channel',
               author: 'System',
-              date: moment(new Date(2021, 2, 10, 5, 0, 5)),
+              date: moment(new Date(2021, 2, 10, 5)),
             },
           ],
           lastMessage: {
             message: 'I forgive you 💩',
             author: 'Madame Trudeau',
-            date: moment(new Date(2022, 2, 10, 7, 10, 5)),
+            date: moment(new Date(2022, 2, 10, 7)),
           },
           firstMessage: {
             message: 'Welcome to the chat!',
             author: 'Madame Trudeau',
-            date: moment(new Date(2021, 2, 10, 5, 10, 5)),
+            date: moment(new Date(2021, 2, 10, 5)),
           },
           messagesPerUser: {
             'Among Us Player': [
               {
                 author: 'Among Us Player',
-                date: moment(new Date(2021, 2, 10, 5, 12, 5)),
+                date: moment(new Date(2021, 2, 12, 5)),
                 message: 'Thanks! Happy to be here 😊',
               },
               {
                 message: 'Sorry for being late to the meeting',
                 author: 'Among Us Player',
-                date: moment(new Date(2022, 1, 10, 6, 12, 5)),
+                date: moment(new Date(2022, 1, 10, 6)),
               },
             ],
             'Madame Trudeau': [
               {
                 author: 'Madame Trudeau',
-                date: moment(new Date(2021, 2, 10, 5, 10, 5)),
+                date: moment(new Date(2021, 2, 10, 5)),
                 message: 'Welcome to the chat!',
               },
               {
                 author: 'Madame Trudeau',
-                date: moment(new Date(2022, 2, 10, 7, 10, 5)),
+                date: moment(new Date(2022, 2, 10, 7)),
                 message: 'I forgive you 💩',
               },
             ],
@@ -563,7 +413,6 @@ describe('WhatsappData', () => {
             },
           },
           conversationNames: [],
-          userTimelines: {},
           messagesPerMonthPerUser: {
             'Apr 2021': {
               'Among Us Player': 0,
@@ -716,8 +565,6 @@ describe('WhatsappData', () => {
               'Madame Trudeau': 0,
             },
           },
-          // This property is ignored and added in the assert
-          messages: [],
         },
       },
     ];
@@ -728,7 +575,7 @@ describe('WhatsappData', () => {
         const result = new WhatsappData(input);
 
         // Assert
-        expect(result).toEqual({ ...expected, messages: input });
+        expect(result).toEqual(expected);
       });
     });
   });

@@ -47,8 +47,7 @@ const InputForm = ({ handleData }: { handleData: Function }) => {
               onChange={(e: any) => handleChange(e.target!.files)}
             />
             <FormText id="input-file-help" muted>
-              The file to analyze, export the Whatsapp chat you want to analyze
-              and put file here.
+              The file to analyze, click 'Getting Started' to learn more.
             </FormText>
           </FormGroup>
         </Col>

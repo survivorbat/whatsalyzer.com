@@ -1,10 +1,19 @@
+.header-container {
+  padding: 20px 5px 40px 5px;
+  text-align: center;
+  margin-top: 1vh;
+}
+
 .header {
-  padding: 4vh;
   text-align: center;
 }
 
 .header-title {
   font-size: 10vw;
+}
+
+.menu-container {
+  padding-top: 10px;
 }
 
 .menu-button {
@@ -18,8 +27,26 @@
   vertical-align: center;
 }
 
+.menu-button:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 2px;
+}
+
+.menu-button:focus {
+  background-color: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 0 4px;
+}
+
 .info-container {
-  background-color: rgba(0, 0, 0, 0.5);
-  margin-bottom: 50px;
-  margin-top: 50px;
+  padding-top: 20px;
+  padding-bottom: 30px;
+  text-align: left;
+}
+
+.howto-image-container {
+  text-align: center;
+}
+
+.howto-image {
+  max-height: 400px;
 }

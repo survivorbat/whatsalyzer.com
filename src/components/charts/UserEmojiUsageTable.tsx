@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
+import { defaultColors } from '../../constants/colors';
 
 const getTopEmojis = (
   inputData: Record<string, number>,
@@ -21,14 +22,14 @@ function UserEmojiUsageTable({ data }: InputData) {
     <Table borderless className="text-light">
       <thead>
         <tr>
-          <th>User</th>
-          <th>Emojis</th>
+          <th scope="col">User</th>
+          <th scope="col">Emojis</th>
         </tr>
       </thead>
       <tbody>
-        {data.users.map((name) => (
+        {data.users.map((name, index) => (
           <tr key={name}>
-            <td className="user-name-table">{name}</td>
+            <th scope="row" className="user-name-table" style={{color: defaultColors[index % defaultColors.length]}}>{name}</th>
             <td>
               {getTopEmojis(data.emojiUsagePerUser[name], 5).map((emoji) => (
                 <span

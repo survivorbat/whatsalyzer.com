@@ -10,26 +10,27 @@ import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 
 function App() {
-  const [whatsappData, setWhatsappData] = useState(() => {
-    const savedData = localStorage.getItem('saved-data');
-    const initialData = savedData ? parseStringSync(savedData) : [];
-
-    return new WhatsappData(initialData);
-  });
+  const [whatsappData, setWhatsappData] = useState((): WhatsappData | null => null);
 
   const handleNewData = (data: string) => {
     const result = parseStringSync(data);
-    const whatsapp = new WhatsappData(result);
 
-    setWhatsappData(whatsapp);
-    localStorage.setItem('saved-data', data);
+    if (result.length > 0) {
+      const whatsapp = new WhatsappData(result);
+      setWhatsappData(whatsapp);
+    }
   };
+
+  let analysisResult;
+  if (whatsappData) {
+    analysisResult = <AnalysisResults data={whatsappData!} />
+  }
 
   return (
     <Container className="text-light main-container">
       <Header />
       <InputForm handleData={handleNewData} />
-      <AnalysisResults data={whatsappData} />
+      {analysisResult}
       <Footer />
     </Container>
   );

@@ -1,22 +1,23 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
+import { defaultColors } from '../../constants/colors';
 
 function UserEmojiCountTable({ data }: InputData) {
   return (
     <Table borderless className="text-light">
       <thead>
         <tr>
-          <th>User</th>
-          <th>#</th>
-          <th>%</th>
-          <th>Average Per Message</th>
+          <th scope="col">User</th>
+          <th scope="col">#</th>
+          <th scope="col">%</th>
+          <th scope="col">Average Per Message</th>
         </tr>
       </thead>
       <tbody>
-        {data.users.map((name) => (
+        {data.users.map((name, index) => (
           <tr key={name}>
-            <td className="user-name-table">{name}</td>
+            <th scope="row" className="user-name-table" style={{color: defaultColors[index % defaultColors.length]}}>{name}</th>
             <td>{data.emojisPerUser[name].length}</td>
             <td>
               {Math.round(

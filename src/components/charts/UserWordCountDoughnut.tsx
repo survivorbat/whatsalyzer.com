@@ -10,7 +10,7 @@ function UserWordCountDoughnut({ data }: InputData) {
     datasets: [
       {
         id: 0,
-        data: data.users.map((name) => data.wordsPerUser[name].length),
+        data: data.users.map((name) => Math.round(data.wordsPerUser[name].length / data.totalWords * 100)),
         backgroundColor: defaultColors,
         borderColor: '#000000',
       },
@@ -18,7 +18,14 @@ function UserWordCountDoughnut({ data }: InputData) {
   };
 
   const options = {
-    plugins: defaultPluginConfig,
+    plugins:  {
+      legend: defaultPluginConfig.legend,
+      tooltip: {
+        callbacks: {
+          label: (data: any) => `${data.label}: ${data.dataset.data[data.dataIndex]}%`
+        },
+      },
+    },
   };
 
   return <Doughnut datasetIdKey="id" data={chartData} options={options} />;

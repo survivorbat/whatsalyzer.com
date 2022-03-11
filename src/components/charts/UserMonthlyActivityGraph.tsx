@@ -9,7 +9,7 @@ import {
   defaultPluginConfig,
 } from '../../constants/charts';
 
-function UserMessageCountPie({ data }: InputData) {
+const UserMonthlyActivityGraph = ({ data }: InputData) => {
   const chartData = {
     labels: Object.keys(data.messagesPerMonthPerUser),
     datasets: data.users.map((name, index) => ({
@@ -46,4 +46,4 @@ function UserMessageCountPie({ data }: InputData) {
   return <Line datasetIdKey="id" data={chartData} options={options} />;
 }
 
-export default UserMessageCountPie;
+export default UserMonthlyActivityGraph;

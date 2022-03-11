@@ -2,14 +2,18 @@ import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
 import moment from 'moment';
+import { defaultColors } from '../../constants/colors';
 
 function UserMessageCountTable({ data }: InputData) {
   const duration = moment.duration(
-    data.lastMessage.date.diff(data.firstMessage.date)
+    data.firstMessage.date.diff(data.lastMessage.date)
   );
+
   const totalDays = duration.asDays();
   const totalMonths = duration.asMonths();
   const totalYears = duration.asYears();
+
+  console.log();
 
   return (
     <Table borderless className="text-light">
@@ -24,9 +28,9 @@ function UserMessageCountTable({ data }: InputData) {
         </tr>
       </thead>
       <tbody>
-        {data.users.map((name) => (
+        {data.users.map((name, index) => (
           <tr key={name}>
-            <th scope="row" className="user-name-table">
+            <th scope="row" style={{color: defaultColors[index % defaultColors.length]}} className="user-name-table">
               {name}
             </th>
             <td>{data.messagesPerUser[name].length}</td>

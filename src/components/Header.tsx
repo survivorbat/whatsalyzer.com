@@ -1,7 +1,11 @@
 import * as React from 'react';
-import { Button, Col, Collapse, Row } from 'react-bootstrap';
+import { Col, Collapse, Figure, Row } from 'react-bootstrap';
 import './Header.css';
+import howto1 from '../assets/howto-1.jpeg';
+import howto2 from '../assets/howto-2.jpeg';
 import { useState } from 'react';
+import FigureCaption from 'react-bootstrap/FigureCaption';
+import FigureImage from 'react-bootstrap/FigureImage';
 
 function Header() {
   const [menuOpen, setMenuOpen] = useState({qa: false, howto: false} as Record<string, boolean>);
@@ -11,7 +15,7 @@ function Header() {
   }
 
   return (
-    <>
+    <div className="header-container">
       <Row>
         <Col>
           <header className="header">
@@ -19,9 +23,9 @@ function Header() {
           </header>
         </Col>
       </Row>
-      <Row>
+      <Row className="menu-container">
         <Col lg={6} md={12}>
-          <button className="menu-button" onClick={() => toggleMenu('howto')}>Get Started</button>
+          <button className="menu-button" onClick={() => toggleMenu('howto')}>Getting Started</button>
         </Col>
         <Col lg={6} md={12}>
           <button className="menu-button" onClick={() => toggleMenu('qa')}>Q&A</button>
@@ -29,15 +33,63 @@ function Header() {
       </Row>
       <Row className="info-container">
         <Col>
-          <Collapse in={menuOpen.qa}>
-            <div>qa</div>
-          </Collapse>
           <Collapse in={menuOpen.howto}>
-            <div>howto</div>
+            <div>
+              <h2>How does it work?</h2>
+              <ol>
+                <li>Go to the Whatsapp chat you want to analyze</li>
+                <li>Click on the menu button at the top-right</li>
+                <li>Select 'More'</li>
+                <li>Click on 'Export chat'</li>
+                <li>Click 'Without media'</li>
+                <li>Send the export to yourself by email or through Whatsapp</li>
+              </ol>
+              <p>
+                Then select the file below to analyze the conversation.
+              </p>
+              <Row>
+                <Col className="howto-image-container" xs={12} md={6}>
+                  <Figure>
+                    <FigureImage className="howto-image" src={howto1} alt="Select 'More'"/>
+                    <FigureCaption>Select 'More'</FigureCaption>
+                  </Figure>
+                </Col>
+                <Col className="howto-image-container" xs={12} md={6}>
+                  <Figure>
+                    <FigureImage className="howto-image" src={howto2} alt="Click on 'Export chat'"/>
+                    <FigureCaption>Click on 'Export chat'</FigureCaption>
+                  </Figure>
+                </Col>
+              </Row>
+              <hr/>
+            </div>
+          </Collapse>
+          <Collapse in={menuOpen.qa}>
+            <div>
+              <h2>Questions and Answers</h2>
+              <p>Q: Does Whatsalyzer save my data?</p>
+              <p>
+                A: No, Whatsalyzer is a fully client-side application. This means that your browser performs
+                all the calculations and no data is ever uploaded to a server.
+              </p>
+              <p>Q: Can I analyze group chats?</p>
+              <p>
+                A: Yes! Those stats are even more interesting than 'normal' chats.
+              </p>
+              <p>Q: Is Whatsalyzer open-source?</p>
+              <p>
+                A: Yes! You can view the code right here: <a href="https://github.com/survivorbat/whatsalyzer" target="_blank">github.com/survivorbat/whatsalyzer</a>
+              </p>
+              <p>Q: Will new features be added?</p>
+              <p>
+                A: Yes! The TODO list can be found in the README of the source code, check the link above.
+              </p>
+              <hr/>
+            </div>
           </Collapse>
         </Col>
       </Row>
-    </>
+    </div>
   );
 }
 

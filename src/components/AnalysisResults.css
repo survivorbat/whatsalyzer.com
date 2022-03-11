@@ -1,8 +1,3 @@
-.header-container {
-  padding: 20px 5px 40px 5px;
-  text-align: center;
-}
-
 .chart-title {
   text-align: center;
 }
@@ -21,15 +16,11 @@
   color: azure;
 }
 
-.main-title-container {
-  padding: 50px;
-}
-
 .section-title {
   font-weight: bold;
   font-size: 270%;
   margin-bottom: 20px;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .table {
