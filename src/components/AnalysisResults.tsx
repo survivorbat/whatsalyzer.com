@@ -120,7 +120,7 @@ function AnalysisResults({ data }: InputData) {
           </h3>
           <Row>
             <Col>
-              <DiagramHint/>
+              <DiagramHint />
               <UserMessageCountDoughnut data={data} />
             </Col>
           </Row>
@@ -135,7 +135,7 @@ function AnalysisResults({ data }: InputData) {
           <h3 title="The amount of messages per user per month">
             Monthly Activity
           </h3>
-          <DiagramHint/>
+          <DiagramHint />
           <UserActivityGraph data={data} />
         </Col>
       </Row>
@@ -144,7 +144,7 @@ function AnalysisResults({ data }: InputData) {
           <h3 title="The activity of a user on a particular hour, relative to their total activity">
             Relative Hourly Activity
           </h3>
-          <DiagramHint/>
+          <DiagramHint />
           <UserHourlyActivityGraph data={data} />
         </Col>
       </Row>
@@ -163,7 +163,7 @@ function AnalysisResults({ data }: InputData) {
           <h3>Total Words</h3>
           <Row>
             <Col>
-              <DiagramHint/>
+              <DiagramHint />
               <UserWordCountDoughnut data={data} />
             </Col>
           </Row>
@@ -187,7 +187,7 @@ function AnalysisResults({ data }: InputData) {
           </h3>
           <Row>
             <Col>
-              <DiagramHint/>
+              <DiagramHint />
               <UserEmojiCountDoughnut data={data} />
             </Col>
           </Row>

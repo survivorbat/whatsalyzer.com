@@ -19,7 +19,7 @@ const getTopEmojis = (
 
 function UserEmojiUsageTable({ data }: InputData) {
   return (
-    <Table borderless className="text-light">
+    <Table borderless responsive className="text-light">
       <thead>
         <tr>
           <th scope="col">User</th>
