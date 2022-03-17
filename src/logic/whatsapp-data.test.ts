@@ -304,10 +304,19 @@ describe('WhatsappData', () => {
         ],
         expected: <WhatsappData>{
           totalMessages: 4,
-          totalMessageLength: 98,
+          totalCharacters: 98,
           totalWords: 19,
+          totalFemke: 5,
           totalEmojis: 2,
           users: ['Madame Trudeau', 'Among Us Player'],
+          femkePerUser: {
+            'Among Us Player': 3,
+            'Madame Trudeau': 2,
+          },
+          charactersPerUser: {
+            'Among Us Player': 62,
+            'Madame Trudeau': 36,
+          },
           systemMessages: [
             {
               message: 'User joined your channel',

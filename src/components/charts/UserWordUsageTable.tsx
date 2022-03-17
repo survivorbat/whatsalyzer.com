@@ -32,7 +32,6 @@ function UserWordUsageTable({ data }: InputData) {
             <th
               scope="row"
               style={{ color: defaultColors[index % defaultColors.length] }}
-              className="user-name-table"
             >
               {name}
             </th>

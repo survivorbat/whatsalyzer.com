@@ -102,14 +102,17 @@ export interface WhatsappMessage {
 
 class WhatsappData {
   readonly totalMessages: number;
-  readonly totalMessageLength: number;
+  readonly totalCharacters: number;
   readonly totalWords: number;
   readonly totalEmojis: number;
+  readonly totalFemke: number;
 
   readonly users: string[];
   readonly conversationNames: ConversationName[];
 
   readonly messagesPerUser: Record<string, WhatsappMessage[]>;
+  readonly charactersPerUser: Record<string, number>;
+  readonly femkePerUser: Record<string, number>;
   readonly wordsPerUser: Record<string, string[]>;
   readonly emojisPerUser: Record<string, string[]>;
   readonly wordUsagePerUser: Record<string, Record<string, number>>;
@@ -148,8 +151,9 @@ class WhatsappData {
     this.firstMessage = filtered[0];
     this.lastMessage = filtered[filtered.length - 1];
 
+    this.totalFemke = filtered.reduce((count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length, 0)
     this.totalMessages = filtered.length;
-    this.totalMessageLength = filtered.reduce(
+    this.totalCharacters = filtered.reduce(
       (count, msg) => count + msg.message.length,
       0
     );
@@ -162,6 +166,28 @@ class WhatsappData {
       res[msg.author].push(msg);
       return res;
     }, {} as Record<string, WhatsappMessage[]>);
+
+    this.charactersPerUser = Object.keys(this.messagesPerUser).reduce(
+      (res, user) => {
+        res[user] = this.messagesPerUser[user].reduce(
+          (count, msg) => count + msg.message.length,
+          0
+        );
+        return res;
+      },
+      {} as Record<string, number>
+    );
+
+    this.femkePerUser = Object.keys(this.messagesPerUser).reduce(
+      (res, user) => {
+        res[user] = this.messagesPerUser[user].reduce(
+          (count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length,
+          0
+        );
+        return res;
+      },
+      {} as Record<string, number>
+    );
 
     // Set users, we use the keys of wordsPerUser to sort them based on the amount of messages
     this.users = Object.keys(this.messagesPerUser).sort(

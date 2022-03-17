@@ -19,7 +19,6 @@ function UserWordCountTable({ data }: InputData) {
           <tr key={name}>
             <th
               scope="row"
-              className="user-name-table"
               style={{ color: defaultColors[index % defaultColors.length] }}
             >
               {name}

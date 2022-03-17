@@ -25,6 +25,7 @@ function UserMessageCountTable({ data }: InputData) {
           <th scope="col">Daily</th>
           <th scope="col">Monthly</th>
           <th scope="col">Yearly</th>
+          <th scope="col">FEMKE*</th>
         </tr>
       </thead>
       <tbody>
@@ -33,7 +34,6 @@ function UserMessageCountTable({ data }: InputData) {
             <th
               scope="row"
               style={{ color: defaultColors[index % defaultColors.length] }}
-              className="user-name-table"
             >
               {name}
             </th>
@@ -59,6 +59,9 @@ function UserMessageCountTable({ data }: InputData) {
                 `${data.messagesPerUser[name].length / totalYears}`
               ).toFixed(1)}
             </td>
+            <td>
+              {parseFloat(`${data.femkePerUser[name] / data.charactersPerUser[name]}`).toFixed(2)}
+            </td>
           </tr>
         ))}
       </tbody>
@@ -72,6 +75,7 @@ function UserMessageCountTable({ data }: InputData) {
             {parseFloat(`${data.totalMessages / totalMonths}`).toFixed(1)}
           </td>
           <td>{parseFloat(`${data.totalMessages / totalYears}`).toFixed(1)}</td>
+          <td>{parseFloat(`${data.totalFemke / data.totalCharacters}`).toFixed(2)}</td>
         </tr>
       </tfoot>
     </Table>
