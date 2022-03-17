@@ -60,7 +60,7 @@ function UserMessageCountTable({ data }: InputData) {
               ).toFixed(1)}
             </td>
             <td>
-              {parseFloat(`${data.femkePerUser[name] / data.charactersPerUser[name]}`).toFixed(2)}
+              {Math.round(data.femkePerUser[name] / data.charactersPerUser[name] * 100)}%
             </td>
           </tr>
         ))}
@@ -75,7 +75,7 @@ function UserMessageCountTable({ data }: InputData) {
             {parseFloat(`${data.totalMessages / totalMonths}`).toFixed(1)}
           </td>
           <td>{parseFloat(`${data.totalMessages / totalYears}`).toFixed(1)}</td>
-          <td>{parseFloat(`${data.totalFemke / data.totalCharacters}`).toFixed(2)}</td>
+          <td>{Math.round(data.totalFemke / data.totalCharacters * 100)}%</td>
         </tr>
       </tfoot>
     </Table>
