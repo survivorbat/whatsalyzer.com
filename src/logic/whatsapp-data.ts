@@ -39,6 +39,7 @@ export const getConversationSubjects = (
   systemMessages: WhatsappMessage[]
 ): ConversationName[] => {
   return systemMessages.reduce((prev, msg) => {
+    // TODO: These only work in English now...
     const createMatch = msg.message.match(/^(.*) created group "(.+)"/);
     const renameMatch = msg.message.match(
       /^(.*) changed the subject from "(.+)" to "(.+)"/
@@ -145,13 +146,17 @@ class WhatsappData {
 
     const filtered = whatsappMessages
       .filter((m) => m.author !== 'System')
-      .filter((m) => m.message !== '<Media omitted>')
+      // This should take care of all <Media Omitted> messages, in whatever language the user has their phone
+      .filter((m) => !(m.message.startsWith('<') && m.message.endsWith('>')))
       .sort((a, b) => a.date.unix() - b.date.unix());
 
     this.firstMessage = filtered[0];
     this.lastMessage = filtered[filtered.length - 1];
 
-    this.totalFemke = filtered.reduce((count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length, 0)
+    this.totalFemke = filtered.reduce(
+      (count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length,
+      0
+    );
     this.totalMessages = filtered.length;
     this.totalCharacters = filtered.reduce(
       (count, msg) => count + msg.message.length,
