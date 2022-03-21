@@ -8,10 +8,10 @@ function UserWordCountTable({ data }: InputData) {
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col">#</th>
-          <th scope="col">%</th>
-          <th scope="col">Average Per Message</th>
+          <th scope="col" title="The user">User</th>
+          <th scope="col" title="The amount of words a specific user has contributed to this conversation">#</th>
+          <th scope="col" title="The percentage of words a specific user has contributed to this conversation">%</th>
+          <th scope="col" title="The average amount of words per message">Average Per Message</th>
         </tr>
       </thead>
       <tbody>

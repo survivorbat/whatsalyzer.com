@@ -19,13 +19,13 @@ function UserMessageCountTable({ data }: InputData) {
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col">#</th>
-          <th scope="col">%</th>
-          <th scope="col">Daily</th>
-          <th scope="col">Monthly</th>
-          <th scope="col">Yearly</th>
-          <th scope="col">FEMKE*</th>
+          <th scope="col" title="The user">User</th>
+          <th scope="col" title="The amount of messages a specific user has contributed to this conversation">#</th>
+          <th scope="col" title="The percentage of messages a specific user has contributed to the conversation">%</th>
+          <th scope="col" title="The daily amount of messages a user has contributed to the conversation">Daily</th>
+          <th scope="col" title="The weekly amount of messages a user has contributed to the conversation">Monthly</th>
+          <th scope="col" title="The yearly amount of messages a user has contributed to the conversation">Yearly</th>
+          <th scope="col" title="⇪↩ヾ   ⤷э⇅   ↪↩∧   э⇅⤷⇆⇪   ∧↩   ⊏↩⤣↻э⇅⇇⇅↪⇆   ∧⇇⇅   ↹⇅⤣⇊⇅">FEMKE</th>
         </tr>
       </thead>
       <tbody>

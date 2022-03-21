@@ -35,7 +35,7 @@ function AnalysisResults({ data }: InputData) {
         </Row>
         <Row>
           <Col className="chart-container">
-            <h3 title="A timeline of the 'names' of the conversation">
+            <h3 title="A timeline of the 'names' of the conversation, only works for English chats now">
               Group Subject Timeline
             </h3>
             <SubjectTimelineBars data={data} />
@@ -49,7 +49,7 @@ function AnalysisResults({ data }: InputData) {
     <>
       <Row className="chart-title">
         <Col>
-          <h2 className="section-title">Conversation Stats</h2>
+          <h2 className="section-title" title="General conversation stats">Conversation Stats</h2>
         </Col>
       </Row>
       <Row>
@@ -160,7 +160,7 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container" md={12} lg={6}>
-          <h3>Total Words</h3>
+          <h3 title="The percentage of words a specific user has contributed to the conversation">Total Words</h3>
           <Row>
             <Col>
               <DiagramHint />
@@ -174,7 +174,7 @@ function AnalysisResults({ data }: InputData) {
           </Row>
         </Col>
         <Col className="chart-container" md={12} lg={6}>
-          <h3 title="The top-5 words a user uses in their messages, only words with more than 4 characters.">
+          <h3 title="The top-5 words a user uses in their messages, only words with more than 4 characters">
             Popular Words
           </h3>
           <UserWordUsageTable data={data} />

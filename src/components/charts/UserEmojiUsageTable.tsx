@@ -22,8 +22,8 @@ function UserEmojiUsageTable({ data }: InputData) {
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col">Emojis</th>
+          <th scope="col" title="The user">User</th>
+          <th scope="col" title="The top-5 emoji's this user uses">Emojis</th>
         </tr>
       </thead>
       <tbody>
@@ -41,7 +41,7 @@ function UserEmojiUsageTable({ data }: InputData) {
                   className="rounded-pill participant-pill"
                   key={emoji.name}
                 >
-                  {emoji.name} <small>({emoji.amount})</small>
+                  {emoji.name} <small className="text-muted">({emoji.amount})</small>
                 </span>
               ))}
             </td>
