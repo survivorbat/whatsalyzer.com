@@ -292,6 +292,11 @@ describe('WhatsappData', () => {
             date: new Date(2022, 3, 10, 6),
           },
           {
+            message: '<Media weggelaten>',
+            author: 'Among Us Player',
+            date: new Date(2022, 3, 10, 7),
+          },
+          {
             message: 'Sorry for being late to the meeting',
             author: 'Among Us Player',
             date: new Date(2022, 1, 10, 6),

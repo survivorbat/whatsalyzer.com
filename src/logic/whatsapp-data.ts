@@ -147,7 +147,7 @@ class WhatsappData {
     const filtered = whatsappMessages
       .filter((m) => m.author !== 'System')
       // This should take care of all <Media Omitted> messages, in whatever language the user has their phone
-      .filter((m) => !(m.message.startsWith('<') && m.message.endsWith('>')))
+      .filter((m) => !(m.message.trim().startsWith('<') && m.message.trim().endsWith('>')))
       .sort((a, b) => a.date.unix() - b.date.unix());
 
     this.firstMessage = filtered[0];
