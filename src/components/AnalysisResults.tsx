@@ -7,15 +7,13 @@ import UserActivityGraph from './charts/UserMonthlyActivityGraph';
 import UserMessageCountTable from './charts/UserMessageCountTable';
 import UserHourlyActivityGraph from './charts/UserHourlyActivityGraph';
 import { InputData } from './charts/input-interface';
-import UserWordCountDoughnut from './charts/UserWordCountDoughnut';
-import UserWordCountTable from './charts/UserWordCountTable';
 import UserWordUsageTable from './charts/UserWordUsageTable';
-import UserEmojiCountTable from './charts/UserEmojiCountTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
-import UserEmojiCountDoughnut from './charts/UserEmojiCountDoughnut';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
 import { defaultColors } from '../constants/colors';
 import DiagramHint from './DiagramHint';
+import WordCloud from './charts/WordCloud';
+import EmojiCloud from './charts/EmojiCloud';
 
 function AnalysisResults({ data }: InputData) {
   let conversationTimeline;
@@ -49,7 +47,9 @@ function AnalysisResults({ data }: InputData) {
     <>
       <Row className="chart-title">
         <Col>
-          <h2 className="section-title" title="General conversation stats">Conversation Stats</h2>
+          <h2 className="section-title" title="General conversation stats">
+            Conversation Stats
+          </h2>
         </Col>
       </Row>
       <Row>
@@ -159,48 +159,24 @@ function AnalysisResults({ data }: InputData) {
         </Col>
       </Row>
       <Row>
-        <Col className="chart-container" md={12} lg={6}>
-          <h3 title="The percentage of words a specific user has contributed to the conversation">Total Words</h3>
-          <Row>
-            <Col>
-              <DiagramHint />
-              <UserWordCountDoughnut data={data} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <UserWordCountTable data={data} />
-            </Col>
-          </Row>
+        <Col className="chart-container">
+          <h3 title="Most popular words, only words with more than 4 characters and a frequency higher than 9">Popular Words</h3>
+          <WordCloud data={data} />
         </Col>
-        <Col className="chart-container" md={12} lg={6}>
-          <h3 title="The top-5 words a user uses in their messages, only words with more than 4 characters">
-            Popular Words
-          </h3>
+      </Row>
+      <Row>
+        <Col className="chart-container">
           <UserWordUsageTable data={data} />
         </Col>
       </Row>
       <Row>
-        <Col className="chart-container" md={12} lg={6}>
-          <h3 title="The total amount of emojis a user uses in their messages.">
-            Total Emojis
-          </h3>
-          <Row>
-            <Col>
-              <DiagramHint />
-              <UserEmojiCountDoughnut data={data} />
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <UserEmojiCountTable data={data} />
-            </Col>
-          </Row>
+        <Col className="chart-container">
+          <h3 title="Most popular emojis">Popular Emojis</h3>
+          <EmojiCloud data={data} />
         </Col>
-        <Col className="chart-container" md={12} lg={6}>
-          <h3 title="The top-5 emojis a user uses in their messages">
-            Popular Emojis
-          </h3>
+      </Row>
+      <Row>
+        <Col className="chart-container">
           <UserEmojiUsageTable data={data} />
         </Col>
       </Row>

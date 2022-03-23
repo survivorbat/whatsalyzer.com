@@ -377,6 +377,28 @@ describe('WhatsappData', () => {
               '💩': 1,
             },
           },
+          wordUsage: {
+            be: 1,
+            being: 1,
+            chat: 1,
+            for: 1,
+            forgive: 1,
+            happy: 1,
+            here: 1,
+            i: 1,
+            late: 1,
+            meeting: 1,
+            sorry: 1,
+            thanks: 1,
+            the: 2,
+            to: 3,
+            welcome: 1,
+            you: 1,
+          },
+          emojiUsage: {
+            '💩': 1,
+            '😊': 1,
+          },
           wordsPerUser: {
             'Among Us Player': [
               'thanks',

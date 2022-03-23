@@ -17,13 +17,22 @@ const getTopEmojis = (
     .filter((i) => i.name);
 };
 
+const amount = 5;
+
 function UserEmojiUsageTable({ data }: InputData) {
   return (
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col" title="The user">User</th>
-          <th scope="col" title="The top-5 emoji's this user uses">Emojis</th>
+          <th scope="col" title="The user">
+            User
+          </th>
+          <th scope="col" title={`Top-${amount} emojis this user uses`}>
+            Words
+          </th>
+          <th scope="col" title="Total amount of emojis this user has messaged">
+            Total
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -41,10 +50,12 @@ function UserEmojiUsageTable({ data }: InputData) {
                   className="rounded-pill participant-pill"
                   key={emoji.name}
                 >
-                  {emoji.name} <small className="text-muted">({emoji.amount})</small>
+                  {emoji.name}{' '}
+                  <small className="text-muted">({emoji.amount})</small>
                 </span>
               ))}
             </td>
+            <td>{data.emojisPerUser[name].length}</td>
           </tr>
         ))}
       </tbody>

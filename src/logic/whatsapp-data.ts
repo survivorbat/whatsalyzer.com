@@ -118,6 +118,8 @@ class WhatsappData {
   readonly emojisPerUser: Record<string, string[]>;
   readonly wordUsagePerUser: Record<string, Record<string, number>>;
   readonly emojiUsagePerUser: Record<string, Record<string, number>>;
+  readonly wordUsage: Record<string, number>;
+  readonly emojiUsage: Record<string, number>;
 
   readonly messagesPerMonthPerUser: Record<string, Record<string, number>>;
   readonly messagesPerHourPerUser: Record<string, Record<string, number>>;
@@ -147,7 +149,10 @@ class WhatsappData {
     const filtered = whatsappMessages
       .filter((m) => m.author !== 'System')
       // This should take care of all <Media Omitted> messages, in whatever language the user has their phone
-      .filter((m) => !(m.message.trim().startsWith('<') && m.message.trim().endsWith('>')))
+      .filter(
+        (m) =>
+          !(m.message.trim().startsWith('<') && m.message.trim().endsWith('>'))
+      )
       .sort((a, b) => a.date.unix() - b.date.unix());
 
     this.firstMessage = filtered[0];
@@ -226,6 +231,18 @@ class WhatsappData {
       {} as Record<string, Record<string, number>>
     );
 
+    this.wordUsage = Object.keys(this.wordUsagePerUser).reduce((res, user) => {
+      Object.keys(this.wordUsagePerUser[user]).forEach((word) => {
+        if (!res[word]) {
+          res[word] = 0;
+        }
+
+        res[word] += this.wordUsagePerUser[user][word];
+      });
+
+      return res;
+    }, {} as Record<string, number>);
+
     this.emojisPerUser = filtered.reduce((prev, msg) => {
       if (!prev[msg.author]) {
         prev[msg.author] = [];
@@ -251,6 +268,18 @@ class WhatsappData {
       },
       {} as Record<string, Record<string, number>>
     );
+
+    this.emojiUsage = Object.keys(this.emojiUsagePerUser).reduce((res, user) => {
+      Object.keys(this.emojiUsagePerUser[user]).forEach((emoji) => {
+        if (!res[emoji]) {
+          res[emoji] = 0;
+        }
+
+        res[emoji] += this.emojiUsagePerUser[user][emoji];
+      });
+
+      return res;
+    }, {} as Record<string, number>);
 
     this.totalWords = Object.keys(this.wordsPerUser).reduce(
       (res, user) => res + this.wordsPerUser[user].length,

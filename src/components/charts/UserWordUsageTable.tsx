@@ -17,13 +17,22 @@ const getTopWords = (
     .filter((i) => i.name);
 };
 
+const amount = 5;
+
 function UserWordUsageTable({ data }: InputData) {
   return (
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col">User</th>
-          <th scope="col">Words</th>
+          <th scope="col" title="The user">
+            User
+          </th>
+          <th scope="col" title={`Top-${amount} words this user uses`}>
+            Words
+          </th>
+          <th scope="col" title="Total amount of words this user has messaged">
+            Total
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -36,12 +45,14 @@ function UserWordUsageTable({ data }: InputData) {
               {name}
             </th>
             <td>
-              {getTopWords(data.wordUsagePerUser[name], 5).map((word) => (
+              {getTopWords(data.wordUsagePerUser[name], amount).map((word) => (
                 <span className="rounded-pill participant-pill" key={word.name}>
-                  {word.name} <small>({word.amount})</small>
+                  {word.name}{' '}
+                  <small className="text-muted">({word.amount})</small>
                 </span>
               ))}
             </td>
+            <td>{data.wordsPerUser[name].length}</td>
           </tr>
         ))}
       </tbody>
