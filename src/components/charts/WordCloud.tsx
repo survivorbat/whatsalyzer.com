@@ -8,12 +8,12 @@ import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 ChartJS.register(WordCloudController, WordElement);
 
 const minFontSize = 16;
-const fontSizeDivider = 4.5;
+const fontSizeDivider = 5;
 
 function WordCloud({ data }: InputData) {
   const relevantWords = Object.keys(data.wordUsage)
     .filter((word) => word.length > 6)
-    .filter((word) => data.wordUsage[word] >= 10);
+    .filter((word) => data.wordUsage[word] > 29);
 
   const chartData = {
     labels: relevantWords,
