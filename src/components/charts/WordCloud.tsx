@@ -8,19 +8,32 @@ import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 ChartJS.register(WordCloudController, WordElement);
 
 const minFontSize = 16;
-const fontSizeDivider = 5;
+const maxFontSize = 80;
+
+const minFrequency = 29;
 
 function WordCloud({ data }: InputData) {
   const relevantWords = Object.keys(data.wordUsage)
-    .filter((word) => word.length > 6)
-    .filter((word) => data.wordUsage[word] > 29);
+    .filter((word) => word.length > 4)
+    .filter((word) => data.wordUsage[word] > minFrequency);
+
+  // Determine the highest frequency
+  const maxFrequency = relevantWords.reduce((maxFrequency, word) => {
+    const frequency = data.wordUsage[word];
+
+    return frequency > maxFrequency ? frequency : maxFrequency;
+  }, minFrequency + 1);
+
+  // Determine the difference between the lowest and the highest frequency
+  const spread = maxFrequency - minFrequency;
 
   const chartData = {
     labels: relevantWords,
     datasets: [
       {
         id: 0,
-        data: relevantWords.map((name) => data.wordUsage[name] / fontSizeDivider + minFontSize),
+        // For each word usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
+        data: relevantWords.map((name) => data.wordUsage[name] / spread * (maxFontSize - minFontSize) + minFontSize),
         color: defaultColors,
         borderColor: defaultColors,
         backgroundColor: defaultColors,

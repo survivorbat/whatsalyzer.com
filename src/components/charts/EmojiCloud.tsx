@@ -7,18 +7,31 @@ import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
 ChartJS.register(WordCloudController, WordElement);
 
-const minFontSize = 22;
-const fontSizeDivider = 4.6;
+const minFontSize = 12;
+const maxFontSize = 400;
+
+const minFrequency = 5;
 
 function EmojiCloud({ data }: InputData) {
   const relevantEmojis = Object.keys(data.emojiUsage);
+
+  // Determine the highest frequency
+  const maxFrequency = relevantEmojis.reduce((maxFrequency, word) => {
+    const frequency = data.emojiUsage[word];
+
+    return frequency > maxFrequency ? frequency : maxFrequency;
+  }, minFrequency + 1);
+
+  // Determine the difference between the lowest and the highest frequency
+  const spread = maxFrequency - minFrequency;
 
   const chartData = {
     labels: relevantEmojis,
     datasets: [
       {
         id: 0,
-        data: relevantEmojis.map((name) => data.emojiUsage[name] / fontSizeDivider + minFontSize),
+        // For each emoji usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
+        data: relevantEmojis.map((name) => data.emojiUsage[name] / spread * (maxFontSize - minFontSize) + minFontSize),
         color: defaultColors,
         borderColor: defaultColors,
         backgroundColor: defaultColors,
@@ -46,7 +59,7 @@ function EmojiCloud({ data }: InputData) {
   };
 
   // @ts-ignore
-  return <div style={{height: '100vh'}}><Chart type="wordCloud" datasetIdKey="id" data={chartData} options={options}/></div>;
+  return <div style={{height: '90vh'}}><Chart type="wordCloud" datasetIdKey="id" data={chartData} options={options}/></div>;
 }
 
 export default EmojiCloud;
