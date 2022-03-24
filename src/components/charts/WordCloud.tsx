@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { defaultColors } from '../../constants/colors';
-import { InputData } from './input-interface';
+import { InputCloudData} from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
 import './Cloud.css';
@@ -12,11 +12,9 @@ ChartJS.register(WordCloudController, WordElement);
 const minFontSize = 16;
 const maxFontSize = 80;
 
-const minFrequency = 29;
-
-function WordCloud({ data }: InputData) {
+function WordCloud({ data, minFrequency, minLength }: InputCloudData) {
   const relevantWords = Object.keys(data.wordUsage)
-    .filter((word) => word.length > 4)
+    .filter((word) => word.length > minLength!)
     .filter((word) => data.wordUsage[word] > minFrequency);
 
   // Determine the highest frequency

@@ -160,10 +160,10 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3 title="Most popular words, only words with more than 6 characters and a frequency higher than 30">
+          <h3 title="Most popular words, only words with at least 6 characters and a frequency higher than 20">
             Popular Words
           </h3>
-          <WordCloud data={data} />
+          <WordCloud minFrequency={20} minLength={6} data={data} />
         </Col>
       </Row>
       <Row>
@@ -173,8 +173,8 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3 title="Most popular emojis">Popular Emojis</h3>
-          <EmojiCloud data={data} />
+          <h3 title="Most popular emojis, only emojis with a frequency higher than 2">Popular Emojis</h3>
+          <EmojiCloud minFrequency={2} data={data} />
         </Col>
       </Row>
       <Row>

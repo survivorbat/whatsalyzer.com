@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { defaultColors } from '../../constants/colors';
-import { InputData } from './input-interface';
+import { InputCloudData} from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
 import './Cloud.css';
@@ -12,9 +12,7 @@ ChartJS.register(WordCloudController, WordElement);
 const minFontSize = 20;
 const maxFontSize = 300;
 
-const minFrequency = 2;
-
-function EmojiCloud({ data }: InputData) {
+function EmojiCloud({ data, minFrequency }: InputCloudData) {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
     (emoji) => data.emojiUsage[emoji] >= minFrequency
   );
