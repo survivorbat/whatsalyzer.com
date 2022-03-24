@@ -5,15 +5,19 @@ import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
+import './Cloud.css';
+
 ChartJS.register(WordCloudController, WordElement);
 
-const minFontSize = 12;
-const maxFontSize = 400;
+const minFontSize = 20;
+const maxFontSize = 300;
 
-const minFrequency = 5;
+const minFrequency = 2;
 
 function EmojiCloud({ data }: InputData) {
-  const relevantEmojis = Object.keys(data.emojiUsage);
+  const relevantEmojis = Object.keys(data.emojiUsage).filter(
+    (emoji) => data.emojiUsage[emoji] >= minFrequency
+  );
 
   // Determine the highest frequency
   const maxFrequency = relevantEmojis.reduce((maxFrequency, word) => {
@@ -31,10 +35,15 @@ function EmojiCloud({ data }: InputData) {
       {
         id: 0,
         // For each emoji usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
-        data: relevantEmojis.map((name) => data.emojiUsage[name] / spread * (maxFontSize - minFontSize) + minFontSize),
+        data: relevantEmojis.map(
+          (name) =>
+            (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize) +
+            minFontSize
+        ),
         color: defaultColors,
         borderColor: defaultColors,
         backgroundColor: defaultColors,
+        fit: true,
       },
     ],
   };
@@ -46,7 +55,8 @@ function EmojiCloud({ data }: InputData) {
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) => `Found ${data.emojiUsage[tooltipData.label]}`,
+          label: (tooltipData: any) =>
+            `Found ${data.emojiUsage[tooltipData.label]}`,
         },
         color: defaultColors,
         titleFont: {
@@ -59,7 +69,18 @@ function EmojiCloud({ data }: InputData) {
   };
 
   // @ts-ignore
-  return <div style={{height: '90vh'}}><Chart type="wordCloud" datasetIdKey="id" data={chartData} options={options}/></div>;
+  return (
+    <div className="cloud-container">
+      <div className="cloud-wrapper">
+        <Chart
+          type="wordCloud"
+          datasetIdKey="id"
+          data={chartData}
+          options={options}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default EmojiCloud;

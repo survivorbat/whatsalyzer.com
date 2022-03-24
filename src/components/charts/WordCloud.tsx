@@ -5,6 +5,8 @@ import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
+import './Cloud.css';
+
 ChartJS.register(WordCloudController, WordElement);
 
 const minFontSize = 16;
@@ -33,7 +35,11 @@ function WordCloud({ data }: InputData) {
       {
         id: 0,
         // For each word usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
-        data: relevantWords.map((name) => data.wordUsage[name] / spread * (maxFontSize - minFontSize) + minFontSize),
+        data: relevantWords.map(
+          (name) =>
+            (data.wordUsage[name] / spread) * (maxFontSize - minFontSize) +
+            minFontSize
+        ),
         color: defaultColors,
         borderColor: defaultColors,
         backgroundColor: defaultColors,
@@ -48,7 +54,8 @@ function WordCloud({ data }: InputData) {
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) => `Found ${data.wordUsage[tooltipData.label]}`,
+          label: (tooltipData: any) =>
+            `Found ${data.wordUsage[tooltipData.label]}`,
         },
         titleFont: {
           size: 20,
@@ -60,7 +67,18 @@ function WordCloud({ data }: InputData) {
   };
 
   // @ts-ignore
-  return <div style={{height: '80vh'}}><Chart type="wordCloud" datasetIdKey="id" data={chartData} options={options}/></div>;
+  return (
+    <div className="cloud-container">
+      <div className="cloud-wrapper">
+        <Chart
+          type="wordCloud"
+          datasetIdKey="id"
+          data={chartData}
+          options={options}
+        />
+      </div>
+    </div>
+  );
 }
 
 export default WordCloud;

@@ -160,7 +160,9 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3 title="Most popular words, only words with more than 6 characters and a frequency higher than 30">Popular Words</h3>
+          <h3 title="Most popular words, only words with more than 6 characters and a frequency higher than 30">
+            Popular Words
+          </h3>
           <WordCloud data={data} />
         </Col>
       </Row>

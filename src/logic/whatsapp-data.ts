@@ -269,17 +269,20 @@ class WhatsappData {
       {} as Record<string, Record<string, number>>
     );
 
-    this.emojiUsage = Object.keys(this.emojiUsagePerUser).reduce((res, user) => {
-      Object.keys(this.emojiUsagePerUser[user]).forEach((emoji) => {
-        if (!res[emoji]) {
-          res[emoji] = 0;
-        }
+    this.emojiUsage = Object.keys(this.emojiUsagePerUser).reduce(
+      (res, user) => {
+        Object.keys(this.emojiUsagePerUser[user]).forEach((emoji) => {
+          if (!res[emoji]) {
+            res[emoji] = 0;
+          }
 
-        res[emoji] += this.emojiUsagePerUser[user][emoji];
-      });
+          res[emoji] += this.emojiUsagePerUser[user][emoji];
+        });
 
-      return res;
-    }, {} as Record<string, number>);
+        return res;
+      },
+      {} as Record<string, number>
+    );
 
     this.totalWords = Object.keys(this.wordsPerUser).reduce(
       (res, user) => res + this.wordsPerUser[user].length,

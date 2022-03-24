@@ -1,0 +1,10 @@
+.cloud-container {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+.cloud-wrapper {
+  min-height: 800px;
+  width: 100%;
+  min-width: 1200px;
+}
