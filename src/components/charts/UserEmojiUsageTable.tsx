@@ -28,7 +28,7 @@ function UserEmojiUsageTable({ data }: InputData) {
             User
           </th>
           <th scope="col" title={`Top-${amount} emojis this user uses`}>
-            Words
+            Emojis
           </th>
           <th scope="col" title="Total amount of emojis this user has messaged">
             Total
