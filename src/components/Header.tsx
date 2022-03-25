@@ -7,7 +7,7 @@ import { useState } from 'react';
 import FigureCaption from 'react-bootstrap/FigureCaption';
 import FigureImage from 'react-bootstrap/FigureImage';
 
-function Header() {
+const Header = () => {
   const [menuOpen, setMenuOpen] = useState({
     qa: false,
     howto: false,

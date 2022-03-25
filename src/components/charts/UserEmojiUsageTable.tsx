@@ -19,7 +19,7 @@ const getTopEmojis = (
 
 const amount = 5;
 
-function UserEmojiUsageTable({ data }: InputData) {
+const UserEmojiUsageTable = ({ data }: InputData)  => {
   return (
     <Table borderless responsive className="text-light">
       <thead>

@@ -9,7 +9,7 @@ import Footer from './components/Footer';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 
-function App() {
+const App = () => {
   const [whatsappData, setWhatsappData] = useState(
     (): WhatsappData | null => null
   );

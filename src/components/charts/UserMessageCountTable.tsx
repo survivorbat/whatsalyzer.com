@@ -4,7 +4,7 @@ import { InputData } from './input-interface';
 import moment from 'moment';
 import { defaultColors } from '../../constants/colors';
 
-function UserMessageCountTable({ data }: InputData) {
+const UserMessageCountTable = ({ data }: InputData)  => {
   const duration = moment.duration(
     data.lastMessage.date.diff(data.firstMessage.date)
   );

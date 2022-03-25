@@ -4,7 +4,7 @@ import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import { defaultPluginConfig } from '../../constants/charts';
 
-function UserMessageCountDoughnut({ data }: InputData) {
+const UserMessageCountDoughnut = ({ data }: InputData)  => {
   const chartData = {
     labels: data.users,
     datasets: [

@@ -24,10 +24,7 @@ const InputForm = ({ handleData }: { handleData: Function }) => {
     event.preventDefault();
 
     const reader = new FileReader();
-    reader.onload = function (processEvent) {
-      handleData(processEvent.target!.result);
-    };
-
+    reader.onload = (processEvent) => handleData(processEvent.target!.result);
     reader.readAsText(whatsappFile);
   };
 
