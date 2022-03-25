@@ -16,9 +16,7 @@ import './InputForm.css';
 const InputForm = ({ handleData }: { handleData: Function }) => {
   const [whatsappFile, setWhatsappFile] = useState({} as File);
 
-  const handleChange = (files: FileList) => {
-    setWhatsappFile(files[0]);
-  };
+  const handleChange = (files: FileList) => setWhatsappFile(files[0]);
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();

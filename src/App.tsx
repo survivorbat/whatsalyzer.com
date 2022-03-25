@@ -5,7 +5,6 @@ import { parseStringSync } from 'whatsapp-chat-parser';
 import { useState } from 'react';
 import Header from './components/Header';
 import InputForm from './components/InputForm';
-import Footer from './components/Footer';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 
@@ -33,7 +32,6 @@ const App = () => {
       <Header />
       <InputForm handleData={handleNewData} />
       {analysisResult}
-      <Footer />
     </Container>
   );
 }
