@@ -15,7 +15,7 @@ import DiagramHint from './DiagramHint';
 import WordCloud from './charts/WordCloud';
 import EmojiCloud from './charts/EmojiCloud';
 
-function AnalysisResults({ data }: InputData) {
+const AnalysisResults = ({ data }: InputData) => {
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {
@@ -163,7 +163,7 @@ function AnalysisResults({ data }: InputData) {
           <h3 title="Most popular words, only words with at least 6 characters and a frequency higher than 20">
             Popular Words
           </h3>
-          <WordCloud minFrequency={20} minLength={6} data={data} />
+          <WordCloud minFrequency={20} minLength={6} minFontSize={14} maxFontSize={80} data={data} />
         </Col>
       </Row>
       <Row>
@@ -174,7 +174,7 @@ function AnalysisResults({ data }: InputData) {
       <Row>
         <Col className="chart-container">
           <h3 title="Most popular emojis, only emojis with a frequency higher than 2">Popular Emojis</h3>
-          <EmojiCloud minFrequency={2} data={data} />
+          <EmojiCloud minFrequency={2} minFontSize={16} maxFontSize={120} data={data} />
         </Col>
       </Row>
       <Row>

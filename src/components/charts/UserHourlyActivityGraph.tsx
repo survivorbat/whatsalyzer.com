@@ -15,7 +15,7 @@ const hours = [
   22, 23,
 ];
 
-function UserHourlyActivityGraph({ data }: InputData) {
+const UserHourlyActivityGraph = ({ data }: InputData) => {
   const chartData = {
     labels: hours,
     datasets: data.users.map((name, index) => ({

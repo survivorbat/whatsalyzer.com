@@ -9,10 +9,7 @@ import './Cloud.css';
 
 ChartJS.register(WordCloudController, WordElement);
 
-const minFontSize = 16;
-const maxFontSize = 80;
-
-function WordCloud({ data, minFrequency, minLength }: InputCloudData) {
+function WordCloud({ data, minFrequency, minLength, minFontSize, maxFontSize }: InputCloudData) {
   const relevantWords = Object.keys(data.wordUsage)
     .filter((word) => word.length > minLength!)
     .filter((word) => data.wordUsage[word] > minFrequency);

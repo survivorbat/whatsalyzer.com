@@ -8,4 +8,6 @@ export interface InputCloudData {
   data: WhatsappData;
   minFrequency: number;
   minLength?: number;
+  minFontSize: number;
+  maxFontSize: number;
 }

@@ -19,4 +19,4 @@ The following steps allow you to setup the environment to run this application.
 
 - Get ESLint to work with tsx
 - Get a pipeline to deploy it instead of running the deploy command
-- Logo
+- Consistency in code (eslint)
