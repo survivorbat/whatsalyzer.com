@@ -19,7 +19,7 @@ const getTopWords = (
 
 const amount = 5;
 
-const UserWordUsageTable = ({ data }: InputData)  => {
+const UserWordUsageTable = ({ data }: InputData) => {
   return (
     <Table borderless responsive className="text-light">
       <thead>
@@ -58,6 +58,6 @@ const UserWordUsageTable = ({ data }: InputData)  => {
       </tbody>
     </Table>
   );
-}
+};
 
 export default UserWordUsageTable;

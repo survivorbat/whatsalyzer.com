@@ -17,6 +17,6 @@ The following steps allow you to setup the environment to run this application.
 
 ## TODOS
 
-- Get ESLint to work with tsx
+- Add airbnb as eslint guide
 - Get a pipeline to deploy it instead of running the deploy command
 - Consistency in code (eslint)

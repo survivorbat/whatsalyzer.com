@@ -13,7 +13,8 @@ const Header = () => {
     howto: false,
   } as Record<string, boolean>);
 
-  const toggleMenu = (menu: string) => setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
+  const toggleMenu = (menu: string) =>
+    setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
 
   return (
     <div className="header-container">
@@ -97,6 +98,7 @@ const Header = () => {
                 <a
                   href="https://github.com/survivorbat/whatsalyzer"
                   target="_blank"
+                  rel="noreferrer"
                 >
                   github.com/survivorbat/whatsalyzer
                 </a>
@@ -113,6 +115,6 @@ const Header = () => {
       </Row>
     </div>
   );
-}
+};
 
 export default Header;

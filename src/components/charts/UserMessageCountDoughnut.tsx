@@ -4,7 +4,7 @@ import { defaultColors } from '../../constants/colors';
 import { InputData } from './input-interface';
 import { defaultPluginConfig } from '../../constants/charts';
 
-const UserMessageCountDoughnut = ({ data }: InputData)  => {
+const UserMessageCountDoughnut = ({ data }: InputData) => {
   const chartData = {
     labels: data.users,
     datasets: [
@@ -35,6 +35,6 @@ const UserMessageCountDoughnut = ({ data }: InputData)  => {
 
   // @ts-ignore
   return <Doughnut datasetIdKey="id" data={chartData} options={options} />;
-}
+};
 
 export default UserMessageCountDoughnut;

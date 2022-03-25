@@ -57,6 +57,6 @@ const UserHourlyActivityGraph = ({ data }: InputData) => {
 
   // @ts-ignore
   return <Line datasetIdKey="id" data={chartData} options={options} />;
-}
+};
 
 export default UserHourlyActivityGraph;

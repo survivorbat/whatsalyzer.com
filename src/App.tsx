@@ -34,6 +34,6 @@ const App = () => {
       {analysisResult}
     </Container>
   );
-}
+};
 
 export default App;

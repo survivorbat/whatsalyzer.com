@@ -2,20 +2,27 @@ import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { defaultColors } from '../../constants/colors';
-import { InputCloudData} from './input-interface';
+import { InputCloudData } from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 
 import './Cloud.css';
 
 ChartJS.register(WordCloudController, WordElement);
 
-const EmojiCloud = ({ data, minFrequency, minFontSize, maxFontSize }: InputCloudData) => {
+const EmojiCloud = ({
+  data,
+  minFrequency,
+  minFontSize,
+  maxFontSize,
+}: InputCloudData) => {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
     (emoji) => data.emojiUsage[emoji] >= minFrequency
   );
 
-  if (relevantEmojis.length == 0) {
-    return <span className="text-muted">Not enough data for emoji cloud :(</span>;
+  if (relevantEmojis.length === 0) {
+    return (
+      <span className="text-muted">Not enough data for emoji cloud :(</span>
+    );
   }
 
   // Determine the highest frequency
@@ -80,6 +87,6 @@ const EmojiCloud = ({ data, minFrequency, minFontSize, maxFontSize }: InputCloud
       </div>
     </div>
   );
-}
+};
 
 export default EmojiCloud;
