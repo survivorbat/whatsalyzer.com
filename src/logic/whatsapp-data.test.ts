@@ -1,3 +1,5 @@
+import { Message } from 'whatsapp-chat-parser/types/types';
+import moment from 'moment';
 import WhatsappData, {
   ConversationName,
   getConversationSubjects,
@@ -6,8 +8,6 @@ import WhatsappData, {
   getWords,
   WhatsappMessage,
 } from './whatsapp-data';
-import { Message } from 'whatsapp-chat-parser/types/types';
-import moment from 'moment';
 
 describe('getMonthsBetween', () => {
   const tests = [
@@ -504,99 +504,99 @@ describe('WhatsappData', () => {
             },
           },
           messagesPerHourPerUser: {
-            '0': {
+            0: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '1': {
+            1: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '10': {
+            10: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '11': {
+            11: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '12': {
+            12: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '13': {
+            13: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '14': {
+            14: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '15': {
+            15: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '16': {
+            16: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '17': {
+            17: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '18': {
+            18: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '19': {
+            19: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '2': {
+            2: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '20': {
+            20: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '21': {
+            21: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '22': {
+            22: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '23': {
+            23: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '3': {
+            3: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '4': {
+            4: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '5': {
+            5: {
               'Among Us Player': 1,
               'Madame Trudeau': 1,
             },
-            '6': {
+            6: {
               'Among Us Player': 1,
               'Madame Trudeau': 0,
             },
-            '7': {
+            7: {
               'Among Us Player': 0,
               'Madame Trudeau': 1,
             },
-            '8': {
+            8: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },
-            '9': {
+            9: {
               'Among Us Player': 0,
               'Madame Trudeau': 0,
             },

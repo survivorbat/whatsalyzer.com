@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import { defaultColors } from '../../constants/colors';
+import defaultColors from '../../constants/colors';
 import { InputData } from './input-interface';
-import { Tick } from 'chart.js';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
@@ -15,17 +14,16 @@ const hours = [
   22, 23,
 ];
 
-const UserHourlyActivityGraph = ({ data }: InputData) => {
+function UserHourlyActivityGraph({ data }: InputData) {
   const chartData = {
     labels: hours,
     datasets: data.users.map((name, index) => ({
       id: index,
       label: name,
       data: Object.keys(data.messagesPerHourPerUser).map(
-        (date) =>
-          (data.messagesPerHourPerUser[date][name] /
-            data.messagesPerUser[name].length) *
-            100 || 0
+        (date) => (data.messagesPerHourPerUser[date][name]
+            / data.messagesPerUser[name].length)
+            * 100 || 0,
       ),
       borderColor: defaultColors[index % defaultColors.length],
       backgroundColor: defaultColors[index % defaultColors.length],
@@ -38,16 +36,14 @@ const UserHourlyActivityGraph = ({ data }: InputData) => {
       y: {
         grid: defaultGridYConfig,
         ticks: {
-          callback: (label: string, index: number, ticks: Tick[]) =>
-            `${label}%`,
+          callback: (label: string) => `${label}%`,
           color: defaultLabelColor,
         },
       },
       x: {
         grid: defaultGridXConfig,
         ticks: {
-          callback: (label: string, index: number, ticks: Tick[]) =>
-            `${label}:00`,
+          callback: (label: string) => `${label}:00`,
           color: defaultLabelColor,
         },
       },
@@ -57,6 +53,6 @@ const UserHourlyActivityGraph = ({ data }: InputData) => {
 
   // @ts-ignore
   return <Line datasetIdKey="id" data={chartData} options={options} />;
-};
+}
 
 export default UserHourlyActivityGraph;

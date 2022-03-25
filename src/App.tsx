@@ -8,9 +8,9 @@ import InputForm from './components/InputForm';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 
-const App = () => {
+function App() {
   const [whatsappData, setWhatsappData] = useState(
-    (): WhatsappData | null => null
+    (): WhatsappData | null => null,
   );
 
   const handleNewData = (data: string) => {
@@ -34,6 +34,6 @@ const App = () => {
       {analysisResult}
     </Container>
   );
-};
+}
 
 export default App;

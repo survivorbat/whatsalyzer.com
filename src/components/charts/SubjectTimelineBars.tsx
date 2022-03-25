@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { InputData } from './input-interface';
-import { defaultColors } from '../../constants/colors';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
+import { InputData } from './input-interface';
+import defaultColors from '../../constants/colors';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
   defaultLabelColor,
 } from '../../constants/charts';
-import { Tick } from 'chart.js';
 
-const SubjectTimelineBars = ({ data }: InputData) => {
+function SubjectTimelineBars({ data }: InputData) {
   const chartData = {
     labels: data.conversationNames.map((convo) => convo.name),
     datasets: [
@@ -34,8 +33,7 @@ const SubjectTimelineBars = ({ data }: InputData) => {
       x: {
         grid: defaultGridXConfig,
         ticks: {
-          callback: (label: number, index: number, ticks: Tick[]) =>
-            moment.unix(label).format('MMM YYYY'),
+          callback: (label: number) => moment.unix(label).format('MMM YYYY'),
           color: defaultLabelColor,
           autoSkip: false,
         },
@@ -58,11 +56,9 @@ const SubjectTimelineBars = ({ data }: InputData) => {
             const begin = context.dataset.data[context.dataIndex][0];
             const end = context.dataset.data[context.dataIndex][1];
 
-            return (
-              moment.unix(begin).format('MMM YYYY') +
-              ' - ' +
-              moment.unix(end).format('MMM YYYY')
-            );
+            return `${moment.unix(begin).format('MMM YYYY')} - ${moment
+              .unix(end)
+              .format('MMM YYYY')}`;
           },
         },
       },
@@ -71,6 +67,6 @@ const SubjectTimelineBars = ({ data }: InputData) => {
 
   // @ts-ignore
   return <Bar options={options} data={chartData} />;
-};
+}
 
 export default SubjectTimelineBars;

@@ -1,20 +1,21 @@
 import * as React from 'react';
-import { Col, Collapse, Figure, Row } from 'react-bootstrap';
+import {
+  Col, Collapse, Figure, Row,
+} from 'react-bootstrap';
 import './Header.css';
-import howto1 from '../assets/howto-1.jpeg';
-import howto2 from '../assets/howto-2.jpeg';
 import { useState } from 'react';
 import FigureCaption from 'react-bootstrap/FigureCaption';
 import FigureImage from 'react-bootstrap/FigureImage';
+import howto2 from '../assets/howto-2.jpeg';
+import howto1 from '../assets/howto-1.jpeg';
 
-const Header = () => {
+function Header() {
   const [menuOpen, setMenuOpen] = useState({
     qa: false,
     howto: false,
   } as Record<string, boolean>);
 
-  const toggleMenu = (menu: string) =>
-    setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
+  const toggleMenu = (menu: string) => setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
 
   return (
     <div className="header-container">
@@ -27,12 +28,20 @@ const Header = () => {
       </Row>
       <Row className="menu-container">
         <Col lg={6} md={12}>
-          <button className="menu-button" onClick={() => toggleMenu('howto')}>
+          <button
+            type="button"
+            className="menu-button"
+            onClick={() => toggleMenu('howto')}
+          >
             Getting Started
           </button>
         </Col>
         <Col lg={6} md={12}>
-          <button className="menu-button" onClick={() => toggleMenu('qa')}>
+          <button
+            type="button"
+            className="menu-button"
+            onClick={() => toggleMenu('qa')}
+          >
             Q&A
           </button>
         </Col>
@@ -45,9 +54,9 @@ const Header = () => {
               <ol>
                 <li>Go to the Whatsapp chat you want to analyze</li>
                 <li>Click on the menu button at the top-right</li>
-                <li>Select 'More'</li>
-                <li>Click on 'Export chat'</li>
-                <li>Click 'Without media'</li>
+                <li>Select &apos;More&apos;</li>
+                <li>Click on &apos;Export chat&apos;</li>
+                <li>Click &apos;Without media&apos;</li>
                 <li>
                   Send the export to yourself by email or through Whatsapp
                 </li>
@@ -61,7 +70,7 @@ const Header = () => {
                       src={howto1}
                       alt="Select 'More'"
                     />
-                    <FigureCaption>Select 'More'</FigureCaption>
+                    <FigureCaption>Select &apos;More&apos;</FigureCaption>
                   </Figure>
                 </Col>
                 <Col className="howto-image-container" xs={12} md={6}>
@@ -71,7 +80,9 @@ const Header = () => {
                       src={howto2}
                       alt="Click on 'Export chat'"
                     />
-                    <FigureCaption>Click on 'Export chat'</FigureCaption>
+                    <FigureCaption>
+                      Click on &apos;Export chat&apos;
+                    </FigureCaption>
                   </Figure>
                 </Col>
               </Row>
@@ -89,12 +100,12 @@ const Header = () => {
               </p>
               <p>Q: Can I analyze group chats?</p>
               <p>
-                A: Yes! Those stats are even more interesting than 'normal'
-                chats.
+                A: Yes! Those stats are even more interesting than
+                &apos;normal&apos; chats.
               </p>
               <p>Q: Is Whatsalyzer open-source?</p>
               <p>
-                A: Yes! You can view the code right here:{' '}
+                A: Yes! You can view the code right here:
                 <a
                   href="https://github.com/survivorbat/whatsalyzer"
                   target="_blank"
@@ -115,6 +126,6 @@ const Header = () => {
       </Row>
     </div>
   );
-};
+}
 
 export default Header;

@@ -1,14 +1,14 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
-import { defaultColors } from '../../constants/colors';
+import defaultColors from '../../constants/colors';
 
 const getTopEmojis = (
   inputData: Record<string, number>,
-  amount: number
+  amount: number,
 ): { name: string; amount: number }[] => {
   const sorted = Object.keys(inputData).sort(
-    (a, b) => inputData[b] - inputData[a]
+    (a, b) => inputData[b] - inputData[a],
   );
 
   return new Array(amount)
@@ -19,7 +19,7 @@ const getTopEmojis = (
 
 const amount = 5;
 
-const UserEmojiUsageTable = ({ data }: InputData) => {
+function UserEmojiUsageTable({ data }: InputData) {
   return (
     <Table borderless responsive className="text-light">
       <thead>
@@ -50,8 +50,13 @@ const UserEmojiUsageTable = ({ data }: InputData) => {
                   className="rounded-pill participant-pill"
                   key={emoji.name}
                 >
-                  {emoji.name}{' '}
-                  <small className="text-muted">({emoji.amount})</small>
+                  {emoji.name}
+                  {' '}
+                  <small className="text-muted">
+                    (
+                    {emoji.amount}
+                    )
+                  </small>
                 </span>
               ))}
             </td>
@@ -61,6 +66,6 @@ const UserEmojiUsageTable = ({ data }: InputData) => {
       </tbody>
     </Table>
   );
-};
+}
 
 export default UserEmojiUsageTable;

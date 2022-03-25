@@ -10,12 +10,12 @@ import { InputData } from './charts/input-interface';
 import UserWordUsageTable from './charts/UserWordUsageTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
-import { defaultColors } from '../constants/colors';
+import defaultColors from '../constants/colors';
 import DiagramHint from './DiagramHint';
 import WordCloud from './charts/WordCloud';
 import EmojiCloud from './charts/EmojiCloud';
 
-const AnalysisResults = ({ data }: InputData) => {
+function AnalysisResults({ data }: InputData) {
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {
@@ -85,7 +85,9 @@ const AnalysisResults = ({ data }: InputData) => {
           <h3 title="The first message in this conversation">First Message</h3>
           <div className="fw-bold">{data.firstMessage.message}</div>
           <div className="text-muted">
-            {data.firstMessage.author},{' '}
+            {data.firstMessage.author}
+            ,
+            {' '}
             {data.firstMessage.date.format('DD-MM-YYYY')}
           </div>
         </Col>
@@ -98,7 +100,9 @@ const AnalysisResults = ({ data }: InputData) => {
           <h3>Last Message</h3>
           <div className="fw-bold">{data.lastMessage.message}</div>
           <div className="text-muted">
-            {data.lastMessage.author},{' '}
+            {data.lastMessage.author}
+            ,
+            {' '}
             {data.lastMessage.date.format('DD-MM-YYYY')}
           </div>
         </Col>
@@ -198,6 +202,6 @@ const AnalysisResults = ({ data }: InputData) => {
       {conversationTimeline}
     </>
   );
-};
+}
 
 export default AnalysisResults;

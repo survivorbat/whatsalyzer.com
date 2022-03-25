@@ -1,4 +1,4 @@
-export const defaultColors = [
+const defaultColors = [
   '#e6194b',
   '#3cb44b',
   '#ffe119',
@@ -21,3 +21,5 @@ export const defaultColors = [
   '#808080',
   '#ffffff',
 ];
+
+export default defaultColors;

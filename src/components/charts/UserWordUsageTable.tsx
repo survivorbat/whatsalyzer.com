@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import { InputData } from './input-interface';
-import { defaultColors } from '../../constants/colors';
+import defaultColors from '../../constants/colors';
 
 const getTopWords = (
   inputData: Record<string, number>,
-  amount: number
+  amount: number,
 ): { name: string; amount: number }[] => {
   const sorted = Object.keys(inputData)
     .filter((w) => w.length > 4)
@@ -19,7 +19,7 @@ const getTopWords = (
 
 const amount = 5;
 
-const UserWordUsageTable = ({ data }: InputData) => {
+function UserWordUsageTable({ data }: InputData) {
   return (
     <Table borderless responsive className="text-light">
       <thead>
@@ -47,8 +47,13 @@ const UserWordUsageTable = ({ data }: InputData) => {
             <td>
               {getTopWords(data.wordUsagePerUser[name], amount).map((word) => (
                 <span className="rounded-pill participant-pill" key={word.name}>
-                  {word.name}{' '}
-                  <small className="text-muted">({word.amount})</small>
+                  {word.name}
+                  {' '}
+                  <small className="text-muted">
+                    (
+                    {word.amount}
+                    )
+                  </small>
                 </span>
               ))}
             </td>
@@ -58,6 +63,6 @@ const UserWordUsageTable = ({ data }: InputData) => {
       </tbody>
     </Table>
   );
-};
+}
 
 export default UserWordUsageTable;

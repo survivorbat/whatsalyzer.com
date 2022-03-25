@@ -13,7 +13,7 @@ import { FormEvent, useState } from 'react';
 
 import './InputForm.css';
 
-const InputForm = ({ handleData }: { handleData: Function }) => {
+function InputForm({ handleData }: { handleData: Function }) {
   const [whatsappFile, setWhatsappFile] = useState({} as File);
 
   const handleChange = (files: FileList) => setWhatsappFile(files[0]);
@@ -38,11 +38,12 @@ const InputForm = ({ handleData }: { handleData: Function }) => {
               aria-describedby="input-file-help"
               placeholder="The file to upload"
               className="text-light"
-              required={true}
+              required
               onChange={(e: any) => handleChange(e.target!.files)}
             />
             <FormText id="input-file-help" muted>
-              The file to analyze, click 'Getting Started' to learn more.
+              The file to analyze, click &apos;Getting Started&apos; to learn
+              more.
             </FormText>
           </FormGroup>
         </Col>
@@ -54,6 +55,6 @@ const InputForm = ({ handleData }: { handleData: Function }) => {
       </Row>
     </Form>
   );
-};
+}
 
 export default InputForm;

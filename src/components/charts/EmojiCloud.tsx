@@ -1,22 +1,22 @@
 import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
-import { defaultColors } from '../../constants/colors';
-import { InputCloudData } from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
+import defaultColors from '../../constants/colors';
+import { InputCloudData } from './input-interface';
 
 import './Cloud.css';
 
 ChartJS.register(WordCloudController, WordElement);
 
-const EmojiCloud = ({
+function EmojiCloud({
   data,
   minFrequency,
   minFontSize,
   maxFontSize,
-}: InputCloudData) => {
+}: InputCloudData) {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
-    (emoji) => data.emojiUsage[emoji] >= minFrequency
+    (emoji) => data.emojiUsage[emoji] >= minFrequency,
   );
 
   if (relevantEmojis.length === 0) {
@@ -26,10 +26,10 @@ const EmojiCloud = ({
   }
 
   // Determine the highest frequency
-  const maxFrequency = relevantEmojis.reduce((maxFrequency, word) => {
+  const maxFrequency = relevantEmojis.reduce((result, word) => {
     const frequency = data.emojiUsage[word];
 
-    return frequency > maxFrequency ? frequency : maxFrequency;
+    return frequency > result ? frequency : result;
   }, minFrequency + 1);
 
   // Determine the difference between the lowest and the highest frequency
@@ -40,11 +40,11 @@ const EmojiCloud = ({
     datasets: [
       {
         id: 0,
-        // For each emoji usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
+        // For each emoji usage, divide by the spread and multiply
+        // by the font size spread, add additional minimum font size.
         data: relevantEmojis.map(
-          (name) =>
-            (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize) +
-            minFontSize
+          (name) => (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize)
+            + minFontSize,
         ),
         color: defaultColors,
         borderColor: defaultColors,
@@ -61,8 +61,7 @@ const EmojiCloud = ({
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) =>
-            `Found ${data.emojiUsage[tooltipData.label]}`,
+          label: (tooltipData: any) => `Found ${data.emojiUsage[tooltipData.label]}`,
         },
         color: defaultColors,
         titleFont: {
@@ -87,6 +86,6 @@ const EmojiCloud = ({
       </div>
     </div>
   );
-};
+}
 
 export default EmojiCloud;

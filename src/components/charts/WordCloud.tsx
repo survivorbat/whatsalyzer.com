@@ -1,21 +1,21 @@
 import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
-import { defaultColors } from '../../constants/colors';
-import { InputCloudData } from './input-interface';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
+import defaultColors from '../../constants/colors';
+import { InputCloudData } from './input-interface';
 
 import './Cloud.css';
 
 ChartJS.register(WordCloudController, WordElement);
 
-const WordCloud = ({
+function WordCloud({
   data,
   minFrequency,
   minLength,
   minFontSize,
   maxFontSize,
-}: InputCloudData) => {
+}: InputCloudData) {
   const relevantWords = Object.keys(data.wordUsage)
     .filter((word) => word.length > minLength!)
     .filter((word) => data.wordUsage[word] > minFrequency);
@@ -27,10 +27,10 @@ const WordCloud = ({
   }
 
   // Determine the highest frequency
-  const maxFrequency = relevantWords.reduce((maxFrequency, word) => {
+  const maxFrequency = relevantWords.reduce((result, word) => {
     const frequency = data.wordUsage[word];
 
-    return frequency > maxFrequency ? frequency : maxFrequency;
+    return frequency > result ? frequency : result;
   }, minFrequency + 1);
 
   // Determine the difference between the lowest and the highest frequency
@@ -43,9 +43,8 @@ const WordCloud = ({
         id: 0,
         // For each word usage, divide by the spread and multiply by the font size spread, add additional minimum font size.
         data: relevantWords.map(
-          (name) =>
-            (data.wordUsage[name] / spread) * (maxFontSize - minFontSize) +
-            minFontSize
+          (name) => (data.wordUsage[name] / spread) * (maxFontSize - minFontSize)
+            + minFontSize,
         ),
         color: defaultColors,
         borderColor: defaultColors,
@@ -61,8 +60,7 @@ const WordCloud = ({
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) =>
-            `Found ${data.wordUsage[tooltipData.label]}`,
+          label: (tooltipData: any) => `Found ${data.wordUsage[tooltipData.label]}`,
         },
         titleFont: {
           size: 20,
@@ -86,6 +84,6 @@ const WordCloud = ({
       </div>
     </div>
   );
-};
+}
 
 export default WordCloud;
