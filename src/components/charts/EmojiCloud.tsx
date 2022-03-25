@@ -10,7 +10,7 @@ import './Cloud.css';
 ChartJS.register(WordCloudController, WordElement);
 
 const minFontSize = 20;
-const maxFontSize = 300;
+const maxFontSize = 120;
 
 function EmojiCloud({ data, minFrequency }: InputCloudData) {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
