@@ -17,6 +17,10 @@ function EmojiCloud({ data, minFrequency }: InputCloudData) {
     (emoji) => data.emojiUsage[emoji] >= minFrequency
   );
 
+  if (relevantEmojis.length == 0) {
+    return <span className="text-muted">Not enough data for emoji cloud :(</span>;
+  }
+
   // Determine the highest frequency
   const maxFrequency = relevantEmojis.reduce((maxFrequency, word) => {
     const frequency = data.emojiUsage[word];

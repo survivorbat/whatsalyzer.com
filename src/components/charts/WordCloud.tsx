@@ -17,6 +17,11 @@ function WordCloud({ data, minFrequency, minLength }: InputCloudData) {
     .filter((word) => word.length > minLength!)
     .filter((word) => data.wordUsage[word] > minFrequency);
 
+
+  if (relevantWords.length == 0) {
+    return <span className="text-muted">Not enough data for word cloud :(</span>;
+  }
+
   // Determine the highest frequency
   const maxFrequency = relevantWords.reduce((maxFrequency, word) => {
     const frequency = data.wordUsage[word];
