@@ -46,7 +46,7 @@ function AnalysisResults({ data }: InputData) {
 
   const minWordLength = 6;
   const minWordFrequency = Math.round(data.totalWords / 8000);
-  const minEmojiFrequency = 10;
+  const minEmojiFrequency = 2;
 
   const topUsageAmount = 5;
 
@@ -226,7 +226,7 @@ function AnalysisResults({ data }: InputData) {
           </p>
           <EmojiCloud
             minFrequency={minEmojiFrequency}
-            minFontSize={16}
+            minFontSize={18}
             maxFontSize={90}
             data={data}
           />
