@@ -601,6 +601,36 @@ describe('WhatsappData', () => {
               'Madame Trudeau': 0,
             },
           },
+          messagesPerDayPerUser: {
+            0: {
+              'Among Us Player': 0,
+              'Madame Trudeau': 0,
+            },
+            1: {
+              'Among Us Player': 0,
+              'Madame Trudeau': 0,
+            },
+            2: {
+              'Among Us Player': 0,
+              'Madame Trudeau': 0,
+            },
+            3: {
+              'Among Us Player': 0,
+              'Madame Trudeau': 1,
+            },
+            4: {
+              'Among Us Player': 1,
+              'Madame Trudeau': 1,
+            },
+            5: {
+              'Among Us Player': 1,
+              'Madame Trudeau': 0,
+            },
+            6: {
+              'Among Us Player': 0,
+              'Madame Trudeau': 0,
+            },
+          },
         },
       },
     ];

@@ -6,6 +6,7 @@ import defaultColors from '../../constants/colors';
 import { InputCloudData } from './input-interface';
 
 import './Cloud.css';
+import { getMaxWordFrequency } from '../../logic/chart-helpers';
 
 ChartJS.register(WordCloudController, WordElement);
 
@@ -25,14 +26,7 @@ function EmojiCloud({
     );
   }
 
-  // Determine the highest frequency
-  const maxFrequency = relevantEmojis.reduce((result, word) => {
-    const frequency = data.emojiUsage[word];
-
-    return frequency > result ? frequency : result;
-  }, minFrequency + 1);
-
-  // Determine the difference between the lowest and the highest frequency
+  const maxFrequency = getMaxWordFrequency(minFrequency, relevantEmojis, data.emojiUsage)
   const spread = maxFrequency - minFrequency;
 
   const chartData = {

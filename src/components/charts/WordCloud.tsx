@@ -6,6 +6,7 @@ import defaultColors from '../../constants/colors';
 import { InputCloudData } from './input-interface';
 
 import './Cloud.css';
+import { getMaxWordFrequency } from '../../logic/chart-helpers';
 
 ChartJS.register(WordCloudController, WordElement);
 
@@ -26,14 +27,7 @@ function WordCloud({
     );
   }
 
-  // Determine the highest frequency
-  const maxFrequency = relevantWords.reduce((result, word) => {
-    const frequency = data.wordUsage[word];
-
-    return frequency > result ? frequency : result;
-  }, minFrequency + 1);
-
-  // Determine the difference between the lowest and the highest frequency
+  const maxFrequency = getMaxWordFrequency(minFrequency, relevantWords, data.wordUsage)
   const spread = maxFrequency - minFrequency;
 
   const chartData = {

@@ -1,10 +1,6 @@
 import { Message } from 'whatsapp-chat-parser/types/types';
 import moment from 'moment';
-
-const hours = [
-  0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-  22, 23,
-];
+import { hours, weekdays } from '../constants/time';
 
 /**
  * Get all the months date A and date B
@@ -131,6 +127,8 @@ class WhatsappData {
 
   readonly messagesPerHourPerUser: Record<string, Record<string, number>>;
 
+  readonly messagesPerDayPerUser: Record<string, Record<string, number>>;
+
   readonly systemMessages: WhatsappMessage[];
 
   readonly firstMessage: WhatsappMessage;
@@ -225,8 +223,7 @@ class WhatsappData {
       (res, user) => {
         res[user] = this.wordsPerUser[user].reduce((result, word) => {
           if (!result[word]) {
-            result[word] = 1;
-            return result;
+            result[word] = 0;
           }
 
           result[word] += 1;
@@ -308,6 +305,21 @@ class WhatsappData {
           ...result,
           [user]: filtered.filter(
             (message) => message.date.hour() === hour && message.author === user,
+          ).length,
+        }),
+        {},
+      );
+
+      return res;
+    }, {} as Record<string, Record<string, number>>);
+
+    // Set messages per hour
+    this.messagesPerDayPerUser = weekdays.reduce((res, weekDay) => {
+      res[weekDay] = this.users!.reduce(
+        (result, user) => ({
+          ...result,
+          [user]: filtered.filter(
+            (message) => message.date.weekday() === weekDay && message.author == user,
           ).length,
         }),
         {},

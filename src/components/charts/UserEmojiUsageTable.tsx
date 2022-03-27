@@ -1,25 +1,12 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
-import { InputData } from './input-interface';
+import { InputData, InputUsageTableData } from './input-interface';
 import defaultColors from '../../constants/colors';
+import { getTopWords } from '../../logic/chart-helpers';
 
-const getTopEmojis = (
-  inputData: Record<string, number>,
-  amount: number,
-): { name: string; amount: number }[] => {
-  const sorted = Object.keys(inputData).sort(
-    (a, b) => inputData[b] - inputData[a],
-  );
+function UserEmojiUsageTable({ data, minLength, displayAmount }: InputUsageTableData) {
+  const topWords = data.users.map((name) => getTopWords(data.emojiUsagePerUser[name], minLength, displayAmount));
 
-  return new Array(amount)
-    .fill(0)
-    .map((_, i) => ({ name: sorted[i], amount: inputData[sorted[i]] }))
-    .filter((i) => i.name);
-};
-
-const amount = 5;
-
-function UserEmojiUsageTable({ data }: InputData) {
   return (
     <Table borderless responsive className="text-light">
       <thead>
@@ -27,7 +14,7 @@ function UserEmojiUsageTable({ data }: InputData) {
           <th scope="col" title="The user">
             User
           </th>
-          <th scope="col" title={`Top-${amount} emojis this user uses`}>
+          <th scope="col" title={`Top-${displayAmount} emojis this user uses`}>
             Emojis
           </th>
           <th scope="col" title="Total amount of emojis this user has messaged">
@@ -45,7 +32,7 @@ function UserEmojiUsageTable({ data }: InputData) {
               {name}
             </th>
             <td>
-              {getTopEmojis(data.emojiUsagePerUser[name], 5).map((emoji) => (
+              {topWords[index].map((emoji) => (
                 <span
                   className="rounded-pill participant-pill"
                   key={emoji.name}

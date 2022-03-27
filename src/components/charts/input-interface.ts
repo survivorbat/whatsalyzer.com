@@ -11,3 +11,9 @@ export interface InputCloudData {
   minFontSize: number;
   maxFontSize: number;
 }
+
+export interface InputUsageTableData {
+  data: WhatsappData;
+  minLength: number;
+  displayAmount: number;
+}

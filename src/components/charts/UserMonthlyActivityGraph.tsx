@@ -10,18 +10,31 @@ import {
 } from '../../constants/charts';
 
 function UserMonthlyActivityGraph({ data }: InputData) {
+  const userMonthData = data.users.map((name, index) => ({
+    id: index + 1,
+    label: name,
+    data: Object.keys(data.messagesPerMonthPerUser).map(
+      (date) => data.messagesPerMonthPerUser[date][name] || 0,
+    ),
+    borderColor: defaultColors[index % defaultColors.length],
+    backgroundColor: defaultColors[index % defaultColors.length],
+    tension: 0.3,
+  }));
+
   const chartData = {
     labels: Object.keys(data.messagesPerMonthPerUser),
-    datasets: data.users.map((name, index) => ({
-      id: index,
-      label: name,
-      data: Object.keys(data.messagesPerMonthPerUser).map(
-        (date) => data.messagesPerMonthPerUser[date][name] || 0,
-      ),
-      borderColor: defaultColors[index % defaultColors.length],
-      backgroundColor: defaultColors[index % defaultColors.length],
-      tension: 0.3,
-    })),
+    datasets: [
+      ...userMonthData,
+      {
+        id: 0,
+        label: 'Total Messages',
+        data: Object.keys(data.messagesPerMonthPerUser).map((date) => Object.keys(data.messagesPerMonthPerUser[date]).reduce((res, user) => res + data.messagesPerMonthPerUser[date][user], 0)),
+        borderColor: 'white',
+        backgroundColor: 'white',
+        tension: 0.3,
+        hidden: true,
+      },
+    ],
   };
 
   const options = {
@@ -39,7 +52,14 @@ function UserMonthlyActivityGraph({ data }: InputData) {
         },
       },
     },
-    plugins: defaultPluginConfig,
+    plugins: {
+      ...defaultPluginConfig,
+      tooltip: {
+        callbacks: {
+          label: (context: any) => `${context.dataset.label}: ${context.dataset.data[context.dataIndex]} messages`,
+        },
+      },
+    },
   };
 
   // @ts-ignore
