@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import defaultColors from '../../constants/colors';
 import { InputData } from './input-interface';
 import {
   defaultGridXConfig,
@@ -8,6 +7,7 @@ import {
   defaultLabelColor,
   defaultPluginConfig,
 } from '../../constants/charts';
+import { colorIndex, totalCount } from '../../logic/chart-helpers';
 
 function UserMonthlyActivityGraph({ data }: InputData) {
   const userMonthData = data.users.map((name, index) => ({
@@ -16,8 +16,8 @@ function UserMonthlyActivityGraph({ data }: InputData) {
     data: Object.keys(data.messagesPerMonthPerUser).map(
       (date) => data.messagesPerMonthPerUser[date][name] || 0,
     ),
-    borderColor: defaultColors[index % defaultColors.length],
-    backgroundColor: defaultColors[index % defaultColors.length],
+    borderColor: colorIndex(index),
+    backgroundColor: colorIndex(index),
     tension: 0.3,
   }));
 
@@ -28,7 +28,7 @@ function UserMonthlyActivityGraph({ data }: InputData) {
       {
         id: 0,
         label: 'Total Messages',
-        data: Object.keys(data.messagesPerMonthPerUser).map((date) => Object.keys(data.messagesPerMonthPerUser[date]).reduce((res, user) => res + data.messagesPerMonthPerUser[date][user], 0)),
+        data: Object.keys(data.messagesPerMonthPerUser).map((date) => totalCount(data.messagesPerMonthPerUser[date])),
         borderColor: 'white',
         backgroundColor: 'white',
         tension: 0.3,
@@ -56,7 +56,9 @@ function UserMonthlyActivityGraph({ data }: InputData) {
       ...defaultPluginConfig,
       tooltip: {
         callbacks: {
-          label: (context: any) => `${context.dataset.label}: ${context.dataset.data[context.dataIndex]} messages`,
+          label: (context: any) => `${context.dataset.label}: ${
+            context.dataset.data[context.dataIndex]
+          } messages`,
         },
       },
     },

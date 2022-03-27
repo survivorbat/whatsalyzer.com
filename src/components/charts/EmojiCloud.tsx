@@ -26,7 +26,12 @@ function EmojiCloud({
     );
   }
 
-  const maxFrequency = getMaxWordFrequency(minFrequency, relevantEmojis, data.emojiUsage)
+  const maxFrequency = getMaxWordFrequency(
+    minFrequency,
+    relevantEmojis,
+    data.emojiUsage,
+  );
+
   const spread = maxFrequency - minFrequency;
 
   const chartData = {

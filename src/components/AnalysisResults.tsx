@@ -10,11 +10,11 @@ import { InputData } from './charts/input-interface';
 import UserWordUsageTable from './charts/UserWordUsageTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
-import defaultColors from '../constants/colors';
 import DiagramHint from './DiagramHint';
 import WordCloud from './charts/WordCloud';
 import EmojiCloud from './charts/EmojiCloud';
 import UserWeeklyActivityGraph from './charts/UserWeeklyActivityGraph';
+import { colorIndex } from '../logic/chart-helpers';
 
 function AnalysisResults({ data }: InputData) {
   let conversationTimeline;
@@ -66,7 +66,7 @@ function AnalysisResults({ data }: InputData) {
             {data.users.map((name, index) => (
               <div
                 key={name}
-                style={{ color: defaultColors[index % defaultColors.length] }}
+                style={{ color: colorIndex(index) }}
                 className="fw-bold participant-pill"
               >
                 {name}
@@ -180,10 +180,18 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3 title={`Most popular words, only words with at least 6 characters and a frequency higher than ${minWordFrequency}`}>
+          <h3
+            title={`Most popular words, only words with at least 6 characters and a frequency higher than ${minWordFrequency}`}
+          >
             Popular Words
           </h3>
-          <p><small className="text-muted">Minimal frequency: {minWordFrequency}</small></p>
+          <p>
+            <small className="text-muted">
+              Minimal frequency:
+              {' '}
+              {minWordFrequency}
+            </small>
+          </p>
           <WordCloud
             minFrequency={minWordFrequency}
             minLength={minWordLength}
@@ -195,15 +203,27 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <UserWordUsageTable data={data} displayAmount={topUsageAmount} minLength={minWordLength} />
+          <UserWordUsageTable
+            data={data}
+            displayAmount={topUsageAmount}
+            minLength={minWordLength}
+          />
         </Col>
       </Row>
       <Row>
         <Col className="chart-container">
-          <h3 title={`Most popular emojis, only emojis with a frequency higher than ${minEmojiFrequency}`}>
+          <h3
+            title={`Most popular emojis, only emojis with a frequency higher than ${minEmojiFrequency}`}
+          >
             Popular Emojis
           </h3>
-          <p><small className="text-muted">Minimal frequency: {minEmojiFrequency}</small></p>
+          <p>
+            <small className="text-muted">
+              Minimal frequency:
+              {' '}
+              {minEmojiFrequency}
+            </small>
+          </p>
           <EmojiCloud
             minFrequency={minEmojiFrequency}
             minFontSize={16}
@@ -214,7 +234,11 @@ function AnalysisResults({ data }: InputData) {
       </Row>
       <Row>
         <Col className="chart-container">
-          <UserEmojiUsageTable data={data} displayAmount={topUsageAmount} minLength={1} />
+          <UserEmojiUsageTable
+            data={data}
+            displayAmount={topUsageAmount}
+            minLength={1}
+          />
         </Col>
       </Row>
       {conversationTimeline}

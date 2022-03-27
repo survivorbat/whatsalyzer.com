@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
-import { InputData, InputUsageTableData } from './input-interface';
-import defaultColors from '../../constants/colors';
+import { InputUsageTableData } from './input-interface';
 import { getTopWords } from '../../logic/chart-helpers';
+import UserTableHead from './reusable/UserTableHead';
+import TopWordDisplay from './reusable/TopWordDisplay';
 
-function UserEmojiUsageTable({ data, minLength, displayAmount }: InputUsageTableData) {
+function UserEmojiUsageTable({
+  data,
+  minLength,
+  displayAmount,
+}: InputUsageTableData) {
   const topWords = data.users.map((name) => getTopWords(data.emojiUsagePerUser[name], minLength, displayAmount));
 
   return (
@@ -25,26 +30,10 @@ function UserEmojiUsageTable({ data, minLength, displayAmount }: InputUsageTable
       <tbody>
         {data.users.map((name, index) => (
           <tr key={name}>
-            <th
-              scope="row"
-              style={{ color: defaultColors[index % defaultColors.length] }}
-            >
-              {name}
-            </th>
+            <UserTableHead name={name} index={index} />
             <td>
               {topWords[index].map((emoji) => (
-                <span
-                  className="rounded-pill participant-pill"
-                  key={emoji.name}
-                >
-                  {emoji.name}
-                  {' '}
-                  <small className="text-muted">
-                    (
-                    {emoji.amount}
-                    )
-                  </small>
-                </span>
+                <TopWordDisplay topWord={emoji} />
               ))}
             </td>
             <td>{data.emojisPerUser[name].length}</td>

@@ -1,10 +1,15 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
-import { InputData, InputUsageTableData } from './input-interface';
-import defaultColors from '../../constants/colors';
+import { InputUsageTableData } from './input-interface';
 import { getTopWords } from '../../logic/chart-helpers';
+import UserTableHead from './reusable/UserTableHead';
+import TopWordDisplay from './reusable/TopWordDisplay';
 
-function UserWordUsageTable({ data, minLength, displayAmount }: InputUsageTableData) {
+function UserWordUsageTable({
+  data,
+  minLength,
+  displayAmount,
+}: InputUsageTableData) {
   const topWords = data.users.map((name) => getTopWords(data.wordUsagePerUser[name], minLength, displayAmount));
 
   return (
@@ -25,23 +30,10 @@ function UserWordUsageTable({ data, minLength, displayAmount }: InputUsageTableD
       <tbody>
         {data.users.map((name, index) => (
           <tr key={name}>
-            <th
-              scope="row"
-              style={{ color: defaultColors[index % defaultColors.length] }}
-            >
-              {name}
-            </th>
+            <UserTableHead name={name} index={index} />
             <td>
               {topWords[index].map((word) => (
-                <span className="rounded-pill participant-pill" key={word.name}>
-                  {word.name}
-                  {' '}
-                  <small className="text-muted">
-                    (
-                    {word.amount}
-                    )
-                  </small>
-                </span>
+                <TopWordDisplay topWord={word} />
               ))}
             </td>
             <td>{data.wordsPerUser[name].length}</td>

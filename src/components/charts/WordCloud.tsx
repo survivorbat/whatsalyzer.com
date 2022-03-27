@@ -27,7 +27,11 @@ function WordCloud({
     );
   }
 
-  const maxFrequency = getMaxWordFrequency(minFrequency, relevantWords, data.wordUsage)
+  const maxFrequency = getMaxWordFrequency(
+    minFrequency,
+    relevantWords,
+    data.wordUsage,
+  );
   const spread = maxFrequency - minFrequency;
 
   const chartData = {

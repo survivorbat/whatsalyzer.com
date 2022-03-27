@@ -319,7 +319,7 @@ class WhatsappData {
         (result, user) => ({
           ...result,
           [user]: filtered.filter(
-            (message) => message.date.weekday() === weekDay && message.author == user,
+            (message) => message.date.weekday() === weekDay && message.author === user,
           ).length,
         }),
         {},

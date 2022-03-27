@@ -7,11 +7,10 @@
   "extends": ["react-app", "airbnb", "airbnb-typescript"],
   "rules": {
     "no-param-reassign": "off",
+    "@typescript-eslint/consistent-type-assertions": "off",
     "max-len": "off"
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "parserOptions": {
     "project": "./tsconfig.json"
   }

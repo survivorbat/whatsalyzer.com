@@ -19,7 +19,6 @@ const defaultColors = [
   '#ffd8b1',
   '#0202e1',
   '#808080',
-  '#ffffff',
 ];
 
 export default defaultColors;

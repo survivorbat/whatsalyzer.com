@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
 import { InputData } from './input-interface';
-import defaultColors from '../../constants/colors';
+import UserTableHead from './reusable/UserTableHead';
 
 function UserMessageCountTable({ data }: InputData) {
   const duration = moment.duration(
@@ -61,12 +61,7 @@ function UserMessageCountTable({ data }: InputData) {
       <tbody>
         {data.users.map((name, index) => (
           <tr key={name}>
-            <th
-              scope="row"
-              style={{ color: defaultColors[index % defaultColors.length] }}
-            >
-              {name}
-            </th>
+            <UserTableHead name={name} index={index} />
             <td>{data.messagesPerUser[name].length}</td>
             <td>
               {Math.round(

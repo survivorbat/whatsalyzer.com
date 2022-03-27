@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import defaultColors from '../../constants/colors';
 import { InputData } from './input-interface';
 import {
   defaultGridXConfig,
@@ -9,6 +8,7 @@ import {
   defaultPluginConfig,
 } from '../../constants/charts';
 import { hours } from '../../constants/time';
+import { colorIndex, totalCount } from '../../logic/chart-helpers';
 
 function UserHourlyActivityGraph({ data }: InputData) {
   const userHourData = data.users.map((name, index) => ({
@@ -17,10 +17,10 @@ function UserHourlyActivityGraph({ data }: InputData) {
     data: Object.keys(data.messagesPerHourPerUser).map(
       (date) => (data.messagesPerHourPerUser[date][name]
           / data.messagesPerUser[name].length)
-        * 100 || 0,
+          * 100 || 0,
     ),
-    borderColor: defaultColors[index % defaultColors.length],
-    backgroundColor: defaultColors[index % defaultColors.length],
+    borderColor: colorIndex(index),
+    backgroundColor: colorIndex(index),
     tension: 0.3,
   }));
 
@@ -31,7 +31,11 @@ function UserHourlyActivityGraph({ data }: InputData) {
       {
         id: 0,
         label: 'Total Average',
-        data: Object.keys(data.messagesPerHourPerUser).map((date) => Object.keys(data.messagesPerHourPerUser[date]).reduce((res, user) => res + data.messagesPerHourPerUser[date][user], 0) / data.totalMessages * 100 || 0),
+        data: Object.keys(data.messagesPerHourPerUser).map(
+          (date) => (totalCount(data.messagesPerHourPerUser[date])
+              / data.totalMessages)
+              * 100 || 0,
+        ),
         borderColor: 'white',
         backgroundColor: 'white',
         tension: 0.3,
@@ -60,7 +64,9 @@ function UserHourlyActivityGraph({ data }: InputData) {
       ...defaultPluginConfig,
       tooltip: {
         callbacks: {
-          label: (context: any) => `${context.dataset.label}: ${Math.round(context.dataset.data[context.dataIndex])}%`,
+          label: (context: any) => `${context.dataset.label}: ${Math.round(
+            context.dataset.data[context.dataIndex],
+          )}%`,
           title: (context: any) => `${context[0].label}:00`,
         },
       },
