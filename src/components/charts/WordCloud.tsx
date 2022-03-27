@@ -52,6 +52,10 @@ function WordCloud({
   };
 
   const options = {
+    animation: {
+      duration: 0,
+    },
+    responsiveAnimationDuration: 0,
     plugins: {
       legend: {
         display: false,
@@ -63,7 +67,6 @@ function WordCloud({
         titleFont: {
           size: 20,
         },
-        color: defaultColors,
         displayColors: false,
       },
     },

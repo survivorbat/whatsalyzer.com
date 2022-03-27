@@ -2,7 +2,6 @@ import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
-import defaultColors from '../../constants/colors';
 import { InputCloudData } from './input-interface';
 
 import './Cloud.css';
@@ -45,15 +44,16 @@ function EmojiCloud({
           (name) => (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize)
             + minFontSize,
         ),
-        color: defaultColors,
-        borderColor: defaultColors,
-        backgroundColor: defaultColors,
         fit: true,
       },
     ],
   };
 
   const options = {
+    animation: {
+      duration: 0,
+    },
+    responsiveAnimationDuration: 0,
     plugins: {
       legend: {
         display: false,
@@ -62,7 +62,6 @@ function EmojiCloud({
         callbacks: {
           label: (tooltipData: any) => `Found ${data.emojiUsage[tooltipData.label]}`,
         },
-        color: defaultColors,
         titleFont: {
           size: 100,
         },

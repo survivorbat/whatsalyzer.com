@@ -33,7 +33,7 @@ function UserEmojiUsageTable({
             <UserTableHead name={name} index={index} />
             <td>
               {topWords[index].map((emoji) => (
-                <TopWordDisplay topWord={emoji} />
+                <TopWordDisplay key={emoji.name} topWord={emoji} />
               ))}
             </td>
             <td>{data.emojisPerUser[name].length}</td>

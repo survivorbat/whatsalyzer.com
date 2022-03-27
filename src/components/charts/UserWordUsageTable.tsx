@@ -33,7 +33,7 @@ function UserWordUsageTable({
             <UserTableHead name={name} index={index} />
             <td>
               {topWords[index].map((word) => (
-                <TopWordDisplay topWord={word} />
+                <TopWordDisplay key={word.name} topWord={word} />
               ))}
             </td>
             <td>{data.wordsPerUser[name].length}</td>
