@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
 import moment from 'moment';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
@@ -11,7 +11,7 @@ import {
 import { weekdays } from '../../constants/time';
 import { colorIndex, totalCount } from '../../logic/chart-helpers';
 
-function UserWeeklyActivityGraph({ data }: InputData) {
+function UserWeeklyActivityGraph({ data }: DefaultProps) {
   const userWeekData = data.users.map((name, index) => ({
     id: index + 1,
     label: name,

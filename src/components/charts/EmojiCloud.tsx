@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
-import { InputCloudData } from './input-interface';
+import { CloudChartProps } from './input-interface';
 
 import './Cloud.css';
 import { getMaxWordFrequency } from '../../logic/chart-helpers';
@@ -14,7 +14,7 @@ function EmojiCloud({
   minFrequency,
   minFontSize,
   maxFontSize,
-}: InputCloudData) {
+}: CloudChartProps) {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
     (emoji) => data.emojiUsage[emoji] >= minFrequency,
   );

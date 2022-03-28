@@ -3,7 +3,7 @@ import { Chart } from 'react-chartjs-2';
 import { Chart as ChartJS } from 'chart.js';
 import { WordCloudController, WordElement } from 'chartjs-chart-wordcloud';
 import defaultColors from '../../constants/colors';
-import { InputCloudData } from './input-interface';
+import { CloudChartProps } from './input-interface';
 
 import './Cloud.css';
 import { getMaxWordFrequency } from '../../logic/chart-helpers';
@@ -16,7 +16,7 @@ function WordCloud({
   minLength,
   minFontSize,
   maxFontSize,
-}: InputCloudData) {
+}: CloudChartProps) {
   const relevantWords = Object.keys(data.wordUsage)
     .filter((word) => word.length > minLength!)
     .filter((word) => data.wordUsage[word] > minFrequency);
@@ -45,8 +45,6 @@ function WordCloud({
             + minFontSize,
         ),
         color: defaultColors,
-        borderColor: defaultColors,
-        backgroundColor: defaultColors,
       },
     ],
   };

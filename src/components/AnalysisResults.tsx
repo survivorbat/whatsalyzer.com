@@ -6,7 +6,7 @@ import UserMessageCountDoughnut from './charts/UserMessageCountDoughnut';
 import UserActivityGraph from './charts/UserMonthlyActivityGraph';
 import UserMessageCountTable from './charts/UserMessageCountTable';
 import UserHourlyActivityGraph from './charts/UserHourlyActivityGraph';
-import { InputData } from './charts/input-interface';
+import { DefaultProps } from './charts/input-interface';
 import UserWordUsageTable from './charts/UserWordUsageTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
@@ -15,23 +15,19 @@ import WordCloud from './charts/WordCloud';
 import EmojiCloud from './charts/EmojiCloud';
 import UserWeeklyActivityGraph from './charts/UserWeeklyActivityGraph';
 import { colorIndex } from '../logic/chart-helpers';
+import MinimalFrequencyTag from './charts/reusable/MinimalFrequencyTag';
+import SectionTitle from './charts/reusable/SectionTitle';
 
-function AnalysisResults({ data }: InputData) {
+function AnalysisResults({ data }: DefaultProps) {
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {
     conversationTimeline = (
       <>
-        <Row className="chart-title">
-          <Col>
-            <h3
-              className="section-title"
-              title="Timelines related to group conversations"
-            >
-              Group Timelines
-            </h3>
-          </Col>
-        </Row>
+        <SectionTitle
+          title="Timelines related to group conversations"
+          name="Group Timelines"
+        />
         <Row>
           <Col className="chart-container">
             <h3 title="A timeline of the 'names' of the conversation, only works for English chats now">
@@ -44,21 +40,25 @@ function AnalysisResults({ data }: InputData) {
     );
   }
 
+  // I want to filter on simple words, so I found 6 to be fair
   const minWordLength = 6;
-  const minWordFrequency = Math.round(data.totalWords / 8000);
-  const minEmojiFrequency = 2;
 
-  const topUsageAmount = 5;
+  // This should ensure that the word cloud does not get too big but still appears
+  // if there aren't that many words
+  const minWordFrequency = Math.round(data.totalWords / 8000);
+
+  // Fair number, we only want emojis that appear more frequent
+  const minEmojiFrequency = 5;
+
+  // A top-5 is nice, but I want to make it a slider or something
+  const topUsageAmount = 4;
 
   return (
     <>
-      <Row className="chart-title">
-        <Col>
-          <h2 className="section-title" title="General conversation stats">
-            Conversation Stats
-          </h2>
-        </Col>
-      </Row>
+      <SectionTitle
+        title="General conversation stats"
+        name="Conversation Stats"
+      />
       <Row>
         <Col className="header-container" md={12} lg={4}>
           <h3 title="All the users in this conversation">Users</h3>
@@ -114,16 +114,10 @@ function AnalysisResults({ data }: InputData) {
           </div>
         </Col>
       </Row>
-      <Row className="chart-title">
-        <Col>
-          <h3
-            title="All data related to user activity"
-            className="section-title"
-          >
-            User Activity
-          </h3>
-        </Col>
-      </Row>
+      <SectionTitle
+        title="All data related to user activity"
+        name="User Activity"
+      />
       <Row>
         <Col className="chart-container" md={12} lg={6}>
           <h3 title="The percentage of messages a specific user has contributed to the conversation">
@@ -168,16 +162,10 @@ function AnalysisResults({ data }: InputData) {
           <UserHourlyActivityGraph data={data} />
         </Col>
       </Row>
-      <Row className="chart-title">
-        <Col>
-          <h2
-            className="section-title"
-            title="All data related to the contents of a user's messages"
-          >
-            Message Contents
-          </h2>
-        </Col>
-      </Row>
+      <SectionTitle
+        title="All data related to the contents of a user's messages"
+        name="Message Contents"
+      />
       <Row>
         <Col className="chart-container">
           <h3
@@ -185,13 +173,7 @@ function AnalysisResults({ data }: InputData) {
           >
             Popular Words
           </h3>
-          <p>
-            <small className="text-muted">
-              Minimal frequency:
-              {' '}
-              {minWordFrequency}
-            </small>
-          </p>
+          <MinimalFrequencyTag frequency={minWordFrequency} />
           <WordCloud
             minFrequency={minWordFrequency}
             minLength={minWordLength}
@@ -217,16 +199,10 @@ function AnalysisResults({ data }: InputData) {
           >
             Popular Emojis
           </h3>
-          <p>
-            <small className="text-muted">
-              Minimal frequency:
-              {' '}
-              {minEmojiFrequency}
-            </small>
-          </p>
+          <MinimalFrequencyTag frequency={minEmojiFrequency} />
           <EmojiCloud
             minFrequency={minEmojiFrequency}
-            minFontSize={18}
+            minFontSize={14}
             maxFontSize={90}
             data={data}
           />

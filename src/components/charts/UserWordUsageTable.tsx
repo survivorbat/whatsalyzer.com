@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
-import { InputUsageTableData } from './input-interface';
+import { UsageTableProps } from './input-interface';
 import { getTopWords } from '../../logic/chart-helpers';
 import UserTableHead from './reusable/UserTableHead';
 import TopWordDisplay from './reusable/TopWordDisplay';
@@ -9,7 +9,7 @@ function UserWordUsageTable({
   data,
   minLength,
   displayAmount,
-}: InputUsageTableData) {
+}: UsageTableProps) {
   const topWords = data.users.map((name) => getTopWords(data.wordUsagePerUser[name], minLength, displayAmount));
 
   return (

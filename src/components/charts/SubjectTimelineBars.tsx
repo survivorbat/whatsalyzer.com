@@ -1,7 +1,7 @@
 import * as React from 'react';
 import moment from 'moment';
 import { Bar } from 'react-chartjs-2';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import defaultColors from '../../constants/colors';
 import {
   defaultGridXConfig,
@@ -9,7 +9,7 @@ import {
   defaultLabelColor,
 } from '../../constants/charts';
 
-function SubjectTimelineBars({ data }: InputData) {
+function SubjectTimelineBars({ data }: DefaultProps) {
   const chartData = {
     labels: data.conversationNames.map((convo) => convo.name),
     datasets: [

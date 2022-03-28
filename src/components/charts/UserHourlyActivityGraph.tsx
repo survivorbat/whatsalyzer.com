@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
@@ -10,7 +10,7 @@ import {
 import { hours } from '../../constants/time';
 import { colorIndex, totalCount } from '../../logic/chart-helpers';
 
-function UserHourlyActivityGraph({ data }: InputData) {
+function UserHourlyActivityGraph({ data }: DefaultProps) {
   const userHourData = data.users.map((name, index) => ({
     id: index + 1,
     label: name,

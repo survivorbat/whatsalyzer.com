@@ -1,10 +1,10 @@
 import WhatsappData from '../../logic/whatsapp-data';
 
-export interface InputData {
+export interface DefaultProps {
   data: WhatsappData;
 }
 
-export interface InputCloudData {
+export interface CloudChartProps {
   data: WhatsappData;
   minFrequency: number;
   minLength?: number;
@@ -12,7 +12,7 @@ export interface InputCloudData {
   maxFontSize: number;
 }
 
-export interface InputUsageTableData {
+export interface UsageTableProps {
   data: WhatsappData;
   minLength: number;
   displayAmount: number;

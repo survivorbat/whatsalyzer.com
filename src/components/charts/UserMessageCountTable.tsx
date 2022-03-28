@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Table } from 'react-bootstrap';
 import moment from 'moment';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import UserTableHead from './reusable/UserTableHead';
 
-function UserMessageCountTable({ data }: InputData) {
+function UserMessageCountTable({ data }: DefaultProps) {
   const duration = moment.duration(
     data.lastMessage.date.diff(data.firstMessage.date),
   );

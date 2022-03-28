@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import defaultColors from '../../constants/colors';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import { defaultPluginConfig } from '../../constants/charts';
 
-function UserMessageCountDoughnut({ data }: InputData) {
+function UserMessageCountDoughnut({ data }: DefaultProps) {
   const chartData = {
     labels: data.users,
     datasets: [

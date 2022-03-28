@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Line } from 'react-chartjs-2';
-import { InputData } from './input-interface';
+import { DefaultProps } from './input-interface';
 import {
   defaultGridXConfig,
   defaultGridYConfig,
@@ -9,7 +9,7 @@ import {
 } from '../../constants/charts';
 import { colorIndex, totalCount } from '../../logic/chart-helpers';
 
-function UserMonthlyActivityGraph({ data }: InputData) {
+function UserMonthlyActivityGraph({ data }: DefaultProps) {
   const userMonthData = data.users.map((name, index) => ({
     id: index + 1,
     label: name,
