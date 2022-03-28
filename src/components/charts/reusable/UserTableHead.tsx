@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { colorIndex } from '../../../logic/chart-helpers';
 
-export interface UserTableHeadProps {
+interface UserTableHeadProps {
   name: string;
   index: number;
 }

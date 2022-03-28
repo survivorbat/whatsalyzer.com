@@ -23,7 +23,7 @@ export const getMonthsBetween = (
   return dates;
 };
 
-export interface ConversationName {
+interface ConversationName {
   name: string;
   user: string;
   startDate: moment.Moment;

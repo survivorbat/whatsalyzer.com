@@ -1,6 +1,6 @@
 import defaultColors from '../constants/colors';
 
-export interface TopWord {
+interface TopWord {
   amount: number;
   name: string;
 }
