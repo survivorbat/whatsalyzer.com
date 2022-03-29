@@ -200,8 +200,8 @@ function AnalysisResults({ data }: DefaultProps) {
           <MinimalFrequencyTag frequency={minEmojiFrequency} />
           <EmojiCloud
             minFrequency={minEmojiFrequency}
-            minFontSize={22}
-            maxFontSize={170}
+            minFontSize={24}
+            maxFontSize={220}
             data={data}
           />
         </Col>
