@@ -32,6 +32,7 @@ function EmojiCloud({
   );
 
   const spread = maxFrequency - minFrequency;
+  const fontSizeSpread = maxFontSize - minFontSize;
 
   const chartData = {
     labels: relevantEmojis,
@@ -41,7 +42,7 @@ function EmojiCloud({
         // For each emoji usage, divide by the spread and multiply
         // by the font size spread, add additional minimum font size.
         data: relevantEmojis.map(
-          (name) => (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize)
+          (name) => (data.emojiUsage[name] / spread) * (fontSizeSpread)
             + minFontSize,
         ),
       },
