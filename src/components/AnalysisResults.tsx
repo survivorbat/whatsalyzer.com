@@ -48,10 +48,10 @@ function AnalysisResults({ data }: DefaultProps) {
   const minWordFrequency = Math.round(data.totalWords / 8000);
 
   // Fair number, we only want emojis that appear more frequent
-  const minEmojiFrequency = 5;
+  const minEmojiFrequency = 2;
 
   // A top-5 is nice, but I want to make it a slider or something
-  const topUsageAmount = 4;
+  const topUsageAmount = 5;
 
   return (
     <>
@@ -202,8 +202,8 @@ function AnalysisResults({ data }: DefaultProps) {
           <MinimalFrequencyTag frequency={minEmojiFrequency} />
           <EmojiCloud
             minFrequency={minEmojiFrequency}
-            minFontSize={14}
-            maxFontSize={90}
+            minFontSize={24}
+            maxFontSize={120}
             data={data}
           />
         </Col>

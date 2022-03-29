@@ -44,7 +44,6 @@ function EmojiCloud({
           (name) => (data.emojiUsage[name] / spread) * (maxFontSize - minFontSize)
             + minFontSize,
         ),
-        fit: true,
       },
     ],
   };

@@ -44,6 +44,7 @@ function WordCloud({
           (name) => (data.wordUsage[name] / spread) * (maxFontSize - minFontSize)
             + minFontSize,
         ),
+        fit: true,
         color: defaultColors,
       },
     ],
