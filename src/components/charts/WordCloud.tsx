@@ -36,13 +36,16 @@ function WordCloud({
   const frequencySpread = maxFrequency - minFrequency;
   const fontSizeSpread = maxFontSize - minFontSize;
 
+  // For every frequency, this is the multiplier for the font size
+  const stepMultiplier = fontSizeSpread / frequencySpread;
+
   const chartData = {
     labels: relevantWords,
     datasets: [
       {
         id: 0,
         data: relevantWords.map(
-          (name) => (fontSizeSpread / frequencySpread) * (data.wordUsage[name] - 1) + minFontSize,
+          (name) => stepMultiplier * (data.wordUsage[name] - 1) + minFontSize,
         ),
         fit: true,
         color: defaultColors,

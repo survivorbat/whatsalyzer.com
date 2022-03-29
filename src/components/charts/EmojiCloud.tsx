@@ -34,13 +34,16 @@ function EmojiCloud({
   const frequencySpread = maxFrequency - minFrequency;
   const fontSizeSpread = maxFontSize - minFontSize;
 
+  // For every frequency, this is the multiplier for the font size
+  const stepMultiplier = fontSizeSpread / frequencySpread;
+
   const chartData = {
     labels: relevantEmojis,
     datasets: [
       {
         id: 0,
         data: relevantEmojis.map(
-          (name) => (fontSizeSpread / frequencySpread) * (data.emojiUsage[name] - 1) + minFontSize,
+          (name) => stepMultiplier * (data.emojiUsage[name] - 1) + minFontSize,
         ),
       },
     ],
