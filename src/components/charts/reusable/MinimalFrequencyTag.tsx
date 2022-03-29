@@ -9,6 +9,7 @@ function MinimalFrequencyTag({ frequency }: MinimalFrequencyTagProps) {
     <p>
       <small className="text-muted">
         Minimal frequency:
+        {' '}
         {frequency}
       </small>
     </p>
