@@ -6,7 +6,6 @@ import UserMessageCountDoughnut from './charts/UserMessageCountDoughnut';
 import UserActivityGraph from './charts/UserMonthlyActivityGraph';
 import UserMessageCountTable from './charts/UserMessageCountTable';
 import UserHourlyActivityGraph from './charts/UserHourlyActivityGraph';
-import { DefaultProps } from './charts/input-interface';
 import UserWordUsageTable from './charts/UserWordUsageTable';
 import UserEmojiUsageTable from './charts/UserEmojiUsageTable';
 import SubjectTimelineBars from './charts/SubjectTimelineBars';
@@ -17,8 +16,13 @@ import UserWeeklyActivityGraph from './charts/UserWeeklyActivityGraph';
 import { colorIndex } from '../logic/chart-helpers';
 import MinimalFrequencyTag from './charts/reusable/MinimalFrequencyTag';
 import SectionTitle from './charts/reusable/SectionTitle';
+import WhatsappData from '../logic/whatsapp-data';
 
-function AnalysisResults({ data }: DefaultProps) {
+interface AnalysisResultsProps {
+  data: WhatsappData;
+}
+
+function AnalysisResults({ data }: AnalysisResultsProps) {
   let conversationTimeline;
 
   if (data.conversationNames.length > 0) {

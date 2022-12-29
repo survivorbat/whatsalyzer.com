@@ -9,7 +9,7 @@
 }
 
 .header-title {
-  font-size: 10vw;
+  font-size: 5.5vw;
 }
 
 .menu-container {
@@ -20,7 +20,7 @@
   width: 100%;
   height: 100%;
   font-weight: bold;
-  font-size: 160%;
+  font-size: 130%;
   background: none;
   border: none;
   transition: 300ms;

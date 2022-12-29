@@ -13,9 +13,10 @@ function Header() {
   const [menuOpen, setMenuOpen] = useState({
     qa: false,
     howto: false,
+    privacy: false,
   } as Record<string, boolean>);
 
-  const toggleMenu = (menu: string) => setMenuOpen({ ...menuOpen, [menu]: !menuOpen[menu] });
+  const toggleMenu = (menu: string) => setMenuOpen({ qa: false, howto: false, privacy: false, [menu]: !menuOpen[menu] });
 
   return (
     <div className="header-container">
@@ -27,7 +28,7 @@ function Header() {
         </Col>
       </Row>
       <Row className="menu-container">
-        <Col lg={6} md={12}>
+        <Col lg={4} md={12}>
           <button
             type="button"
             className="menu-button"
@@ -36,13 +37,22 @@ function Header() {
             Getting Started
           </button>
         </Col>
-        <Col lg={6} md={12}>
+        <Col lg={4} md={12}>
           <button
             type="button"
             className="menu-button"
             onClick={() => toggleMenu('qa')}
           >
             Q&A
+          </button>
+        </Col>
+        <Col lg={4} md={12}>
+          <button
+            type="button"
+            className="menu-button"
+            onClick={() => toggleMenu('privacy')}
+          >
+            Privacy
           </button>
         </Col>
       </Row>
@@ -118,6 +128,17 @@ function Header() {
               <p>
                 A: Yes! The TODO list can be found in the README of the source
                 code, check the link above.
+              </p>
+              <hr />
+            </div>
+          </Collapse>
+          <Collapse in={menuOpen.privacy}>
+            <div>
+              <h2>Privacy</h2>
+              <p>
+                Whatsalyzer does not collect any data from you. All the
+                calculations are performed in your browser, so no data is ever
+                uploaded to a server.
               </p>
               <hr />
             </div>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import {
   Button,
   Col,
-  Form,
+  Form, FormCheck,
   FormControl,
   FormGroup,
   FormLabel,
@@ -10,10 +10,13 @@ import {
   Row,
 } from 'react-bootstrap';
 import { FormEvent, useState } from 'react';
-
 import './InputForm.css';
 
-function InputForm({ handleData }: { handleData: Function }) {
+interface InputFormProps {
+  handleData: (data: string | ArrayBuffer | null) => void;
+}
+
+function InputForm({ handleData }: InputFormProps) {
   const [whatsappFile, setWhatsappFile] = useState({} as File);
 
   const handleChange = (files: FileList) => setWhatsappFile(files[0]);
@@ -42,14 +45,13 @@ function InputForm({ handleData }: { handleData: Function }) {
               onChange={(e: any) => handleChange(e.target!.files)}
             />
             <FormText id="input-file-help" muted>
-              The file to analyze, click &apos;Getting Started&apos; to learn
-              more.
+              The file to analyze, check &apos;Getting Started&apos; to learn more.
             </FormText>
           </FormGroup>
         </Col>
         <Col lg={6} md={12} className="input-column">
           <Button type="submit" id="submit-button" value="Submit">
-            Analyze this conversation!
+            Analyze
           </Button>
         </Col>
       </Row>
