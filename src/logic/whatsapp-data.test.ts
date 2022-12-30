@@ -270,44 +270,64 @@ describe('WhatsappData', () => {
   describe('constructor', () => {
     const tests = [
       {
-        input: <Message[]>[
-          {
-            message: 'User joined your channel',
-            author: 'System',
-            date: new Date(2021, 2, 10, 5),
-          },
-          {
-            message: 'Welcome to the chat!',
-            author: 'Madame Trudeau',
-            date: new Date(2021, 2, 10, 5),
-          },
-          {
-            message: 'Thanks! Happy to be here 😊',
-            author: 'Among Us Player',
-            date: new Date(2021, 2, 12, 5),
-          },
-          {
-            message: '<Media omitted>',
-            author: 'Among Us Player',
-            date: new Date(2022, 3, 10, 6),
-          },
-          {
-            message: '<Media weggelaten>',
-            author: 'Among Us Player',
-            date: new Date(2022, 3, 10, 7),
-          },
-          {
-            message: 'Sorry for being late to the meeting',
-            author: 'Among Us Player',
-            date: new Date(2022, 1, 10, 6),
-          },
-          {
-            message: 'I forgive you 💩',
-            author: 'Madame Trudeau',
-            date: new Date(2022, 2, 10, 7),
-          },
-        ],
         expected: <WhatsappData>{
+          messages: [],
+          conversations: [],
+          users: [],
+          words: [],
+          emojis: [],
+          totalMessages: 0,
+          totalWords: 0,
+          totalEmojis: 0,
+          totalCharacters: 0,
+          totalFemke: 0,
+          conversationNames: [],
+          messagesPerDayPerUser: {},
+          wordsPerDayPerUser: {},
+          emojisPerDayPerUser: {},
+          charactersPerDayPerUser: {},
+          femkePerDay: {},
+        },
+      },
+      {
+        expected: <WhatsappData>{
+          messages: [
+            {
+              message: 'User joined your channel',
+              author: 'System',
+              date: new Date(2021, 2, 10, 5),
+            },
+            {
+              message: 'Welcome to the chat!',
+              author: 'Madame Trudeau',
+              date: new Date(2021, 2, 10, 5),
+            },
+            {
+              message: 'Thanks! Happy to be here 😊',
+              author: 'Among Us Player',
+              date: new Date(2021, 2, 12, 5),
+            },
+            {
+              message: '<Media omitted>',
+              author: 'Among Us Player',
+              date: new Date(2022, 3, 10, 6),
+            },
+            {
+              message: '<Media weggelaten>',
+              author: 'Among Us Player',
+              date: new Date(2022, 3, 10, 7),
+            },
+            {
+              message: 'Sorry for being late to the meeting',
+              author: 'Among Us Player',
+              date: new Date(2022, 1, 10, 6),
+            },
+            {
+              message: 'I forgive you 💩',
+              author: 'Madame Trudeau',
+              date: new Date(2022, 2, 10, 7),
+            },
+          ],
           totalMessages: 4,
           totalCharacters: 98,
           totalWords: 19,
@@ -635,10 +655,10 @@ describe('WhatsappData', () => {
       },
     ];
 
-    tests.forEach(({ input, expected }) => {
-      it(`returns expected calculations on '${input.length}' messages`, () => {
+    tests.forEach(({ expected }) => {
+      it(`returns expected calculations on '${expected.length}' messages`, () => {
         // Act
-        const result = new WhatsappData(input);
+        const result = new WhatsappData(expected.messages);
 
         // Assert
         expect(result).toEqual(expected);

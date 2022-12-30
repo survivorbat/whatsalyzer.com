@@ -73,20 +73,16 @@ export const getConversationSubjects = (
  * Get the words in a message
  * @param message The message to dissect
  */
-export const getWords = (message: string): string[] => {
-  return message
-    .split(/\b[^\w']+\b/)
-    .map((w) => w.toLowerCase().replace(/[^a-zA-Z']/g, ''))
-    .filter((w) => w !== '');
-};
+export const getWords = (message: string): string[] => message
+  .split(/\b[^\w']+\b/)
+  .map((w) => w.toLowerCase().replace(/[^a-zA-Z']/g, ''))
+  .filter((w) => w !== '');
 
 /**
  * Get the words in a message
  * @param message The message to dissect
  */
-export const getEmojis = (message: string): string[] => {
-  return [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
-};
+export const getEmojis = (message: string): string[] => [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
 
 export interface WhatsappMessage {
   date: moment.Moment;
@@ -144,10 +140,6 @@ class WhatsappData {
    * @param messages The parsed messages
    */
   constructor(readonly messages: Message[]) {
-    if (messages.length === 0) {
-      throw new Error('No messages to analyze');
-    }
-
     const whatsappMessages = messages.map((m) => ({
       message: m.message,
       author: m.author,
@@ -164,8 +156,16 @@ class WhatsappData {
       )
       .sort((a, b) => a.date.unix() - b.date.unix());
 
-    [this.firstMessage] = filtered;
-    this.lastMessage = filtered[filtered.length - 1];
+    this.firstMessage = filtered[0] || {
+      date: moment(),
+      author: 'Not Found',
+      message: 'Not Found',
+    };
+    this.lastMessage = filtered[filtered.length - 1] || {
+      date: moment(),
+      author: 'Not Found',
+      message: 'Not Found',
+    };
 
     this.totalFemke = filtered.reduce(
       (count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length,

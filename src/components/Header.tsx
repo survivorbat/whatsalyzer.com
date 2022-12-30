@@ -16,7 +16,12 @@ function Header() {
     privacy: false,
   } as Record<string, boolean>);
 
-  const toggleMenu = (menu: string) => setMenuOpen({ qa: false, howto: false, privacy: false, [menu]: !menuOpen[menu] });
+  const toggleMenu = (menu: string) => setMenuOpen({
+    qa: false,
+    howto: false,
+    privacy: false,
+    [menu]: !menuOpen[menu],
+  });
 
   return (
     <div className="header-container">

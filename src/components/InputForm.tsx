@@ -2,7 +2,8 @@ import * as React from 'react';
 import {
   Button,
   Col,
-  Form, FormCheck,
+  Form,
+  FormCheck,
   FormControl,
   FormGroup,
   FormLabel,
@@ -45,7 +46,8 @@ function InputForm({ handleData }: InputFormProps) {
               onChange={(e: any) => handleChange(e.target!.files)}
             />
             <FormText id="input-file-help" muted>
-              The file to analyze, check &apos;Getting Started&apos; to learn more.
+              The file to analyze, check &apos;Getting Started&apos; to learn
+              more.
             </FormText>
           </FormGroup>
         </Col>

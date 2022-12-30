@@ -1,10 +1,15 @@
 .input-filter {
-    background: none !important;
+  background: none !important;
 }
 
 .filters-row {
-    background: rgb(0,0,0);
-    background: linear-gradient(90deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.2) 50%, rgba(0,0,0,0) 100%);
-    padding-top: 30px;
-    padding-bottom: 30px;
+  background: rgb(0, 0, 0);
+  background: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0) 100%
+  );
+  padding-top: 30px;
+  padding-bottom: 30px;
 }

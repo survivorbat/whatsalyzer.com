@@ -3,12 +3,12 @@ import './App.css';
 import { Container } from 'react-bootstrap';
 import { parseStringSync } from 'whatsapp-chat-parser';
 import { useState } from 'react';
+import { Message } from 'whatsapp-chat-parser/types/types';
 import Header from './components/Header';
 import InputForm from './components/InputForm';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
 import Filters from './components/Filters';
-import { Message } from 'whatsapp-chat-parser/types/types';
 
 function App() {
   const [whatsappData, setWhatsappData] = useState(
@@ -31,10 +31,10 @@ function App() {
   const handleFilterChange = (filter: (filter: Message) => boolean) => {
     const data = whatsappData!.messages.filter(filter);
     setFilteredData(new WhatsappData(data));
-  }
+  };
 
   // Only add analysis results if we have data
-  let analysisResult = filteredData ? (
+  const analysisResult = filteredData ? (
     <>
       <Filters data={whatsappData!} handleFilterChange={handleFilterChange} />
       <AnalysisResults data={filteredData!} />
