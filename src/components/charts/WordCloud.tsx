@@ -30,7 +30,7 @@ function WordCloud({
   const maxFrequency = getMaxWordFrequency(
     minFrequency,
     relevantWords,
-    data.wordUsage,
+    data.wordUsage
   );
 
   const frequencySpread = maxFrequency - minFrequency;
@@ -45,7 +45,7 @@ function WordCloud({
       {
         id: 0,
         data: relevantWords.map(
-          (name) => stepMultiplier * (data.wordUsage[name] - 1) + minFontSize,
+          (name) => stepMultiplier * (data.wordUsage[name] - 1) + minFontSize
         ),
         fit: true,
         color: defaultColors,
@@ -64,7 +64,8 @@ function WordCloud({
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) => `Found ${data.wordUsage[tooltipData.label]}`,
+          label: (tooltipData: any) =>
+            `Found ${data.wordUsage[tooltipData.label]}`,
         },
         titleFont: {
           size: 20,

@@ -10,9 +10,11 @@ function UserMessageCountDoughnut({ data }: DefaultProps) {
     datasets: [
       {
         id: 0,
-        data: data.users.map((name) => Math.round(
-          (data.messagesPerUser[name].length / data.totalMessages) * 100,
-        )),
+        data: data.users.map((name) =>
+          Math.round(
+            (data.messagesPerUser[name].length / data.totalMessages) * 100
+          )
+        ),
         backgroundColor: defaultColors,
         borderColor: '#000000',
       },
@@ -24,7 +26,8 @@ function UserMessageCountDoughnut({ data }: DefaultProps) {
       legend: defaultPluginConfig.legend,
       tooltip: {
         callbacks: {
-          label: (dataSet: any) => `${dataSet.label}: ${dataSet.dataset.data[dataSet.dataIndex]}%`,
+          label: (dataSet: any) =>
+            `${dataSet.label}: ${dataSet.dataset.data[dataSet.dataIndex]}%`,
         },
       },
     },

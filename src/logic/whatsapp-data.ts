@@ -9,7 +9,7 @@ import { hours, weekdays } from '../constants/time';
  */
 export const getMonthsBetween = (
   from: moment.Moment,
-  to: moment.Moment,
+  to: moment.Moment
 ): moment.Moment[] => {
   const dates = [];
 
@@ -31,58 +31,61 @@ interface ConversationName {
 }
 
 export const getConversationSubjects = (
-  systemMessages: WhatsappMessage[],
-): ConversationName[] => systemMessages.reduce((prev, msg) => {
-  // TODO: These only work in English now...
-  const createMatch = msg.message.match(/^(.*) created group "(.+)"/);
-  const renameMatch = msg.message.match(
-    /^(.*) changed the subject from "(.+)" to "(.+)"/,
-  );
+  systemMessages: WhatsappMessage[]
+): ConversationName[] =>
+  systemMessages.reduce((prev, msg) => {
+    // TODO: These only work in English now...
+    const createMatch = msg.message.match(/^(.*) created group "(.+),/);
+    const renameMatch = msg.message.match(
+      /^(.*) changed the subject from "(.+), to "(.+),/
+    );
 
-  // If we find the create message, we add it as the first item in the list with an unspecified end date
-  if (createMatch) {
-    prev.push({
-      name: createMatch[2],
-      user: createMatch[1],
-      startDate: msg.date,
-      endDate: moment(),
-    });
-  }
-
-  // If we find a rename message, we...
-  if (renameMatch) {
-    // First check if a message came before it, because if it does, that message now gets an
-    // end date
-    if (prev.length > 0) {
-      prev[prev.length - 1].endDate = msg.date;
+    // If we find the create message, we add it as the first item in the list with an unspecified end date
+    if (createMatch) {
+      prev.push({
+        name: createMatch[2],
+        user: createMatch[1],
+        startDate: msg.date,
+        endDate: moment(),
+      });
     }
 
-    // Then we add the new item with an unspecified end date
-    prev.push({
-      name: renameMatch[3],
-      user: renameMatch[1],
-      startDate: msg.date,
-      endDate: moment(),
-    });
-  }
+    // If we find a rename message, we...
+    if (renameMatch) {
+      // First check if a message came before it, because if it does, that message now gets an
+      // end date
+      if (prev.length > 0) {
+        prev[prev.length - 1].endDate = msg.date;
+      }
 
-  return prev;
-}, [] as ConversationName[]);
+      // Then we add the new item with an unspecified end date
+      prev.push({
+        name: renameMatch[3],
+        user: renameMatch[1],
+        startDate: msg.date,
+        endDate: moment(),
+      });
+    }
+
+    return prev;
+  }, [] as ConversationName[]);
 
 /**
  * Get the words in a message
  * @param message The message to dissect
  */
-export const getWords = (message: string): string[] => message
-  .split(/\b[^\w']+\b/)
-  .map((w) => w.toLowerCase().replace(/[^a-zA-Z']/g, ''))
-  .filter((w) => w !== '');
+export const getWords = (message: string): string[] =>
+  message
+    .split(/\b[^\w']+\b/)
+    .map((w) => w.toLowerCase().replace(/[^a-zA-Z']/g, ''))
+    .filter((w) => w !== '');
 
 /**
  * Get the words in a message
  * @param message The message to dissect
  */
-export const getEmojis = (message: string): string[] => [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
+export const getEmojis = (message: string): string[] =>
+  [...message].filter((w) => /\p{Extended_Pictographic}/u.test(w));
 
 export interface WhatsappMessage {
   date: moment.Moment;
@@ -152,29 +155,30 @@ class WhatsappData {
       .filter((m) => m.author !== 'System')
       // This should take care of all <Media Omitted> messages, in whatever language the user has their phone
       .filter(
-        (m) => !(m.message.trim().startsWith('<') && m.message.trim().endsWith('>')),
+        (m) =>
+          !(m.message.trim().startsWith('<') && m.message.trim().endsWith('>'))
       )
       .sort((a, b) => a.date.unix() - b.date.unix());
 
     this.firstMessage = filtered[0] || {
-      date: moment(),
+      date: moment(0),
       author: 'Not Found',
       message: 'Not Found',
     };
     this.lastMessage = filtered[filtered.length - 1] || {
-      date: moment(),
+      date: moment(0),
       author: 'Not Found',
       message: 'Not Found',
     };
 
     this.totalFemke = filtered.reduce(
       (count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length,
-      0,
+      0
     );
     this.totalMessages = filtered.length;
     this.totalCharacters = filtered.reduce(
       (count, msg) => count + msg.message.length,
-      0,
+      0
     );
 
     this.messagesPerUser = filtered.reduce((res, msg) => {
@@ -190,27 +194,27 @@ class WhatsappData {
       (res, user) => {
         res[user] = this.messagesPerUser[user].reduce(
           (count, msg) => count + msg.message.length,
-          0,
+          0
         );
         return res;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
 
     this.femkePerUser = Object.keys(this.messagesPerUser).reduce(
       (res, user) => {
         res[user] = this.messagesPerUser[user].reduce(
           (count, msg) => count + msg.message.replace(/[^A-Z]/g, '').length,
-          0,
+          0
         );
         return res;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
 
     // Set users, we use the keys of wordsPerUser to sort them based on the amount of messages
     this.users = Object.keys(this.messagesPerUser).sort(
-      (a, b) => this.messagesPerUser[b].length - this.messagesPerUser[a].length,
+      (a, b) => this.messagesPerUser[b].length - this.messagesPerUser[a].length
     );
 
     // Set words per user
@@ -236,7 +240,7 @@ class WhatsappData {
 
         return res;
       },
-      {} as Record<string, Record<string, number>>,
+      {} as Record<string, Record<string, number>>
     );
 
     this.wordUsage = Object.keys(this.wordUsagePerUser).reduce((res, user) => {
@@ -274,7 +278,7 @@ class WhatsappData {
 
         return res;
       },
-      {} as Record<string, Record<string, number>>,
+      {} as Record<string, Record<string, number>>
     );
 
     this.emojiUsage = Object.keys(this.emojiUsagePerUser).reduce(
@@ -289,17 +293,17 @@ class WhatsappData {
 
         return res;
       },
-      {} as Record<string, number>,
+      {} as Record<string, number>
     );
 
     this.totalWords = Object.keys(this.wordsPerUser).reduce(
       (res, user) => res + this.wordsPerUser[user].length,
-      0,
+      0
     );
 
     this.totalEmojis = Object.keys(this.emojisPerUser).reduce(
       (res, user) => res + this.emojisPerUser[user].length,
-      0,
+      0
     );
 
     // Set messages per hour
@@ -308,10 +312,10 @@ class WhatsappData {
         (result, user) => ({
           ...result,
           [user]: filtered.filter(
-            (message) => message.date.hour() === hour && message.author === user,
+            (message) => message.date.hour() === hour && message.author === user
           ).length,
         }),
-        {},
+        {}
       );
 
       return res;
@@ -323,10 +327,11 @@ class WhatsappData {
         (result, user) => ({
           ...result,
           [user]: filtered.filter(
-            (message) => message.date.weekday() === weekDay && message.author === user,
+            (message) =>
+              message.date.weekday() === weekDay && message.author === user
           ).length,
         }),
-        {},
+        {}
       );
 
       return res;
@@ -335,7 +340,7 @@ class WhatsappData {
     // Set messages per month, just use an empty array if there are no messages
     const dates = getMonthsBetween(
       this.firstMessage.date,
-      this.lastMessage.date,
+      this.lastMessage.date
     );
 
     this.messagesPerMonthPerUser = dates.reduce((res, date) => {
@@ -345,12 +350,13 @@ class WhatsappData {
         (list, user) => ({
           ...list,
           [user]: filtered.filter(
-            (message) => message.date.month() === date.month()
-              && message.date.year() === date.year()
-              && message.author === user,
+            (message) =>
+              message.date.month() === date.month() &&
+              message.date.year() === date.year() &&
+              message.author === user
           ).length,
         }),
-        {},
+        {}
       );
 
       return res;

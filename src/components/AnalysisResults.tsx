@@ -1,7 +1,7 @@
 import * as React from 'react';
 import 'chart.js/auto';
 import './AnalysisResults.css';
-import { Col, Row } from 'react-bootstrap';
+import { Col, Row, Tab, Tabs } from 'react-bootstrap';
 import UserMessageCountDoughnut from './charts/UserMessageCountDoughnut';
 import UserActivityGraph from './charts/UserMonthlyActivityGraph';
 import UserMessageCountTable from './charts/UserMessageCountTable';
@@ -94,9 +94,7 @@ function AnalysisResults({ data }: AnalysisResultsProps) {
           <h3 title="The first message in this conversation">First Message</h3>
           <div className="fw-bold">{data.firstMessage.message}</div>
           <div className="text-muted">
-            {data.firstMessage.author}
-            ,
-            {' '}
+            {data.firstMessage.author},{' '}
             {data.firstMessage.date.format('DD-MM-YYYY')}
           </div>
         </Col>
@@ -109,9 +107,7 @@ function AnalysisResults({ data }: AnalysisResultsProps) {
           <h3>Last Message</h3>
           <div className="fw-bold">{data.lastMessage.message}</div>
           <div className="text-muted">
-            {data.lastMessage.author}
-            ,
-            {' '}
+            {data.lastMessage.author},{' '}
             {data.lastMessage.date.format('DD-MM-YYYY')}
           </div>
         </Col>

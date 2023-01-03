@@ -5,13 +5,7 @@ interface AmountTagProps {
 }
 
 function AmountTag({ amount }: AmountTagProps) {
-  return (
-    <small className="text-muted">
-      (
-      {amount}
-      )
-    </small>
-  );
+  return <small className="text-muted">({amount})</small>;
 }
 
 export default AmountTag;

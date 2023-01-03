@@ -8,7 +8,7 @@ export interface TopWord {
 export const getTopWords = (
   inputData: Record<string, number>,
   minLength: number,
-  amount: number,
+  amount: number
 ): TopWord[] => {
   const sorted = Object.keys(inputData)
     .filter((w) => w.length >= minLength)
@@ -28,12 +28,15 @@ export const getTopWords = (
 export const getMaxWordFrequency = (
   minFrequency: number,
   words: string[],
-  usage: Record<string, number>,
-) => words.reduce(
-  (result, word) => (usage[word] > result ? usage[word] : result),
-  minFrequency + 1,
-);
+  usage: Record<string, number>
+) =>
+  words.reduce(
+    (result, word) => (usage[word] > result ? usage[word] : result),
+    minFrequency + 1
+  );
 
-export const totalCount = (input: Record<string, number>): number => Object.keys(input).reduce((res, key) => res + input[key], 0);
+export const totalCount = (input: Record<string, number>): number =>
+  Object.keys(input).reduce((res, key) => res + input[key], 0);
 
-export const colorIndex = (index: number) => defaultColors[index % defaultColors.length];
+export const colorIndex = (index: number) =>
+  defaultColors[index % defaultColors.length];

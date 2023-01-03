@@ -15,9 +15,10 @@ function UserHourlyActivityGraph({ data }: DefaultProps) {
     id: index + 1,
     label: name,
     data: Object.keys(data.messagesPerHourPerUser).map(
-      (date) => (data.messagesPerHourPerUser[date][name]
-          / data.messagesPerUser[name].length)
-          * 100 || 0,
+      (date) =>
+        (data.messagesPerHourPerUser[date][name] /
+          data.messagesPerUser[name].length) *
+          100 || 0
     ),
     borderColor: colorIndex(index),
     backgroundColor: colorIndex(index),
@@ -32,9 +33,10 @@ function UserHourlyActivityGraph({ data }: DefaultProps) {
         id: 0,
         label: 'Total Average',
         data: Object.keys(data.messagesPerHourPerUser).map(
-          (date) => (totalCount(data.messagesPerHourPerUser[date])
-              / data.totalMessages)
-              * 100 || 0,
+          (date) =>
+            (totalCount(data.messagesPerHourPerUser[date]) /
+              data.totalMessages) *
+              100 || 0
         ),
         borderColor: 'white',
         backgroundColor: 'white',
@@ -64,9 +66,10 @@ function UserHourlyActivityGraph({ data }: DefaultProps) {
       ...defaultPluginConfig,
       tooltip: {
         callbacks: {
-          label: (context: any) => `${context.dataset.label}: ${Math.round(
-            context.dataset.data[context.dataIndex],
-          )}%`,
+          label: (context: any) =>
+            `${context.dataset.label}: ${Math.round(
+              context.dataset.data[context.dataIndex]
+            )}%`,
           title: (context: any) => `${context[0].label}:00`,
         },
       },

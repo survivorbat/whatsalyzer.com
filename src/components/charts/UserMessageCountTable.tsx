@@ -6,7 +6,7 @@ import UserTableHead from './reusable/UserTableHead';
 
 function UserMessageCountTable({ data }: DefaultProps) {
   const duration = moment.duration(
-    data.lastMessage.date.diff(data.firstMessage.date),
+    data.lastMessage.date.diff(data.firstMessage.date)
   );
 
   const totalDays = duration.asDays();
@@ -65,28 +65,28 @@ function UserMessageCountTable({ data }: DefaultProps) {
             <td>{data.messagesPerUser[name].length}</td>
             <td>
               {Math.round(
-                (data.messagesPerUser[name].length / data.totalMessages) * 100,
+                (data.messagesPerUser[name].length / data.totalMessages) * 100
               )}
               %
             </td>
             <td>
               {parseFloat(
-                `${data.messagesPerUser[name].length / totalDays}`,
+                `${data.messagesPerUser[name].length / totalDays}`
               ).toFixed(1)}
             </td>
             <td>
               {parseFloat(
-                `${data.messagesPerUser[name].length / totalMonths}`,
+                `${data.messagesPerUser[name].length / totalMonths}`
               ).toFixed(1)}
             </td>
             <td>
               {parseFloat(
-                `${data.messagesPerUser[name].length / totalYears}`,
+                `${data.messagesPerUser[name].length / totalYears}`
               ).toFixed(1)}
             </td>
             <td>
               {Math.round(
-                (data.femkePerUser[name] / data.charactersPerUser[name]) * 100,
+                (data.femkePerUser[name] / data.charactersPerUser[name]) * 100
               )}
               %
             </td>
@@ -103,10 +103,7 @@ function UserMessageCountTable({ data }: DefaultProps) {
             {parseFloat(`${data.totalMessages / totalMonths}`).toFixed(1)}
           </td>
           <td>{parseFloat(`${data.totalMessages / totalYears}`).toFixed(1)}</td>
-          <td>
-            {Math.round((data.totalFemke / data.totalCharacters) * 100)}
-            %
-          </td>
+          <td>{Math.round((data.totalFemke / data.totalCharacters) * 100)}%</td>
         </tr>
       </tfoot>
     </Table>

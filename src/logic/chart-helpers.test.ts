@@ -55,9 +55,7 @@ describe('getTopWords', () => {
     },
   ];
 
-  testData.forEach(({
-    inputData, amount, minLength, expected,
-  }) => {
+  testData.forEach(({ inputData, amount, minLength, expected }) => {
     it(`returns '${expected}' on input '${inputData}'`, () => {
       // Act
       const result = getTopWords(inputData, minLength, amount);
@@ -107,9 +105,7 @@ describe('getMaxWordFrequency', () => {
     },
   ];
 
-  testData.forEach(({
-    minFrequency, expected, usage, words,
-  }) => {
+  testData.forEach(({ minFrequency, expected, usage, words }) => {
     it(`returns '${expected}' on '${words.length} words'`, () => {
       // Act
       const result = getMaxWordFrequency(minFrequency, words, usage);

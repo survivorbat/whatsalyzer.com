@@ -9,9 +9,7 @@ interface TopWordDisplayProps {
 function TopWordDisplay({ topWord }: TopWordDisplayProps) {
   return (
     <span className="rounded-pill participant-pill" key={topWord.name}>
-      {topWord.name}
-      {' '}
-      <AmountTag amount={topWord.amount} />
+      {topWord.name} <AmountTag amount={topWord.amount} />
     </span>
   );
 }

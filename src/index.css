@@ -24,7 +24,14 @@ body {
   height: 100vh;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.clickable {
+  cursor: pointer;
+}
+
+.modal-header {
+  background-color: #2234ae;
+  background-image: linear-gradient(315deg, #2234ae 0%, #191714 70%);
+  color: white;
+  font-weight: bolder;
+  font-size: 1.5em;
 }

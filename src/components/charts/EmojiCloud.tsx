@@ -16,7 +16,7 @@ function EmojiCloud({
   maxFontSize,
 }: CloudChartProps) {
   const relevantEmojis = Object.keys(data.emojiUsage).filter(
-    (emoji) => data.emojiUsage[emoji] >= minFrequency,
+    (emoji) => data.emojiUsage[emoji] >= minFrequency
   );
 
   if (relevantEmojis.length === 0) {
@@ -28,7 +28,7 @@ function EmojiCloud({
   const maxFrequency = getMaxWordFrequency(
     minFrequency,
     relevantEmojis,
-    data.emojiUsage,
+    data.emojiUsage
   );
 
   const frequencySpread = maxFrequency - minFrequency;
@@ -43,7 +43,7 @@ function EmojiCloud({
       {
         id: 0,
         data: relevantEmojis.map(
-          (name) => stepMultiplier * (data.emojiUsage[name] - 1) + minFontSize,
+          (name) => stepMultiplier * (data.emojiUsage[name] - 1) + minFontSize
         ),
       },
     ],
@@ -60,7 +60,8 @@ function EmojiCloud({
       },
       tooltip: {
         callbacks: {
-          label: (tooltipData: any) => `Found ${data.emojiUsage[tooltipData.label]}`,
+          label: (tooltipData: any) =>
+            `Found ${data.emojiUsage[tooltipData.label]}`,
         },
         titleFont: {
           size: 100,

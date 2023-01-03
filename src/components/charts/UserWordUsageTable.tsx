@@ -10,7 +10,9 @@ function UserWordUsageTable({
   minLength,
   displayAmount,
 }: UsageTableProps) {
-  const topWords = data.users.map((name) => getTopWords(data.wordUsagePerUser[name], minLength, displayAmount));
+  const topWords = data.users.map((name) =>
+    getTopWords(data.wordUsagePerUser[name], minLength, displayAmount)
+  );
 
   return (
     <Table borderless responsive className="text-light">

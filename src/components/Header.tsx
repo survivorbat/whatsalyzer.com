@@ -1,27 +1,31 @@
 import * as React from 'react';
-import {
-  Col, Collapse, Figure, Row,
-} from 'react-bootstrap';
+import { Col, Collapse, Figure, Modal, Row } from 'react-bootstrap';
 import './Header.css';
 import { useState } from 'react';
 import FigureCaption from 'react-bootstrap/FigureCaption';
 import FigureImage from 'react-bootstrap/FigureImage';
-import howto2 from '../assets/howto-2.jpeg';
-import howto1 from '../assets/howto-1.jpeg';
+import howto3 from '../assets/howto-3.png';
+import howto2 from '../assets/howto-2.png';
+import howto1 from '../assets/howto-1.png';
+import howto0 from '../assets/howto-0.png';
+import InputForm from './InputForm';
 
-function Header() {
+interface HeaderProps {
+  handleData: (data: string | ArrayBuffer | null) => void;
+}
+
+function Header({ handleData }: HeaderProps) {
   const [menuOpen, setMenuOpen] = useState({
     qa: false,
     howto: false,
-    privacy: false,
   } as Record<string, boolean>);
 
-  const toggleMenu = (menu: string) => setMenuOpen({
-    qa: false,
-    howto: false,
-    privacy: false,
-    [menu]: !menuOpen[menu],
-  });
+  const toggleMenu = (menu: string) =>
+    setMenuOpen({
+      qa: false,
+      howto: false,
+      [menu]: !menuOpen[menu],
+    });
 
   return (
     <div className="header-container">
@@ -39,8 +43,11 @@ function Header() {
             className="menu-button"
             onClick={() => toggleMenu('howto')}
           >
-            Getting Started
+            How does it work?
           </button>
+        </Col>
+        <Col lg={4} md={12}>
+          <InputForm handleData={handleData} />
         </Col>
         <Col lg={4} md={12}>
           <button
@@ -51,21 +58,23 @@ function Header() {
             Q&A
           </button>
         </Col>
-        <Col lg={4} md={12}>
-          <button
-            type="button"
-            className="menu-button"
-            onClick={() => toggleMenu('privacy')}
-          >
-            Privacy
-          </button>
-        </Col>
       </Row>
       <Row className="info-container">
         <Col>
-          <Collapse in={menuOpen.howto}>
-            <div>
-              <h2>How does it work?</h2>
+          <Modal
+            onBackdropClick={() => toggleMenu('howto')}
+            size="lg"
+            onHide={() => toggleMenu('howto')}
+            show={menuOpen.howto}
+          >
+            <Modal.Header
+              className="input-modal-header text-center"
+              closeVariant="white"
+              closeButton
+            >
+              How does it work?
+            </Modal.Header>
+            <Modal.Body className="Body">
               <ol>
                 <li>Go to the Whatsapp chat you want to analyze</li>
                 <li>Click on the menu button at the top-right</li>
@@ -78,17 +87,29 @@ function Header() {
               </ol>
               <p>Then select the file below to analyze the conversation.</p>
               <Row>
-                <Col className="howto-image-container" xs={12} md={6}>
+                <Col className="howto-image-container" xs={12} md={3}>
+                  <Figure>
+                    <FigureImage
+                      className="howto-image"
+                      src={howto0}
+                      alt="Open the menu"
+                    />
+                    <FigureCaption>
+                      2. Open options at the top-right
+                    </FigureCaption>
+                  </Figure>
+                </Col>
+                <Col className="howto-image-container" xs={12} md={3}>
                   <Figure>
                     <FigureImage
                       className="howto-image"
                       src={howto1}
                       alt="Select 'More'"
                     />
-                    <FigureCaption>Select &apos;More&apos;</FigureCaption>
+                    <FigureCaption>3. Select &apos;More&apos;</FigureCaption>
                   </Figure>
                 </Col>
-                <Col className="howto-image-container" xs={12} md={6}>
+                <Col className="howto-image-container" xs={12} md={3}>
                   <Figure>
                     <FigureImage
                       className="howto-image"
@@ -96,31 +117,59 @@ function Header() {
                       alt="Click on 'Export chat'"
                     />
                     <FigureCaption>
-                      Click on &apos;Export chat&apos;
+                      4. Click on &apos;Export chat&apos;
+                    </FigureCaption>
+                  </Figure>
+                </Col>
+                <Col className="howto-image-container" xs={12} md={3}>
+                  <Figure>
+                    <FigureImage
+                      className="howto-image"
+                      src={howto3}
+                      alt="Select 'Without media'"
+                    />
+                    <FigureCaption>
+                      5. Select &apos;Without media&apos;
                     </FigureCaption>
                   </Figure>
                 </Col>
               </Row>
-              <hr />
-            </div>
-          </Collapse>
-          <Collapse in={menuOpen.qa}>
-            <div>
-              <h2>Questions and Answers</h2>
-              <p>Q: Does Whatsalyzer save my data?</p>
+            </Modal.Body>
+          </Modal>
+          <Modal
+            onBackdropClick={() => toggleMenu('qa')}
+            onHide={() => toggleMenu('qa')}
+            show={menuOpen.qa}
+          >
+            <Modal.Header
+              className="input-modal-header text-center"
+              closeVariant="white"
+              closeButton
+            >
+              Questions and Answers
+            </Modal.Header>
+            <Modal.Body>
               <p>
-                A: No, Whatsalyzer is a fully client-side application. This
-                means that your browser performs all the calculations and no
-                data is ever uploaded to a server.
+                <strong>Does Whatsalyzer save my data?</strong>
               </p>
-              <p>Q: Can I analyze group chats?</p>
               <p>
-                A: Yes! Those stats are even more interesting than
+                No, Whatsalyzer is a fully client-side application. This means
+                that your browser performs all the calculations and no data is
+                ever uploaded to a server. Check the source code if you want to
+                know more.
+              </p>
+              <p>
+                <strong>Can I analyze group chats?</strong>
+              </p>
+              <p>
+                Yes! Those stats are even more interesting than
                 &apos;normal&apos; chats.
               </p>
-              <p>Q: Is Whatsalyzer open-source?</p>
               <p>
-                A: Yes! You can view the code right here:
+                <strong>Is Whatsalyzer open-source?</strong>
+              </p>
+              <p>
+                Yes! You can view the code right here:{' '}
                 <a
                   href="https://github.com/survivorbat/whatsalyzer"
                   target="_blank"
@@ -129,25 +178,15 @@ function Header() {
                   github.com/survivorbat/whatsalyzer
                 </a>
               </p>
-              <p>Q: Will new features be added?</p>
               <p>
-                A: Yes! The TODO list can be found in the README of the source
+                <strong>Will new features be added?</strong>
+              </p>
+              <p>
+                Yes! The TODO list can be found in the README of the source
                 code, check the link above.
               </p>
-              <hr />
-            </div>
-          </Collapse>
-          <Collapse in={menuOpen.privacy}>
-            <div>
-              <h2>Privacy</h2>
-              <p>
-                Whatsalyzer does not collect any data from you. All the
-                calculations are performed in your browser, so no data is ever
-                uploaded to a server.
-              </p>
-              <hr />
-            </div>
-          </Collapse>
+            </Modal.Body>
+          </Modal>
         </Col>
       </Row>
     </div>

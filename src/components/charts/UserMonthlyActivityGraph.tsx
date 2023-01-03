@@ -14,7 +14,7 @@ function UserMonthlyActivityGraph({ data }: DefaultProps) {
     id: index + 1,
     label: name,
     data: Object.keys(data.messagesPerMonthPerUser).map(
-      (date) => data.messagesPerMonthPerUser[date][name] || 0,
+      (date) => data.messagesPerMonthPerUser[date][name] || 0
     ),
     borderColor: colorIndex(index),
     backgroundColor: colorIndex(index),
@@ -28,7 +28,9 @@ function UserMonthlyActivityGraph({ data }: DefaultProps) {
       {
         id: 0,
         label: 'Total Messages',
-        data: Object.keys(data.messagesPerMonthPerUser).map((date) => totalCount(data.messagesPerMonthPerUser[date])),
+        data: Object.keys(data.messagesPerMonthPerUser).map((date) =>
+          totalCount(data.messagesPerMonthPerUser[date])
+        ),
         borderColor: 'white',
         backgroundColor: 'white',
         tension: 0.3,
@@ -56,9 +58,10 @@ function UserMonthlyActivityGraph({ data }: DefaultProps) {
       ...defaultPluginConfig,
       tooltip: {
         callbacks: {
-          label: (context: any) => `${context.dataset.label}: ${
-            context.dataset.data[context.dataIndex]
-          } messages`,
+          label: (context: any) =>
+            `${context.dataset.label}: ${
+              context.dataset.data[context.dataIndex]
+            } messages`,
         },
       },
     },

@@ -1,34 +1,3 @@
-#input-file {
-  background: none;
-  transition: 150ms;
-}
-
-#input-file:hover {
-  text-shadow: 0 0 2px azure;
-}
-
-#submit-button {
-  width: 100%;
-  height: 100%;
-  font-weight: bold;
-  font-size: 160%;
-  background: none;
-  border: none;
-  transition: 300ms;
-  vertical-align: center;
-  box-shadow: 0 0 1px;
-}
-
-#submit-button:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 2px;
-}
-
-#submit-button:focus {
-  background-color: rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 4px;
-}
-
-.input-column {
-  margin-bottom: 10px;
+.start-button {
+  color: #3cb44b;
 }

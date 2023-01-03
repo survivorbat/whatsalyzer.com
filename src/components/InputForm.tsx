@@ -1,14 +1,11 @@
 import * as React from 'react';
 import {
   Button,
-  Col,
   Form,
-  FormCheck,
   FormControl,
   FormGroup,
-  FormLabel,
   FormText,
-  Row,
+  Modal,
 } from 'react-bootstrap';
 import { FormEvent, useState } from 'react';
 import './InputForm.css';
@@ -19,6 +16,7 @@ interface InputFormProps {
 
 function InputForm({ handleData }: InputFormProps) {
   const [whatsappFile, setWhatsappFile] = useState({} as File);
+  const [inputOpen, setInputOpen] = useState(false);
 
   const handleChange = (files: FileList) => setWhatsappFile(files[0]);
 
@@ -28,36 +26,52 @@ function InputForm({ handleData }: InputFormProps) {
     const reader = new FileReader();
     reader.onload = (processEvent) => handleData(processEvent.target!.result);
     reader.readAsText(whatsappFile);
+
+    setInputOpen(false);
   };
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <Row>
-        <Col lg={6} md={12} className="input-column">
-          <FormGroup>
-            <FormLabel htmlFor="input-file">Whatsapp file</FormLabel>
-            <FormControl
-              id="input-file"
-              type="file"
-              aria-describedby="input-file-help"
-              placeholder="The file to upload"
-              className="text-light"
-              required
-              onChange={(e: any) => handleChange(e.target!.files)}
-            />
-            <FormText id="input-file-help" muted>
-              The file to analyze, check &apos;Getting Started&apos; to learn
-              more.
-            </FormText>
-          </FormGroup>
-        </Col>
-        <Col lg={6} md={12} className="input-column">
-          <Button type="submit" id="submit-button" value="Submit">
-            Analyze
-          </Button>
-        </Col>
-      </Row>
-    </Form>
+    <>
+      <button
+        type="button"
+        className="menu-button start-button"
+        onClick={() => setInputOpen(true)}
+      >
+        Start
+      </button>
+      <Modal show={inputOpen} onHide={() => setInputOpen(false)}>
+        <Modal.Header
+          className="input-modal-header text-center"
+          closeVariant="white"
+          closeButton
+        >
+          Get Whatsalyzing
+        </Modal.Header>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Body>
+            <FormGroup>
+              <FormControl
+                type="file"
+                aria-describedby="input-file-help"
+                placeholder="The file to upload"
+                required
+                onChange={(e: any) => handleChange(e.target!.files)}
+                accept=".txt"
+              />
+              <FormText id="input-file-help" muted>
+                The file to analyze, check &apos;Getting Started&apos; to learn
+                more.
+              </FormText>
+            </FormGroup>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button type="submit" variant="light" value="Submit">
+              Analyze
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    </>
   );
 }
 

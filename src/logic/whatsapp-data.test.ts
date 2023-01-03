@@ -1,7 +1,5 @@
-import { Message } from 'whatsapp-chat-parser/types/types';
 import moment from 'moment';
 import WhatsappData, {
-  ConversationName,
   getConversationSubjects,
   getEmojis,
   getMonthsBetween,
@@ -272,21 +270,71 @@ describe('WhatsappData', () => {
       {
         expected: <WhatsappData>{
           messages: [],
-          conversations: [],
           users: [],
-          words: [],
-          emojis: [],
           totalMessages: 0,
           totalWords: 0,
           totalEmojis: 0,
           totalCharacters: 0,
           totalFemke: 0,
           conversationNames: [],
-          messagesPerDayPerUser: {},
-          wordsPerDayPerUser: {},
-          emojisPerDayPerUser: {},
-          charactersPerDayPerUser: {},
-          femkePerDay: {},
+          messagesPerDayPerUser: {
+            0: {},
+            1: {},
+            2: {},
+            3: {},
+            4: {},
+            5: {},
+            6: {},
+          },
+          femkePerUser: {},
+          firstMessage: {
+            date: moment(0),
+            author: 'Not Found',
+            message: 'Not Found',
+          },
+          lastMessage: {
+            date: moment(0),
+            author: 'Not Found',
+            message: 'Not Found',
+          },
+          emojiUsage: {},
+          emojisPerUser: {},
+          emojiUsagePerUser: {},
+          wordUsage: {},
+          charactersPerUser: {},
+          messagesPerHourPerUser: {
+            0: {},
+            1: {},
+            10: {},
+            11: {},
+            12: {},
+            13: {},
+            14: {},
+            15: {},
+            16: {},
+            17: {},
+            18: {},
+            19: {},
+            2: {},
+            20: {},
+            21: {},
+            22: {},
+            23: {},
+            3: {},
+            4: {},
+            5: {},
+            6: {},
+            7: {},
+            8: {},
+            9: {},
+          },
+          messagesPerMonthPerUser: {
+            'Jan 1970': {},
+          },
+          messagesPerUser: {},
+          systemMessages: [],
+          wordsPerUser: {},
+          wordUsagePerUser: {},
         },
       },
       {
@@ -656,7 +704,7 @@ describe('WhatsappData', () => {
     ];
 
     tests.forEach(({ expected }) => {
-      it(`returns expected calculations on '${expected.length}' messages`, () => {
+      it(`returns expected calculations on '${expected.messages.length}' messages`, () => {
         // Act
         const result = new WhatsappData(expected.messages);
 
