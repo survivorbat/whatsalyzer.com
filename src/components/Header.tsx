@@ -4,10 +4,10 @@ import './Header.css';
 import { useState } from 'react';
 import FigureCaption from 'react-bootstrap/FigureCaption';
 import FigureImage from 'react-bootstrap/FigureImage';
-import howto3 from '../assets/howto-3.png';
-import howto2 from '../assets/howto-2.png';
-import howto1 from '../assets/howto-1.png';
-import howto0 from '../assets/howto-0.png';
+import howto3 from '../assets/howto-3.webp';
+import howto2 from '../assets/howto-2.webp';
+import howto1 from '../assets/howto-1.webp';
+import howto0 from '../assets/howto-0.webp';
 import InputForm from './InputForm';
 
 interface HeaderProps {
@@ -62,7 +62,6 @@ function Header({ handleData }: HeaderProps) {
       <Row className="info-container">
         <Col>
           <Modal
-            onBackdropClick={() => toggleMenu('howto')}
             size="lg"
             onHide={() => toggleMenu('howto')}
             show={menuOpen.howto}
@@ -136,11 +135,7 @@ function Header({ handleData }: HeaderProps) {
               </Row>
             </Modal.Body>
           </Modal>
-          <Modal
-            onBackdropClick={() => toggleMenu('qa')}
-            onHide={() => toggleMenu('qa')}
-            show={menuOpen.qa}
-          >
+          <Modal onHide={() => toggleMenu('qa')} show={menuOpen.qa}>
             <Modal.Header
               className="input-modal-header text-center"
               closeVariant="white"
