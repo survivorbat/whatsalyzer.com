@@ -1,11 +1,11 @@
 self.__precacheManifest = [
   {
-    "revision": "5e800a1475cd76a43aab",
+    "revision": "5b3cf6a5f9b7ce6b17a0",
     "url": "/static/css/main.042d155c.chunk.css"
   },
   {
-    "revision": "5e800a1475cd76a43aab",
-    "url": "/static/js/main.0e695977.chunk.js"
+    "revision": "5b3cf6a5f9b7ce6b17a0",
+    "url": "/static/js/main.6de9c885.chunk.js"
   },
   {
     "revision": "42ac5946195a7306e2a5",
@@ -20,20 +20,20 @@ self.__precacheManifest = [
     "url": "/static/js/2.ffa92b1c.chunk.js"
   },
   {
-    "revision": "dff92041fd457e336f07f56da23be773",
-    "url": "/static/media/howto-3.dff92041.png"
+    "revision": "f9386290c75d9ec247b865f2acbcaa51",
+    "url": "/static/media/howto-3.f9386290.webp"
   },
   {
-    "revision": "e9e09d090913f7a19038ee37d4221572",
-    "url": "/static/media/howto-2.e9e09d09.png"
+    "revision": "a3cee202397cbc086dba598f081d7b2b",
+    "url": "/static/media/howto-2.a3cee202.webp"
   },
   {
-    "revision": "ec81d0d51c4c96022a881cadc5f754f4",
-    "url": "/static/media/howto-1.ec81d0d5.png"
+    "revision": "3776b52e259eed012eb888ddc7efa6b8",
+    "url": "/static/media/howto-1.3776b52e.webp"
   },
   {
-    "revision": "1594aa831742632faade4acad94a8239",
-    "url": "/static/media/howto-0.1594aa83.png"
+    "revision": "f8fe82b5279344352d732af8443bdabf",
+    "url": "/static/media/howto-0.f8fe82b5.webp"
   },
   {
     "revision": "53436aca8627a49f4deaaa44dc9e3c05",
@@ -44,24 +44,24 @@ self.__precacheManifest = [
     "url": "/static/media/material-icons.3e1afe59.woff"
   },
   {
+    "revision": "0e4321a7c0dda51d72a669ac5892fc39",
+    "url": "/static/media/material-icons-outlined.0e4321a7.woff"
+  },
+  {
     "revision": "121a59d703f74d7fc4a1bf64580966ed",
     "url": "/static/media/material-icons-round.121a59d7.woff2"
+  },
+  {
+    "revision": "9f309e9eab67445742ec147a3e37364f",
+    "url": "/static/media/material-icons-round.9f309e9e.woff"
   },
   {
     "revision": "0ba49c096a77b67734434cebcaf2e14d",
     "url": "/static/media/material-icons-outlined.0ba49c09.woff2"
   },
   {
-    "revision": "0e4321a7c0dda51d72a669ac5892fc39",
-    "url": "/static/media/material-icons-outlined.0e4321a7.woff"
-  },
-  {
     "revision": "4f203ef2d5bc0198ed17648f0642ff96",
     "url": "/static/media/material-icons-sharp.4f203ef2.woff2"
-  },
-  {
-    "revision": "9f309e9eab67445742ec147a3e37364f",
-    "url": "/static/media/material-icons-round.9f309e9e.woff"
   },
   {
     "revision": "6efac2316204505e0e8882b391df7d13",
@@ -76,7 +76,7 @@ self.__precacheManifest = [
     "url": "/static/media/material-icons-two-tone.87a93d69.woff"
   },
   {
-    "revision": "e4f813c109b2631b41cd90f9b8f59531",
+    "revision": "1698a5408b0455da216b164ced8ba7c4",
     "url": "/index.html"
   }
 ];
