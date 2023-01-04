@@ -7,14 +7,13 @@ import { Message } from 'whatsapp-chat-parser/types/types';
 import Header from './components/Header';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
-import defaultMessages from './constants/default-messages';
 
 function App() {
   const [whatsappData, setWhatsappData] = useState(
-    new WhatsappData(defaultMessages)
+    new WhatsappData([])
   );
   const [filteredData, setFilteredData] = useState(
-    new WhatsappData(defaultMessages)
+    new WhatsappData([])
   );
 
   const handleNewData = (data: string | ArrayBuffer | null) => {
@@ -33,7 +32,7 @@ function App() {
   };
 
   // Only add analysis results if we have data
-  const analysisResult = filteredData ? (
+  const analysisResult = filteredData.users.length > 0 ? (
     <>
       {/*TODO: Re-enable filters*/}
       {/*<Filters data={whatsappData} handleFilterChange={handleFilterChange} />*/}
