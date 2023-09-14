@@ -7,8 +7,8 @@ interface MinimalFrequencyTagProps {
 function MinimalFrequencyTag({ frequency }: MinimalFrequencyTagProps) {
   return (
     <p>
-      <small className="text-muted">
-        Minimal frequency:
+      <small className="text-light">
+        Minimum frequency:
         {frequency}
       </small>
     </p>

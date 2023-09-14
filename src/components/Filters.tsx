@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Message } from 'whatsapp-chat-parser/types/types';
+import { Message } from 'whatsapp-chat-parser/dist/types';
 import { useState } from 'react';
 import {
   Col,

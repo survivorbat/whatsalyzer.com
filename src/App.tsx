@@ -3,17 +3,18 @@ import './App.css';
 import { Container } from 'react-bootstrap';
 import { parseStringSync } from 'whatsapp-chat-parser';
 import { useState } from 'react';
-import { Message } from 'whatsapp-chat-parser/types/types';
 import Header from './components/Header';
 import AnalysisResults from './components/AnalysisResults';
 import WhatsappData from './logic/whatsapp-data';
+import dummyData from "./constants/dummy";
+import {Message} from "whatsapp-chat-parser/dist/types";
 
 function App() {
   const [whatsappData, setWhatsappData] = useState(
-    new WhatsappData([])
+    new WhatsappData(dummyData)
   );
   const [filteredData, setFilteredData] = useState(
-    new WhatsappData([])
+    new WhatsappData(dummyData)
   );
 
   const handleNewData = (data: string | ArrayBuffer | null) => {

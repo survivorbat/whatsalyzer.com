@@ -1,0 +1,86 @@
+import { Message } from 'whatsapp-chat-parser/dist/types';
+
+const dummyData: Message[] = [
+  {author: 'example user', date: new Date(2023, 3, 5, 0), message: 'This is example data'},
+  {author: 'robert', date: new Date(2023, 3, 6, 10), message: 'is it though?'},
+
+  {author: 'john', date: new Date(2023, 4, 24, 11), message: 'I found this meme'},
+  {author: 'savex', date: new Date(2023, 4, 24, 12), message: '_I_ found this meme'},
+  {author: 'linn', date: new Date(2023, 4, 24, 15), message: 'I observed this meme'},
+  {author: 'stella', date: new Date(2023, 4, 24, 15), message: 'I became this meme'},
+  {author: 'savex', date: new Date(2023, 4, 24, 16), message: 'I am this meme'},
+  {author: 'stella', date: new Date(2023, 4, 24, 16), message: 'this meme, is me'},
+  {author: 'savex', date: new Date(2023, 4, 24, 16), message: 'me is meme'},
+  {author: 'stella', date: new Date(2023, 4, 24, 16), message: 'me-me'},
+  {author: 'savex', date: new Date(2023, 4, 24, 17), message: 'me'},
+  {author: 'stella', date: new Date(2023, 4, 24, 17), message: 'm'},
+  {author: 'john', date: new Date(2023, 4, 24, 18), message: 'I'},
+  {author: 'john', date: new Date(2023, 4, 24, 18), message: '🍿'},
+  {author: 'john', date: new Date(2023, 4, 24, 18), message: '🍿'},
+  {author: 'john', date: new Date(2023, 4, 24, 18), message: '🍿'},
+  {author: 'john', date: new Date(2023, 4, 24, 19), message: '🍿'},
+  {author: 'robert', date: new Date(2023, 4, 24, 20), message: 'spam'},
+  {author: 'john', date: new Date(2023, 4, 24, 21), message: '@robert 🍿'},
+  {author: 'linn', date: new Date(2023, 4, 24, 21), message: 'Why do you hate popcorn'},
+
+  {author: 'john', date: new Date(2023, 4, 25, 12), message: 'Anyone up for food?'},
+  {author: 'savex', date: new Date(2023, 4, 26, 13), message: 'anytime'},
+  {author: 'linn', date: new Date(2023, 4, 26, 14), message: 'eh'},
+  {author: 'linn', date: new Date(2023, 4, 26, 14), message: 'too much homework srry'},
+  {author: 'jake', date: new Date(2023, 4, 27, 15), message: 'L'},
+  {author: 'robert', date: new Date(2023, 4, 24, 16), message: 'nty'},
+
+  {author: 'john', date: new Date(2023, 4, 28, 16), message: 'Alright everyone it\'s birthday time'},
+  {author: 'savex', date: new Date(2023, 4, 28, 16), message: '2 months overdue but alright'},
+  {author: 'linn', date: new Date(2023, 4, 28, 17), message: 'What are your plans?'},
+  {author: 'john', date: new Date(2023, 4, 28, 17), message: 'I wanted to cook dinner for y\'all 😊😊'},
+  {author: 'jake', date: new Date(2023, 4, 28, 17), message: 'I\'ll bring snacks 🍿🍬🍫🍭'},
+  {author: 'savex', date: new Date(2023, 4, 28, 17), message: 'TIME TO PARTYYYYY'},
+  {author: 'stella', date: new Date(2023, 4, 28, 17), message: 'do you already have a date in mind?'},
+  {author: 'john', date: new Date(2023, 4, 28, 19), message: 'sorry for the late response was at work, perhaps next week on a sunday?'},
+  {author: 'jake', date: new Date(2023, 4, 28, 19), message: 'Aw I have football practice that day 😥😥'},
+  {author: 'jake', date: new Date(2023, 4, 28, 19), message: 'What about saturday?'},
+  {author: 'stella', date: new Date(2023, 4, 28, 19), message: 'fine with me'},
+  {author: 'savex', date: new Date(2023, 4, 28, 19), message: 'me too'},
+  {author: 'savex', date: new Date(2023, 4, 28, 19), message: 'only after 16:00 though'},
+
+  {author: 'linn', date: new Date(2023, 4, 29, 8), message: '👍👍👍👍👍👍'},
+  {author: 'linn', date: new Date(2023, 4, 29, 8), message: 'shall i bring some drinks'},
+  {author: 'jake', date: new Date(2023, 4, 29, 8), message: 'sounds good, wanna do something else before we eat?'},
+  {author: 'stella', date: new Date(2023, 4, 29, 9), message: 'Play some games at the 🐝🐝🐝🐝🐝?'},
+  {author: 'jake', date: new Date(2023, 4, 29, 9), message: 'Like that 👀👀👀👀👀👀👀👀'},
+  {author: 'linn', date: new Date(2023, 4, 29, 10), message: 'I\'m in 👍'},
+
+  {author: 'savex', date: new Date(2023, 4, 30, 12), message: 'Gonna be epic'},
+  {author: 'linn', date: new Date(2023, 4, 30, 13), message: '@john can I drop off the drinks at your place first?'},
+  {author: 'john', date: new Date(2023, 4, 30, 14), message: 'Fine with me'},
+
+  {author: 'savex', date: new Date(2023, 5, 1, 8), message: 'What food are you going to prepare btw?'},
+  {author: 'john', date: new Date(2023, 5, 1, 9), message: '🍔?'},
+  {author: 'john', date: new Date(2023, 5, 1, 9), message: '🍕?'},
+  {author: 'savex', date: new Date(2023, 5, 1, 9), message: '🍔🍔🍔🍔🍔'},
+  {author: 'linn', date: new Date(2023, 5, 1, 9), message: '🍔❤️'},
+  {author: 'john', date: new Date(2023, 5, 1, 9), message: '🍔'},
+
+  {author: 'stella', date: new Date(2023, 5, 2, 14), message: 'anything is fine with me'},
+  {author: 'savex', date: new Date(2023, 5, 2, 15), message: 'Hamburger is better though'},
+  {author: 'jake', date: new Date(2023, 5, 29, 8), message: 'That\'s a nice argument savex, why don\'t you back it up with a source?'},
+  {author: 'savex', date: new Date(2023, 5, 29, 14), message: '👁️👄👁️'},
+  {author: 'linn', date: new Date(2023, 5, 29, 15), message: 'good source ngl'},
+
+  {author: 'john', date: new Date(2023, 5, 5, 10), message: 'Alright I\'m waiting for your arrival 👀'},
+
+  {author: 'john', date: new Date(2023, 6, 14, 0), message: 'HAPPY BIRTHDAY JAKE'},
+  {author: 'jake', date: new Date(2023, 6, 14, 8), message: 'Tnx ❤️'},
+  {author: 'jake', date: new Date(2023, 6, 14, 8), message: 'You\'re up wayyyy too early though'},
+  {author: 'john', date: new Date(2023, 6, 14, 9), message: 'NEVER TOO EARLY TO DECLARE FRIENDSHIP'},
+  {author: 'linn', date: new Date(2023, 6, 14, 10), message: 'true dat'},
+  {author: 'linn', date: new Date(2023, 6, 14, 10), message: 'love you jake, happy birthday'},
+  {author: 'savex', date: new Date(2023, 6, 14, 11), message: 'party time?'},
+  {author: 'stella', date: new Date(2023, 6, 14, 11), message: 'happy birthday!!!'},
+  {author: 'savex', date: new Date(2023, 6, 14, 12), message: 'happy bday! 😊'},
+
+  {author: 'example user', date: new Date(2023, 6, 15, 23), message: 'Still example data'},
+]
+
+export default dummyData

@@ -18,13 +18,13 @@ function UserWordUsageTable({
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col" title="The user">
+          <th scope="col" className="text-light" title="The user">
             User
           </th>
-          <th scope="col" title={`Top-${displayAmount} words this user uses`}>
+          <th scope="col" className="text-light" title={`Top-${displayAmount} words this user uses`}>
             Words
           </th>
-          <th scope="col" title="Total amount of words this user has messaged">
+          <th scope="col" className="text-light" title="Total amount of words this user has messaged">
             Total
           </th>
         </tr>
@@ -38,7 +38,7 @@ function UserWordUsageTable({
                 <TopWordDisplay key={word.name} topWord={word} />
               ))}
             </td>
-            <td>{data.wordsPerUser[name].length}</td>
+            <td className="text-light">{data.wordsPerUser[name].length}</td>
           </tr>
         ))}
       </tbody>

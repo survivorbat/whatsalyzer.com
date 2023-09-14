@@ -1,4 +1,4 @@
-import { Message } from 'whatsapp-chat-parser/types/types';
+import { Message } from 'whatsapp-chat-parser/dist/types';
 import moment from 'moment';
 import { hours, weekdays } from '../constants/time';
 

@@ -18,13 +18,13 @@ function UserEmojiUsageTable({
     <Table borderless responsive className="text-light">
       <thead>
         <tr>
-          <th scope="col" title="The user">
+          <th scope="col" className="text-light" title="The user">
             User
           </th>
-          <th scope="col" title={`Top-${displayAmount} emojis this user uses`}>
+          <th scope="col" className="text-light" title={`Top-${displayAmount} emojis this user uses`}>
             Emojis
           </th>
-          <th scope="col" title="Total amount of emojis this user has messaged">
+          <th scope="col" className="text-light" title="Total amount of emojis this user has messaged">
             Total
           </th>
         </tr>
@@ -38,7 +38,7 @@ function UserEmojiUsageTable({
                 <TopWordDisplay key={emoji.name} topWord={emoji} />
               ))}
             </td>
-            <td>{data.emojisPerUser[name].length}</td>
+            <td className="text-light">{data.emojisPerUser[name].length}</td>
           </tr>
         ))}
       </tbody>

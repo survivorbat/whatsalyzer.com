@@ -14,7 +14,7 @@ function UserMessageCountTable({ data }: DefaultProps) {
   const totalYears = duration.asYears();
 
   return (
-    <Table borderless responsive className="text-light">
+    <Table borderless responsive className="text-light bg-transparent" variant="dark">
       <thead>
         <tr>
           <th scope="col" title="The user">
@@ -50,12 +50,6 @@ function UserMessageCountTable({ data }: DefaultProps) {
           >
             Yearly
           </th>
-          <th
-            scope="col"
-            title="⇪↩ヾ   ⤷э⇅   ↪↩∧   э⇅⤷⇆⇪   ∧↩   ⊏↩⤣↻э⇅⇇⇅↪⇆   ∧⇇⇅   ↹⇅⤣⇊⇅"
-          >
-            FEMKE
-          </th>
         </tr>
       </thead>
       <tbody>
@@ -84,12 +78,6 @@ function UserMessageCountTable({ data }: DefaultProps) {
                 `${data.messagesPerUser[name].length / totalYears}`
               ).toFixed(1)}
             </td>
-            <td>
-              {Math.round(
-                (data.femkePerUser[name] / data.charactersPerUser[name]) * 100
-              )}
-              %
-            </td>
           </tr>
         ))}
       </tbody>
@@ -103,7 +91,6 @@ function UserMessageCountTable({ data }: DefaultProps) {
             {parseFloat(`${data.totalMessages / totalMonths}`).toFixed(1)}
           </td>
           <td>{parseFloat(`${data.totalMessages / totalYears}`).toFixed(1)}</td>
-          <td>{Math.round((data.totalFemke / data.totalCharacters) * 100)}%</td>
         </tr>
       </tfoot>
     </Table>
