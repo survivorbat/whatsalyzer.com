@@ -1,5 +1,7 @@
 # Whatsalyzer
 
+> ⚠️ Due to tbe advanced security settings that makes exporting chats impossible, this project has been archived and taken offline. Feel free to run it locally if you wish.
+
 Whatsalyzer allows you to generate graphs and reports from your Whatsapp chats.
 Who talks the most? Who is active at what time? Who uses emoji's? When was the chat the most active? Find out!
 
